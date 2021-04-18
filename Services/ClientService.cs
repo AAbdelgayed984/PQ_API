@@ -34,8 +34,9 @@ namespace PQ_API.Services
             return _Clients;
         }
 
-        public Client GetById(string clientId)
+        public Client GetById(string clientId, string RMR_ID)
         {
+            _Clients = _rubiDataConnect.GetDealClientsListFunc(RMR_ID);
             return _Clients.FirstOrDefault(x => x.CMR_ID == clientId);
         }
 

@@ -29,19 +29,19 @@ namespace PQ_API.Controllers
 
         [Authorize]
         [HttpGet("dealInfo")]
-        public IActionResult DealInfo(string RMR_ID)
+        public IActionResult DealInfo(string RMR_ID, string Brand_CMR_ID)
         {
             if (RMR_ID == null)
                 return BadRequest(new { message = "RMR_ID is missing" });
             
-            Deal dealInfo = _dealService.GetById(RMR_ID);
+            Deal dealInfo = _dealService.GetById(RMR_ID, Brand_CMR_ID);
 
             return Ok(dealInfo);
         }
 
         [Authorize]
         [HttpPost("AskQuestion")]
-        public IActionResult AskQuestion(AskQuestion question)
+        public IActionResult AskQuestion([FromBody] AskQuestion question)
         {
             AskQuestion AskQuestionResponse = _dealService.AskQuestion(question);
 
