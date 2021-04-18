@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  pq_api:
+    image: aabdelgayed/pq_api:uat-latest
+    ports:
+      - 80:80
+      - 1433:1433
+    deploy:
+      replicas: 10
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+  visualizer:
+      image: dockersamples/visualizer:stable
+      ports:
+        - "8080:8080"
+      volumes:
+        - "/var/run/docker.sock:/var/run/docker.sock"
+      deploy:
+        placement:
+          constraints: [node.role == manager]
