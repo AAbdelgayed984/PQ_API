@@ -29,19 +29,19 @@ namespace PQ_API.Controllers
 
         [Authorize]
         [HttpGet("ClientInfo")]
-        public IActionResult ClientInfo(string CMR_ID)
+        public IActionResult ClientInfo(string CMR_ID, string RMR_ID)
         {
             if (CMR_ID == null)
                 return BadRequest(new { message = "CMR_ID is missing" });
             
-            Client ClientInfo = _ClientService.GetById(CMR_ID);
+            Client ClientInfo = _ClientService.GetById(CMR_ID, RMR_ID);
 
             return Ok(ClientInfo);
         }
 
         [Authorize]
         [HttpPost("UpdateClientAddress")]
-        public IActionResult UpdateClientAddress(Address address)
+        public IActionResult UpdateClientAddress([FromBody] Address address)
         {
             Address UpdateClientAddressResponse = _ClientService.UpdateClientAddress(address);
 
@@ -50,7 +50,7 @@ namespace PQ_API.Controllers
 
         [Authorize]
         [HttpPost("UpdateContactInfo")]
-        public IActionResult UpdateContactInfo(ContactInfo contactInfo)
+        public IActionResult UpdateContactInfo([FromBody] ContactInfo contactInfo)
         {
             ContactInfo UpdateContactInfoResponse = _ClientService.UpdateContactInfo(contactInfo);
 

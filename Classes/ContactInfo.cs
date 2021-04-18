@@ -3,28 +3,24 @@ namespace PQ_API.Classes
     public class ContactInfo
     {
         public string ContactId {get; set;}
-        public string Email { get; set; }
-        public string HomePhone { get; set; }
-        public string WorkPhone { get; set; }
-        public string MobilePhone { get; set; }
+        public string ContactType {get; set;}
+        public string ContactDetails {get; set;}
 
         public ContactInfo()
         {
 
         }
         
-        public ContactInfo (string contactId, string email, string homePhone, string workPhone, string mobilePhone)
+        public ContactInfo (string contactId, string contactType, string contactDetails)
         {
             ContactId = contactId;
-            Email = email;
-            HomePhone = homePhone;
-            WorkPhone = workPhone;
-            MobilePhone = mobilePhone;
+            ContactType = contactType;
+            ContactDetails = contactDetails;
         }
 
         public override string ToString()
         {
-            return $"ContactId {ContactId}, Email {Email}, HomePhone {HomePhone}, WorkPhone {WorkPhone}, MobilePhone {MobilePhone}";
+            return $"ContactId {ContactId}, ContactType {ContactType}, ContactDetails {ContactDetails}";
         }
     }
 }

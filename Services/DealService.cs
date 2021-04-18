@@ -33,8 +33,9 @@ namespace PQ_API.Services
             return _deals;
         }
 
-        public Deal GetById(string dealId)
+        public Deal GetById(string dealId, string brandId)
         {
+            _deals = _rubiDataConnect.GetBrandDealsListFunc(brandId);
             return _deals.FirstOrDefault(x => x.RMR_ID == dealId);
         }
 

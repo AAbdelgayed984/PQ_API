@@ -21,7 +21,7 @@ namespace PQ_API.Controllers
 
         [Authorize]
         [HttpPost("SubmitDeal")]
-        public IActionResult SubmitDeal(SubmitDealRequest submitDealRequest)
+        public IActionResult SubmitDeal([FromBody] SubmitDealRequest submitDealRequest)
         {
             SubmitDealResponse SubmitDealResponse = _SubmitDealService.SubmitDeal(submitDealRequest);
 
