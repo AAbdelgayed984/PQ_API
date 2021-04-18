@@ -9,6 +9,6 @@ namespace PQ_API.Classes
         public string MiddleName { get; set; } 
         public string LastName { get; set; }
         public List<Address> Addresses { get; set; }
-        public ContactInfo ContactInfo { get; set; }   
+        public List<ContactInfo> ContactInfo { get; set; }   
     }
 }
