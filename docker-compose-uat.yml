@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   pq_api:
-    image: aabdelgayed/pq_api:uat-latest
+    image: aabdelgayed/pq_api:uat_latest
     ports:
       - 80:80
       - 1433:1433

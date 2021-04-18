@@ -14,11 +14,11 @@ namespace PQ_API.DataConnect
         public const string GetStreetTypeList = "EXEC dbo.PQ_CutomerAPI_GetStreetTypeList";
         public const string GetBrandDealsList = "EXEC dbo.PQ_CutomerAPI_GetBrandDealsList @Brand_CMR_ID";
         public const string GetRequestTypeList = "EXEC dbo.PQ_CutomerAPI_GetRequestTypeList @Brand_CMR_ID";
-        public const string AskQuestion = "EXEC dbo.PQ_PQ_API_AskQuestion @CMR_ID, @RMR_ID, @RequestType, @Comments, @ContactInformation, @ContactTime";
+        public const string AskQuestion = "EXEC dbo.PQ_CustomerAPI_AskQuestion @CMR_ID, @RMR_ID, @RequestType, @Comments, @ContactInformation, @ContactTime";
         public const string GetClientsList = "EXEC dbo.PQ_CutomerAPI_GetDealClientsList @RMR_ID";
         public const string GetClientAddressesList = "EXEC dbo.PQ_CutomerAPI_GetMailAddress @CMR_ID";
         public const string GetClientContactInfoList = "EXEC dbo.PQ_CutomerAPI_GetContactInfo @CMR_ID";
-        public const string SetClientContactInfo = "EXEC dbo.PQ_CutomerAPI_SetContactInfo @ContactId, @Email, @HomePhone, @WorkPhone, @MobilePhone";
+        public const string SetClientContactInfo = "EXEC dbo.PQ_CutomerAPI_SetContactInfo @ContactId, @ContactType, @ContactDetails";
         public const string SetClientAddress = "EXEC PQ_CutomerAPI_SetMailAddress @AddressId, @AddressType, @UnitNumber, @StreetNumber, @StreetName, @StreetType, @Direction, @City, @Province, @PostalCode";
         private SqlCommand _SubmitDeal;
         private SqlCommand _GetClientsList;
@@ -88,10 +88,8 @@ namespace PQ_API.DataConnect
 
             _SetClientContactInfo = new SqlCommand(SetClientContactInfo, _Connection);
             _SetClientContactInfo.Parameters.Add("@ContactId", SqlDbType.VarChar);
-            _SetClientContactInfo.Parameters.Add("@Email", SqlDbType.VarChar);
-            _SetClientContactInfo.Parameters.Add("@HomePhone", SqlDbType.VarChar);
-            _SetClientContactInfo.Parameters.Add("@WorkPhone", SqlDbType.VarChar);
-            _SetClientContactInfo.Parameters.Add("@MobilePhone", SqlDbType.VarChar);
+            _SetClientContactInfo.Parameters.Add("@ContactType", SqlDbType.VarChar);
+            _SetClientContactInfo.Parameters.Add("@ContactDetails", SqlDbType.VarChar);
         }
 
         public List<User> GetAPIUsersListFunc()
@@ -158,25 +156,25 @@ namespace PQ_API.DataConnect
             string RMR_ID = null;
             Int32 RMR_SeqNumber;
             string ComponentType = null;
-            double LoanAmount;
+            double? LoanAmount = null;
             string MortgageType = null;
             string PropertyAddress = null;
-            double InterestPaidPriorYear;
-            double InterestPaidYearToDate;
-            double PrincipalPaidPriorYear;
-            double PrincipalPaidYearToDate;
-            double CurrentMortgageBalance;
+            double? InterestPaidPriorYear = null;
+            double? InterestPaidYearToDate = null;
+            double? PrincipalPaidPriorYear = null;
+            double? PrincipalPaidYearToDate = null;
+            double? CurrentMortgageBalance = null;
             string ProductDescription = null;
             string RateType = null;
             string InterestRate = null;
             string PaymentType = null;
-            double PaymentAmount;
+            double? PaymentAmount = null;
             string PaymentFrequency = null;
             string LastPaymentDate = null;
             string NextPaymentDate = null;
             string MaturityDate = null;
-            Int32 RemainingAmortization_Months;		
-            Int32 RemainingAmortization_Years;
+            Int32? RemainingAmortization_Months = null;		
+            Int32? RemainingAmortization_Years = null;
 
             _rs = _GetBrandDealsList.ExecuteReader();
 
@@ -187,25 +185,25 @@ namespace PQ_API.DataConnect
                     RMR_ID = _rs["RMR_ID"].ToString();
                     RMR_SeqNumber = Convert.ToInt32(_rs["RMR_SeqNumber"]);
                     ComponentType = _rs["ComponentType"].ToString();
-                    LoanAmount = Convert.ToDouble(_rs["LoanAmount"]);
+                    if (_rs["LoanAmount"] != DBNull.Value) LoanAmount = Convert.ToDouble(_rs["LoanAmount"]);
                     MortgageType = _rs["MortgageType"].ToString();
                     PropertyAddress = _rs["PropertyAddress"].ToString();
-                    InterestPaidPriorYear = Convert.ToDouble(_rs["InterestPaidPriorYear"]);
-                    InterestPaidYearToDate = Convert.ToDouble(_rs["InterestPaidYearToDate"]);
-                    PrincipalPaidPriorYear = Convert.ToDouble(_rs["PrincipalPaidPriorYear"]);
-                    PrincipalPaidYearToDate = Convert.ToDouble(_rs["PrincipalPaidYearToDate"]);
+                    if (_rs["InterestPaidPriorYear"] != DBNull.Value) InterestPaidPriorYear = Convert.ToDouble(_rs["InterestPaidPriorYear"]); 
+                    if (_rs["InterestPaidYearToDate"] != DBNull.Value) InterestPaidYearToDate = Convert.ToDouble(_rs["InterestPaidYearToDate"]);
+                    if (_rs["PrincipalPaidPriorYear"] != DBNull.Value) PrincipalPaidPriorYear = Convert.ToDouble(_rs["PrincipalPaidPriorYear"]);
+                    if (_rs["PrincipalPaidYearToDate"] != DBNull.Value) PrincipalPaidYearToDate = Convert.ToDouble(_rs["PrincipalPaidYearToDate"]);
                     CurrentMortgageBalance = Convert.ToDouble(_rs["CurrentMortgageBalance"]);
                     ProductDescription = _rs["ProductDescription"].ToString();
                     RateType = _rs["RateType"].ToString();
                     InterestRate = _rs["InterestRate"].ToString();
                     PaymentType = _rs["PaymentType"].ToString();
-                    PaymentAmount = Convert.ToDouble(_rs["PaymentAmount"]);
+                    if (_rs["PaymentAmount"] != DBNull.Value) PaymentAmount = Convert.ToDouble(_rs["PaymentAmount"]);
                     PaymentFrequency = _rs["PaymentFrequency"].ToString();
                     LastPaymentDate = _rs["LastPaymentDate"].ToString();
                     NextPaymentDate = _rs["NextPaymentDate"].ToString();
                     MaturityDate = _rs["MaturityDate"].ToString();
-                    RemainingAmortization_Months = Convert.ToInt32(_rs["RemainingAmortization_Months"]);		
-                    RemainingAmortization_Years = Convert.ToInt32(_rs["RemainingAmortization_Years"]);
+                    if (_rs["RemainingAmortization_Months"] != DBNull.Value) RemainingAmortization_Months = Convert.ToInt32(_rs["RemainingAmortization_Months"]);		
+                    if (_rs["RemainingAmortization_Years"] != DBNull.Value) RemainingAmortization_Years = Convert.ToInt32(_rs["RemainingAmortization_Years"]);
 
                     
                     Deal deal = new Deal(
@@ -275,6 +273,7 @@ namespace PQ_API.DataConnect
             _GetClientsList.Parameters["@RMR_ID"].Value = (object)RMR_ID ?? DBNull.Value;
             List<Client> clientsList = new List<Client>();
             List<Address> addressList = new List<Address>();
+            List<ContactInfo> contactInfoList = new List<ContactInfo>();
 
             _rs = _GetClientsList.ExecuteReader();
             if (_rs.HasRows)
@@ -324,14 +323,15 @@ namespace PQ_API.DataConnect
                         while (_rs.Read())
                         {  
                             contactInfo.ContactId = _rs["ContactId"].ToString();                          
-                            contactInfo.Email = _rs["Email"].ToString();
-                            contactInfo.HomePhone = _rs["HomePhone"].ToString();
-                            contactInfo.WorkPhone = _rs["WorkPhone"].ToString();
-                            contactInfo.MobilePhone = _rs["MobilePhone"].ToString();   
+                            contactInfo.ContactType = _rs["ContactType"].ToString();
+                            contactInfo.ContactDetails = _rs["ContactDetails"].ToString();
+
+                            contactInfoList.Add(contactInfo);
                         }
-                        clientFromList.ContactInfo = contactInfo;
+                        clientFromList.ContactInfo = contactInfoList;
                     }
                     _rs.Close();
+                    addressList = new List<Address>();;
                 }
 
                 _rs.Close();
@@ -408,18 +408,14 @@ namespace PQ_API.DataConnect
 
         public ContactInfo UpdateContactInfoFunc(ContactInfo contactInfo)
         {
-            _SetClientContactInfo.Parameters["@ContactId"].Value = (object)contactInfo.ContactId ?? DBNull.Value; ;
-            _SetClientContactInfo.Parameters["@Email"].Value = (object)contactInfo.Email ?? DBNull.Value; ;
-            _SetClientContactInfo.Parameters["@HomePhone"].Value = (object)contactInfo.HomePhone ?? DBNull.Value; ;
-            _SetClientContactInfo.Parameters["@WorkPhone"].Value = (object)contactInfo.WorkPhone ?? DBNull.Value; ;
-            _SetClientContactInfo.Parameters["@MobilePhone"].Value = (object)contactInfo.MobilePhone ?? DBNull.Value; ;
+            _SetClientContactInfo.Parameters["@ContactId"].Value = (object)contactInfo.ContactId ?? DBNull.Value;
+            _SetClientContactInfo.Parameters["@ContactType"].Value = (object)contactInfo.ContactType ?? DBNull.Value;
+            _SetClientContactInfo.Parameters["@ContactDetails"].Value = (object)contactInfo.ContactDetails ?? DBNull.Value;
             
             ContactInfo result = null;
             string ContactId = null;
-            string Email = null;
-            string HomePhone = null;
-            string WorkPhone = null;
-            string MobilePhone = null;
+            string ContactType = null;
+            string ContactDetails = null;
 
             _rs = _SetClientContactInfo.ExecuteReader();
 
@@ -428,12 +424,10 @@ namespace PQ_API.DataConnect
                 while (_rs.Read())
                 {
                     ContactId = _rs["ContactId"].ToString();
-                    Email = _rs["Email"].ToString();
-                    HomePhone = _rs["HomePhone"].ToString();
-                    WorkPhone = _rs["WorkPhone"].ToString();
-                    MobilePhone = _rs["MobilePhone"].ToString();
+                    ContactType = _rs["ContactType"].ToString();
+                    ContactDetails = _rs["ContactDetails"].ToString();
                     
-                    result = new ContactInfo(ContactId, Email, HomePhone, WorkPhone, MobilePhone);
+                    result = new ContactInfo(ContactId, ContactType, ContactDetails);
                 }
                 _rs.Close();
                 return result;
@@ -445,7 +439,7 @@ namespace PQ_API.DataConnect
         public Address UpdateClientAddressFunc(Address address)
         {
             _SetClientAddress.Parameters["@AddressId"].Value = (object)address.AddressId ?? DBNull.Value;
-            _SetClientAddress.Parameters["@AddressType"].Value = (object)address.AddressId ?? DBNull.Value;
+            _SetClientAddress.Parameters["@AddressType"].Value = (object)address.AddressType ?? DBNull.Value;
             _SetClientAddress.Parameters["@UnitNumber"].Value = (object)address.UnitNumber ?? DBNull.Value;
             _SetClientAddress.Parameters["@StreetNumber"].Value = (object)address.StreetNumber ?? DBNull.Value;
             _SetClientAddress.Parameters["@StreetName"].Value = (object)address.StreetName ?? DBNull.Value;
