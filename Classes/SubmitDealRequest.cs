@@ -1,9 +1,11 @@
+using System.Collections.Generic;
+
 namespace PQ_API.Classes
 {
     public class SubmitDealRequest
     {
         public AccountDetails AccountDetails { get; set; }
-        public Borrower Borrower { get; set; }
+        public List<Borrower> Borrowers { get; set; }
         public LoanDetails LoanDetails { get; set; }
         public PrePaymentPrivileges PrePaymentPrivileges { get; set; }
         public MortgageInsuranceDetails MortgageInsuranceDetails { get; set; }

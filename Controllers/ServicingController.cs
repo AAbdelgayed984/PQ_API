@@ -23,6 +23,18 @@ namespace PQ_API.Controllers
         [HttpPost("SubmitDeal")]
         public IActionResult SubmitDeal([FromBody] SubmitDealRequest submitDealRequest)
         {
+            //
+            //if (item == null)
+            //{
+            //    var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
+            //    {
+            //        Content = new StringContent(string.Format("No product with ID = {0}", id)),
+            //        ReasonPhrase = "Product ID Not Found"
+            //    };
+            //    throw new HttpResponseException(resp);
+            //}
+            //
+
             SubmitDealResponse SubmitDealResponse = _SubmitDealService.SubmitDeal(submitDealRequest);
 
             return Ok(SubmitDealResponse);
