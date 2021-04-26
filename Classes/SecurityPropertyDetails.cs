@@ -5,7 +5,16 @@ namespace PQ_API.Classes
 {
     public class SecurityPropertyDetails
     {
-        public Decimal PropertyValue {get;set;}
+        public string UnitNumber { get; set; }
+        public string StreetNumber { get; set; }
+        public string StreetName { get; set; }
+        public Enums.StreetTypes StreetType { get; set; }
+        public string Direction { get; set; }
+        public string City { get; set; }
+        public Enums.Province Province { get; set; }
+        public string PostalCode { get; set; }
+        public Enums.Country Country { get; set; }
+        public Decimal PropertyValue { get;set; }
         public Enums.PropertyStyles propertyStyle {get;set;}
         public Enums.ValuationMethods ValuationMethod {get;set;}
         public Enums.PropertyTypes PropertyType {get;set;}

@@ -19,7 +19,6 @@ namespace PQ_API.Classes
         public Enums.Title Title {get;set;}
         public Enums.Gender Gender {get;set;}
         public int BeaconScore {get;set;}
-        public string MailingAddress {get;set;}
         public string Unit {get;set;}
         public string Number {get;set;}
         public string StreetName {get;set;}

@@ -35,6 +35,7 @@ namespace PQ_API.Services
             string Brand_CMR_ID = Enums.GetEnumDescription( request.AccountDetails.Brand);
             string Investor_CMR_ID = Enums.GetEnumDescription( request.AccountDetails.Investor);
             string Broker_CMR_ID = Enums.GetEnumDescription( request.AccountDetails.Broker);
+            string MI_CMR_ID = Enums.GetEnumDescription(request.MortgageInsuranceDetails.MortgageInsurer);
 
             // Deal Master Details
             string RMR_ID = _rubiDataConnect.PQ_ServicingAPI_Product_MasterReferenceFunc(Product_XRP_ID, Product_XSU_ID);
@@ -45,6 +46,7 @@ namespace PQ_API.Services
             string Agent_LMR_ID = _rubiDataConnect.PQ_ServicingAPI_Link_MasterReferenceFunc(Broker_CMR_ID, RMR_ID, Enums.GetEnumDescription( Enums.Association.Agent)) ;
             string SubAgent_LMR_ID = _rubiDataConnect.PQ_ServicingAPI_Link_MasterReferenceFunc(Broker_CMR_ID, RMR_ID, Enums.GetEnumDescription( Enums.Association.SubAgent)) ;
             string SubmittingAgent_LMR_ID = _rubiDataConnect.PQ_ServicingAPI_Link_MasterReferenceFunc(Broker_CMR_ID, RMR_ID, Enums.GetEnumDescription( Enums.Association.SubmittingAgent)) ;
+            string MortgageInsurer_LMR_ID = _rubiDataConnect.PQ_ServicingAPI_Link_MasterReferenceFunc(MI_CMR_ID, RMR_ID, Enums.GetEnumDescription( Enums.Association.SubmittingAgent));
                         
             // Deal Keys
             string MortgageAccountNumber_YMR_ID = _rubiDataConnect.PQ_ServicingAPI_Keys_MasterReferenceFunc(RMR_ID, request.AccountDetails.MortgageAccountNumber, Enums.GetEnumDescription(Enums.Keys.MortgageAccountNumber));
@@ -55,7 +57,7 @@ namespace PQ_API.Services
             // Balances
             string PrincipalBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.Principal), request.LoanDetails.OriginalLoanAmount); 
             string ApprovedBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.Approved), request.LoanDetails.ApprovedBalance);            
-            
+            string LoanLTV_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.LoanLTV), request.SecurityPropertyDetails.LoanToValue);            
             // Product Term and Amortization
             string ProductTerm_RCTe_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTermFunc(RMR_ID, request.LoanDetails.ProductTerm_Years, request.LoanDetails.ProductTerm_Months, ( request.LoanDetails.ProductTerm_Years * 12 ) + request.LoanDetails.ProductTerm_Months, 1);
             string AmortizationOriginal_RCTe_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTermFunc(RMR_ID, request.LoanDetails.AmortizationOriginal_Years, request.LoanDetails.AmortizationOriginal_Months, ( request.LoanDetails.ProductTerm_Years * 12 ) + request.LoanDetails.ProductTerm_Months, 2);
@@ -67,6 +69,27 @@ namespace PQ_API.Services
             string ApplicationDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 1, request.LoanDetails.ApplicationDate);
 
             // Security
+            string RSP_ID = _rubiDataConnect.PQ_ServicingAPI_Product_SecurityPTYFunc(
+                RMR_ID,
+                Enums.GetEnumDescription(request.SecurityPropertyDetails.StreetType),
+                Enums.GetEnumDescription(Enums.Country.Canada),
+                Enums.GetEnumDescription(request.SecurityPropertyDetails.PropertyType),
+                Enums.GetEnumDescription(request.SecurityPropertyDetails.Occupancy),
+                null,
+                request.SecurityPropertyDetails.PropertyValue,
+                request.SecurityPropertyDetails.PropertyValue,
+                request.SecurityPropertyDetails.UnitNumber,
+                request.SecurityPropertyDetails.StreetNumber,
+                request.SecurityPropertyDetails.StreetName,
+                request.SecurityPropertyDetails.City,
+                Enums.GetEnumDescription(request.SecurityPropertyDetails.Province),
+                request.SecurityPropertyDetails.PostalCode,
+                request.SecurityPropertyDetails.Direction,
+                Enums.GetEnumDescription(request.SecurityPropertyDetails.ConstructionType),
+                0,
+                Enums.GetEnumDescription(request.SecurityPropertyDetails.SewageType),
+                Enums.GetEnumDescription(request.SecurityPropertyDetails.WaterType)
+            );
 
             // Borrowers
             foreach (Borrower borrower in request.Borrowers)
@@ -90,7 +113,7 @@ namespace PQ_API.Services
                 );
                 string CurrentAddress_CAD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_AddressDetailFunc(
                     Borrower_CMR_ID,
-                    Enums.GetEnumDescription(Enums.AddressType.Mailing),
+                    Enums.GetEnumDescription(Enums.AddressType.Current),
                     Enums.GetEnumDescription(borrower.StreetType),
                     Enums.GetEnumDescription(borrower.Country),
                     borrower.Unit,
