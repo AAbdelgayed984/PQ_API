@@ -21,7 +21,7 @@ namespace PQ_API.Services
         {
             _appSettings = appSettings.Value;
             RUBIDataConnect rubiDataConnect = new RUBIDataConnect(rubiDBSettings.ConnectionString);
-            _users = rubiDataConnect.GetAPIUsersListFunc();
+            _users = rubiDataConnect.PQ_CutomerAPI_GetAPIUsersListFunc();
         }
         
         public AuthenticateResponse Authenticate(AuthenticateRequest model)

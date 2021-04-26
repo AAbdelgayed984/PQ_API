@@ -54,3 +54,4 @@ C:\Users\Ahmed.Abdelgayed\Desktop\Projects\PQ_API\obj\Debug\net5.0\PQ_API.pdb
 C:\Users\Ahmed.Abdelgayed\Desktop\Projects\PQ_API\obj\Debug\net5.0\PQ_API.genruntimeconfig.cache
 C:\Users\Ahmed.Abdelgayed\Desktop\Projects\PQ_API\bin\Debug\net5.0\Logs\PQ_API-20210417.json
 C:\Users\Ahmed.Abdelgayed\Desktop\Projects\PQ_API\bin\Debug\net5.0\Logs\PQ_API-20210418.json
+C:\Users\Ahmed.Abdelgayed\Desktop\Projects\PQ_API\bin\Debug\net5.0\Logs\PQ_API-20210425.json
