@@ -8,7 +8,7 @@ namespace PQ_API.DataConnect
 {
     public class RUBIDataConnect : IDisposable
     {
-        public const string PQ_CutomerAPI_GetAPIUsersList = "EXEC dbo.PQ_CutomerAPI_PQ_CutomerAPI_GetAPIUsersList"; 
+        public const string PQ_CutomerAPI_GetAPIUsersList = "EXEC dbo.PQ_CutomerAPI_GetAPIUsersList"; 
         public const string PQ_CutomerAPI_GetUserBrandsList = "EXEC dbo.PQ_CutomerAPI_GetUserBrandsList @UserId";
         public const string PQ_CutomerAPI_GetStreetTypeList = "EXEC dbo.PQ_CutomerAPI_GetStreetTypeList";
         public const string PQ_CutomerAPI_GetBrandDealsList = "EXEC dbo.PQ_CutomerAPI_GetBrandDealsList @Brand_CMR_ID";
@@ -383,7 +383,7 @@ namespace PQ_API.DataConnect
                     if (_rs["InterestPaidYearToDate"] != DBNull.Value) InterestPaidYearToDate = Convert.ToDouble(_rs["InterestPaidYearToDate"]);
                     if (_rs["PrincipalPaidPriorYear"] != DBNull.Value) PrincipalPaidPriorYear = Convert.ToDouble(_rs["PrincipalPaidPriorYear"]);
                     if (_rs["PrincipalPaidYearToDate"] != DBNull.Value) PrincipalPaidYearToDate = Convert.ToDouble(_rs["PrincipalPaidYearToDate"]);
-                    CurrentMortgageBalance = Convert.ToDouble(_rs["CurrentMortgageBalance"]);
+                    if (_rs["CurrentMortgageBalance"] != DBNull.Value) CurrentMortgageBalance = Convert.ToDouble(_rs["CurrentMortgageBalance"]);
                     ProductDescription = _rs["ProductDescription"].ToString();
                     RateType = _rs["RateType"].ToString();
                     InterestRate = _rs["InterestRate"].ToString();
@@ -704,6 +704,7 @@ namespace PQ_API.DataConnect
         {
             _PQ_ServicingAPI_Keys_MasterReference.Parameters["@YMR_IDLink_ARMNet"].Value = (object)YMR_IDLink_ARMNet ?? DBNull.Value;
             _PQ_ServicingAPI_Keys_MasterReference.Parameters["@YMR_IDLink_Foreign"].Value = (object)YMR_IDLink_Foreign ?? DBNull.Value;
+            _PQ_ServicingAPI_Keys_MasterReference.Parameters["@YMR_IDLink_XFK"].Value = (object)YMR_IDLink_XFK ?? DBNull.Value;
             
             string result = null;
 

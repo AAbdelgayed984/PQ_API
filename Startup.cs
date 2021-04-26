@@ -33,6 +33,7 @@ namespace PQ_API
             services.AddScoped<IBrandService, BrandService>();
             services.AddScoped<IDealService, DealService>();
             services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<ISubmitDealService, SubmitDealService>();
 
             services.AddSwaggerGen(options =>
             {
