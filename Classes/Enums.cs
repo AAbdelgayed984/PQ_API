@@ -22,6 +22,7 @@ namespace PQ_API.Classes
             [Description("{ab9ae444-3ec5-425c-be24-121b1618669e}")]AvailableCredit,
             [Description("{b0d3b9a3-a4e6-40c9-818f-e9e60df7643b}")]Unadvanced,
             [Description("{e5c24ad5-75f4-4cf6-8bc0-5b0e833d4cc4}")]Unapplied,
+            [Description("{1d235e92-e720-4a6c-8f2e-5be920c0726c}")]LoanLTV
 
         }
         public enum StreetTypes {
@@ -142,21 +143,30 @@ namespace PQ_API.Classes
             [Description("")]PurchasePrice
         }
         public enum PropertyTypes { 
-            [Description("")]TriPlex, 
-            [Description("")]Duplex, 
-            [Description("")]TwoStorey, 
-            [Description("")]ApartmentLowRise, 
-            [Description("")]Detached, 
-            [Description("")]Stacked, 
-            [Description("")]ThreeStorey, 
-            [Description("")]FourPlex, 
-            [Description("")]RowHousing, 
-            [Description("")]ModularHome, 
-            [Description("")]DuplexSemiDetached, 
-            [Description("")]SemiDetached, 
-            [Description("")]Mobile, 
-            [Description("")]StoreyAndAHalf, 
-            [Description("")]ApartmenHighRise 
+            [Description("{fe50b0db-e29a-44c9-ae25-429cb2ba8bd4}")]ApartmentHighRise,
+            [Description("{801fbf67-9a05-44dd-9e6a-6e874d27c202}")]ApartmentLowRise,
+            [Description("{887acbe8-674b-44fb-93b7-5224d755fd54}")]Detached,
+            [Description("{632061fa-8e66-4054-823b-bf4b7626933c}")]Duplex,
+            [Description("{4c41905e-8ea3-4e97-9a72-f6fe0947ec42}")]Duplex_Detached,
+            [Description("{c05ead17-4d35-4371-ad8f-9d3b31e27b85}")]Duplex_Semi_Detached,
+            [Description("{235c8135-0eac-42f6-8252-8b2ebca6f759}")]Filogix_Bi_Level,
+            [Description("{3c92f619-3832-4bcc-a985-d6764bd35fd3}")]Filogix_OneStorey,
+            [Description("{31cb4a5a-dab3-4033-a408-4d2cab385d3f}")]Filogix_Other,
+            [Description("{3b7c4746-305f-441a-92b0-b4509bc7c7ea}")]Filogix_SplitLevel,
+            [Description("{e036b51f-eb46-486a-8da6-21350f1b8682}")]Filogix_StoreyandaHalf,
+            [Description("{93e2e3d2-be18-4f39-8f4d-1f1d17739111}")]Filogix_ThreeStorey,
+            [Description("{57b65db1-04c7-4e4b-af85-0fabd616452e}")]Filogix_TwoStorey,
+            [Description("{9e40bcc0-65f1-4694-ac30-e7cadbf7d4e2}")]FourPlex_Detached,
+            [Description("{ec09acc6-73bc-4f3f-8d0b-146053770797}")]FourPlex_Semi_Detached,
+            [Description("{d95ec699-ab6c-44c1-a4e2-a4da4161b25a}")]Mobile,
+            [Description("{fd959ea7-1827-476d-9cdf-efd2be354e22}")]ModularHome_Detached,
+            [Description("{c05c36ac-b35a-44ed-b509-b9a5234d0c00}")]ModularHome_Semi_Detached,
+            [Description("{69905f8b-c78b-42cb-b751-14509d90be77}")]Other,
+            [Description("{a4375fec-faff-478b-b3bc-ebd063d38f34}")]RowHousing,
+            [Description("{c295ff07-6c4d-4011-9154-88cd83e9dc61}")]Semi_Detached,
+            [Description("{935afeae-a9ee-4273-92c6-22aa0db35e03}")]Stacked,
+            [Description("{6b64d131-d1cb-41fe-84ef-78e3b60ab134}")]TriPlex_Detached,
+            [Description("{3cebdbbc-6462-4e04-8882-4a1d9439eeeb}")]TriPlex_Semi_Detached,
         }
         public enum DwellingTypes { 
             [Description("")]StrataTitle, 
@@ -172,10 +182,10 @@ namespace PQ_API.Classes
             [Description("")]Condo 
         }
         public enum Occupancies { 
-            [Description("")]OwnerOccupied, 
-            [Description("")]OwnerOccupiedRental, 
-            [Description("")]Rental, 
-            [Description("")]SecondHome 
+            [Description("{cc43d708-e4f0-4a26-a6ec-d452d7824b83}")]OwnerOccupied, 
+            [Description("{ba53ba79-3005-408d-8e37-c3ad27bb965e}")]OwnerOccupiedRental, 
+            [Description("{50bb4e1b-d9e6-4a1b-96ca-fcfa53290b2c}")]Rental, 
+            [Description("{203697e3-5967-4f17-9e56-a3d46325fc43}")]SecondHome 
         }
         public enum PropertyZones { 
             [Description("")]Residential, 
@@ -184,20 +194,21 @@ namespace PQ_API.Classes
             [Description("")]Farm 
         }
         public enum SewageTypes {
-            [Description("")]HoldingTank, 
-            [Description("")]Septic, 
-            [Description("")]SepticField, 
-            [Description("")]Municipal
+            [Description("{caeef52d-b807-4f4a-8e4d-7c6a4a40ae92}")]HoldingTank, 
+            [Description("{a4f9f7e2-e414-403f-9396-ccf84735d8f4}")]Septic, 
+            [Description("{c4e5203e-3d16-4aa6-af11-aacd060b5e7a}")]SepticField, 
+            [Description("{3823a3cf-0e5e-4443-8a2a-644bff4b986a}")]Municipal
         }
         public enum WaterType {
-            [Description("")]Well, 
-            [Description("")]LakeIntake, 
-            [Description("")]Municipal
+            [Description("{9ff4a8f7-38ba-463a-bd13-a9b5f98c82eb}")]Well, 
+            [Description("{87ea126c-ff0f-4a7b-a3c8-328fd00e2407}")]LakeIntake, 
+            [Description("{a85d4ef6-0d46-4c79-9b5f-4a4c070ce830}")]Municipal,
+            [Description("{721203d0-d197-4bc1-b0cc-0793a2c3582c}")]Cistern
         }
         public enum ConstructionTypes { 
-            [Description("")]New, 
-            [Description("")]Existing, 
-            [Description("")]Construction 
+            [Description("{eb4abc9f-08dc-491d-98c3-854222b93363}")]New, 
+            [Description("{cca98738-9842-4993-83b7-446e7afe650e}")]Existing, 
+            [Description("{72e38b5c-8c9b-46d4-b912-b771edd49695}")]Construction 
         }
         public enum BorrowerFlag { 
             [Description("Borrower")]Borrower, 
