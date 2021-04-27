@@ -30,8 +30,8 @@ namespace PQ_API.Classes
             [Description("{9932b46e-ee35-4ade-b0f6-18d087fc8a0b}")]Avenue,
             [Description("{b3a449b6-1f4a-4647-a25b-20f190d0c302}")]Road,
             [Description("{6a2b5561-fd05-49e1-ad30-b77932447054}")]Crescent,
-            [Description("{b555850e-0366-4459-b531-a96330cf0154}")]Boulevard
-
+            [Description("{b555850e-0366-4459-b531-a96330cf0154}")]Boulevard,
+            [Description("{a77137cf-eabb-41b8-894f-6c78318d82cf}")]Circle
         }
         public enum Keys {
             [Description("{67436ac7-d398-41d1-84bc-c471e5d8d1a6}")]CustomerAccountNumber,
