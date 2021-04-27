@@ -25,6 +25,7 @@ namespace PQ_API.Classes
             [Description("{1d235e92-e720-4a6c-8f2e-5be920c0726c}")]LoanLTV
 
         }
+        /*
         public enum StreetTypes {
             [Description("{a5572a98-1eec-43c9-ab44-a18d5ab626b6}")]Street,
             [Description("{9932b46e-ee35-4ade-b0f6-18d087fc8a0b}")]Avenue,
@@ -33,6 +34,7 @@ namespace PQ_API.Classes
             [Description("{b555850e-0366-4459-b531-a96330cf0154}")]Boulevard,
             [Description("{a77137cf-eabb-41b8-894f-6c78318d82cf}")]Circle
         }
+        */
         public enum Keys {
             [Description("{67436ac7-d398-41d1-84bc-c471e5d8d1a6}")]CustomerAccountNumber,
             [Description("{ef3baea0-8d36-4c5a-8a2d-6ce9e119335b}")]MortgageAccountNumber,

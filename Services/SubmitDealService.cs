@@ -71,7 +71,7 @@ namespace PQ_API.Services
             // Security
             string RSP_ID = _rubiDataConnect.PQ_ServicingAPI_Product_SecurityPTYFunc(
                 RMR_ID,
-                Enums.GetEnumDescription(request.SecurityPropertyDetails.StreetType),
+                StreetType.GetEnumDescription(request.SecurityPropertyDetails.StreetType),
                 Enums.GetEnumDescription(Enums.Country.Canada),
                 Enums.GetEnumDescription(request.SecurityPropertyDetails.PropertyType),
                 Enums.GetEnumDescription(request.SecurityPropertyDetails.Occupancy),
@@ -102,7 +102,7 @@ namespace PQ_API.Services
                 string MailingAddress_CAD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_AddressDetailFunc(
                     Borrower_CMR_ID,
                     Enums.GetEnumDescription(Enums.AddressType.Mailing),
-                    Enums.GetEnumDescription(borrower.StreetType),
+                    StreetType.GetEnumDescription(borrower.StreetType),
                     Enums.GetEnumDescription(borrower.Country),
                     borrower.Unit,
                     borrower.Number,
@@ -114,7 +114,7 @@ namespace PQ_API.Services
                 string CurrentAddress_CAD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_AddressDetailFunc(
                     Borrower_CMR_ID,
                     Enums.GetEnumDescription(Enums.AddressType.Current),
-                    Enums.GetEnumDescription(borrower.StreetType),
+                    StreetType.GetEnumDescription(borrower.StreetType),
                     Enums.GetEnumDescription(borrower.Country),
                     borrower.Unit,
                     borrower.Number,
