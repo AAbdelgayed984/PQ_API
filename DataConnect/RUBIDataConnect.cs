@@ -39,7 +39,6 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_Client_IndividualEmployment = "EXEC dbo.PQ_ServicingAPI_Client_IndividualEmployment @CED_IDLink_CMR, @CED_IDLink_XCEt, @CED_IDLink_Country_C, @CED_EmployerName_C, @CED_UnitNumber_C, @CED_StreetNumber_C, @CED_StreetName_C, @CED_City_C, @CED_State_C, @CED_PostCode_C, @CED_TimeInServiceY_C, @CED_TimeInServiceM_C, @CED_IDLink_Occupation_C , @CED_StartDate DATE, @CED_JobTitl";
         public const string PQ_ServicingAPI_client_individualincome = "EXEC dbo.PQ_ServicingAPI_client_individualincome @CINc_IDLink_CMR, @CINc_IDLink_XIN, @CINc_IDLink_XFR, @CINc_Value, @CINc_IDLink_CED";
         public const string PQ_ServicingAPI_Product_LoanLiabilityCredit = "EXEC dbo.PQ_ServicingAPI_Product_LoanLiabilityCredit @RLLc_IDLink_RMR, @RLLc_IDLink_XLBc, @RLLc_CreditProvider, @RLLc_MonthlyRepayment, @RLLc_BalanceOwing";
-        /*Kyle Changes here*/
         public const string PQ_ServicingAPI_Client_BankDetail = "EXEC dbo.PQ_ServicingAPI_Client_BankDetail @CBD_IDLink_CMR, @CBD_AccountName, @CBD_AccountNumber, @CBD_BankName, @CBD_BranchLocation, @CBD_Default, @CBD_AccountTransitNo_CAN, @CBD_AccountInstitutionNo_CAN";
         public const string PQ_ServicingAPI_Product_ControlTask = "EXEC dbo.PQ_ServicingAPI_Product_ControlTask @RCTk_IDLink_RMR, @RCTk_IDLink_XTKM, @RCTk_IDLink_Activation, @RCTk_Type";
         public const string PQ_ServicingAPI_Product_ControlRatio = "EXEC dbo.PQ_ServicingAPI_Product_ControlRatio @RCTi_IDLink_RMR, @RCTi_IDLink_XRTi, @RCTi_CurrentValue";
@@ -58,7 +57,6 @@ namespace PQ_API.DataConnect
         private SqlCommand _PQ_CustomerAPI_AskQuestion;
         private SqlCommand _PQ_CutomerAPI_SetContactInfo;
         private SqlCommand _PQ_CutomerAPI_SetMailAddress;
-
         private SqlCommand _PQ_ServicingAPI_Product_MasterReference;
         private SqlCommand _PQ_ServicingAPI_Keys_MasterReference;
         private SqlCommand _PQ_ServicingAPI_Product_LoanAssetProperty;
@@ -79,8 +77,6 @@ namespace PQ_API.DataConnect
         private SqlCommand _PQ_ServicingAPI_Client_IndividualEmployment;
         private SqlCommand _PQ_ServicingAPI_client_individualincome;
         private SqlCommand _PQ_ServicingAPI_Product_LoanLiabilityCredit;
-
-        /*Kyle Changes here*/
         private SqlCommand _PQ_ServicingAPI_Client_BankDetail;
         private SqlCommand _PQ_ServicingAPI_Product_ControlTask;
         private SqlCommand _PQ_ServicingAPI_Product_ControlRatio;
@@ -298,7 +294,6 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_LoanLiabilityCredit.Parameters.Add("@RLLc_MonthlyRepayment", SqlDbType.Decimal);
             _PQ_ServicingAPI_Product_LoanLiabilityCredit.Parameters.Add("@RLLc_BalanceOwing", SqlDbType.Decimal);
 
-            /*kyle Changes here*/
             _PQ_ServicingAPI_Client_BankDetail = new SqlCommand(PQ_ServicingAPI_Client_BankDetail, _Connection);
             _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@CBD_IDLink_CMR", SqlDbType.VarChar);
             _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@CBD_AccountName", SqlDbType.VarChar);
@@ -311,10 +306,10 @@ namespace PQ_API.DataConnect
 
             
             _PQ_ServicingAPI_Product_ControlTask = new SqlCommand(PQ_ServicingAPI_Product_ControlTask,_Connection);
-            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@RCTk_IDLink_RMR", SqlDbType.VarChar);
-            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@RCTk_IDLink_XTKM", SqlDbType.VarChar);
-            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@RCTk_IDLink_Activation", SqlDbType.Int);
-            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@RCTk_Type", SqlDbType.Int);
+            _PQ_ServicingAPI_Product_ControlTask.Parameters.Add("@RCTk_IDLink_RMR", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_ControlTask.Parameters.Add("@RCTk_IDLink_XTKM", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_ControlTask.Parameters.Add("@RCTk_IDLink_Activation", SqlDbType.Int);
+            _PQ_ServicingAPI_Product_ControlTask.Parameters.Add("@RCTk_Type", SqlDbType.Int);
 
             _PQ_ServicingAPI_Product_ControlRatio = new SqlCommand(PQ_ServicingAPI_Product_ControlRatio,_Connection);
             _PQ_ServicingAPI_Product_ControlRatio.Parameters.Add("@RCTi_IDLink_RMR", SqlDbType.VarChar);
@@ -1541,6 +1536,33 @@ namespace PQ_API.DataConnect
                 _PQ_CutomerAPI_GetDealClientsList.Dispose();
                 _PQ_CutomerAPI_SetContactInfo.Dispose();
                 _PQ_CutomerAPI_SetMailAddress.Dispose();
+
+                _PQ_ServicingAPI_Product_MasterReference.Dispose();
+                _PQ_ServicingAPI_Keys_MasterReference.Dispose();
+                _PQ_ServicingAPI_Product_LoanAssetProperty.Dispose();
+                _PQ_ServicingAPI_Product_LoanAssetMaster.Dispose();
+                _PQ_ServicingAPI_Product_ControlBalance.Dispose();
+                _PQ_ServicingAPI_Product_ControlTerm.Dispose();
+                _PQ_ServicingAPI_Product_LoanMDT.Dispose();
+                _PQ_ServicingAPI_Product_ControlFeature.Dispose();
+                _PQ_ServicingAPI_Product_ControlDate.Dispose();
+                _PQ_ServicingAPI_Product_SecurityPTY.Dispose();
+                _PQ_ServicingAPI_Product_LoanLiabilityMaster.Dispose();
+                _PQ_ServicingAPI_Link_MasterReference.Dispose();
+                _PQ_ServicingAPI_Client_MasterReference.Dispose();
+                _PQ_ServicingAPI_Client_ContactDetail.Dispose();
+                _PQ_ServicingAPI_Client_AddressDetail.Dispose();
+                _PQ_ServicingAPI_Client_TypeIndividual.Dispose();
+                _PQ_ServicingAPI_Client_UniqueIdentifier.Dispose();
+                _PQ_ServicingAPI_Client_IndividualEmployment.Dispose();
+                _PQ_ServicingAPI_client_individualincome.Dispose();
+                _PQ_ServicingAPI_Product_LoanLiabilityCredit.Dispose();
+                _PQ_ServicingAPI_Client_BankDetail.Dispose();
+                _PQ_ServicingAPI_Product_ControlTask.Dispose();
+                _PQ_ServicingAPI_Product_ControlRatio.Dispose();
+                _PQ_ServicingAPI_Product_LoanInsurance.Dispose();
+                _PQ_ServicingAPI_Product_LoanPayment.Dispose();
+                _PQ_ServicingAPI_Task_Pending.Dispose();
                 _Connection.Dispose();
                 _rs.Dispose();
             }
