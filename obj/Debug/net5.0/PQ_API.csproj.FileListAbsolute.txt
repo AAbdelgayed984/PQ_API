@@ -126,3 +126,15 @@ C:\Users\Ahmed.Abdelgayed\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Sinks
 C:\Users\Ahmed.Abdelgayed\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Sinks.Debug.dll
 C:\Users\Ahmed.Abdelgayed\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Sinks.Elasticsearch.dll
 C:\Users\Ahmed.Abdelgayed\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Sinks.PeriodicBatching.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Elasticsearch.Net.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.AspNetCore.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Enrichers.Environment.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Extensions.Hosting.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Formatting.Elasticsearch.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Settings.Configuration.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Sinks.Console.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Sinks.Debug.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Sinks.Elasticsearch.dll
+C:\Users\kyle.cheng\Desktop\Projects\PQ_API\bin\Debug\net5.0\Serilog.Sinks.PeriodicBatching.dll

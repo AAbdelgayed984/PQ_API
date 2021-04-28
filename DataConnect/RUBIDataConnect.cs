@@ -39,7 +39,14 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_Client_IndividualEmployment = "EXEC dbo.PQ_ServicingAPI_Client_IndividualEmployment @CED_IDLink_CMR, @CED_IDLink_XCEt, @CED_IDLink_Country_C, @CED_EmployerName_C, @CED_UnitNumber_C, @CED_StreetNumber_C, @CED_StreetName_C, @CED_City_C, @CED_State_C, @CED_PostCode_C, @CED_TimeInServiceY_C, @CED_TimeInServiceM_C, @CED_IDLink_Occupation_C , @CED_StartDate DATE, @CED_JobTitl";
         public const string PQ_ServicingAPI_client_individualincome = "EXEC dbo.PQ_ServicingAPI_client_individualincome @CINc_IDLink_CMR, @CINc_IDLink_XIN, @CINc_IDLink_XFR, @CINc_Value, @CINc_IDLink_CED";
         public const string PQ_ServicingAPI_Product_LoanLiabilityCredit = "EXEC dbo.PQ_ServicingAPI_Product_LoanLiabilityCredit @RLLc_IDLink_RMR, @RLLc_IDLink_XLBc, @RLLc_CreditProvider, @RLLc_MonthlyRepayment, @RLLc_BalanceOwing";
-
+        /*Kyle Changes here*/
+        public const string PQ_ServicingAPI_Client_BankDetail = "EXEC dbo.PQ_ServicingAPI_Client_BankDetail @CBD_IDLink_CMR, @CBD_AccountName, @CBD_AccountNumber, @CBD_BankName, @CBD_BranchLocation, @CBD_Default, @CBD_AccountTransitNo_CAN, @CBD_AccountInstitutionNo_CAN";
+        public const string PQ_ServicingAPI_Product_ControlTask = "EXEC dbo.PQ_ServicingAPI_Product_ControlTask @RCTk_IDLink_RMR, @RCTk_IDLink_XTKM, @RCTk_IDLink_Activation, @RCTk_Type";
+        public const string PQ_ServicingAPI_Product_ControlRatio = "EXEC dbo.PQ_ServicingAPI_Product_ControlRatio @RCTi_IDLink_RMR, @RCTi_IDLink_XRTi, @RCTi_CurrentValue";
+        public const string PQ_ServicingAPI_Product_LoanInsurance = "EXEC dbo.PQ_ServicingAPI_Product_LoanInsurance @RLMi_IDLink_RMR, @RLMi_LMIProduct, @RLMi_PolicyID, @RLMi_PremiumAmount, @RLMi_PremiumTax, @RLMi_PremiumTotal, @RLMi_PolicyID_Existing, @RLMi_LMIType, @RLMi_LMIFlag_Upfront, @RLMi_LMIFlag_RUInterventation, @RLMi_LMIPayor, @RLMi_Status, @RLMi_LMIPayorOverrideFlag, @RLMi_IsManualOverride, @RLMi_PolicyID_Final";
+        public const string PQ_ServicingAPI_Product_LoanPayment = "EXEC dbo.PQ_ServicingAPI_Product_LoanPayment @RLP_IDLink_RMR, @RLP_Type, @RLP_Fixed, @RLP_Interest, @RLP_Fixed, @RLP_Principal, @RLP_Term, @RLP_Period, @RLP_IDLink_Link";
+        public const string PQ_ServicingAPI_Task_Pending = "EXEC dbo.PQ_ServicingAPI_Task_Pending @KPD_IDLink_Code, @KPD_IDLink_XTKM, @KPD_Type, @KPD_ProcessOrder, @KPD_DateStart, @KPD_DateEnd, @KPD_DateNext, @KPD_DatePrev, @KPD_DayStart, @KPD_IDLink_Key, @KPD_IDLink_CBD";
+      
         private SqlCommand _PQ_CutomerAPI_GetDealClientsList;
         private SqlCommand _PQ_CutomerAPI_GetMailAddress;
         private SqlCommand _PQ_CutomerAPI_GetContactInfo;
@@ -72,6 +79,14 @@ namespace PQ_API.DataConnect
         private SqlCommand _PQ_ServicingAPI_Client_IndividualEmployment;
         private SqlCommand _PQ_ServicingAPI_client_individualincome;
         private SqlCommand _PQ_ServicingAPI_Product_LoanLiabilityCredit;
+
+        /*Kyle Changes here*/
+        private SqlCommand _PQ_ServicingAPI_Client_BankDetail;
+        private SqlCommand _PQ_ServicingAPI_Product_ControlTask;
+        private SqlCommand _PQ_ServicingAPI_Product_ControlRatio;
+        private SqlCommand _PQ_ServicingAPI_Product_LoanInsurance;
+        private SqlCommand _PQ_ServicingAPI_Product_LoanPayment;
+        private SqlCommand _PQ_ServicingAPI_Task_Pending;
 
         private SqlConnection _Connection;
         private SqlDataReader _rs;
@@ -282,6 +297,71 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_LoanLiabilityCredit.Parameters.Add("@RLLc_CreditProvider", SqlDbType.VarChar); 
             _PQ_ServicingAPI_Product_LoanLiabilityCredit.Parameters.Add("@RLLc_MonthlyRepayment", SqlDbType.Decimal);
             _PQ_ServicingAPI_Product_LoanLiabilityCredit.Parameters.Add("@RLLc_BalanceOwing", SqlDbType.Decimal);
+
+            /*kyle Changes here*/
+            _PQ_ServicingAPI_Client_BankDetail = new SqlCommand(PQ_ServicingAPI_Client_BankDetail, _Connection);
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@CBD_IDLink_CMR", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@CBD_AccountName", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@CBD_AccountNumber", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@CBD_BankName", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@CBD_BranchLocation", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@CBD_Default", SqlDbType.Bit); //bit?
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@CBD_AccountTransitNo_CAN", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@CBD_AccountInstitutionNo_CAN", SqlDbType.VarChar);
+
+            
+            _PQ_ServicingAPI_Product_ControlTask = new SqlCommand(PQ_ServicingAPI_Product_ControlTask,_Connection);
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@RCTk_IDLink_RMR", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@RCTk_IDLink_XTKM", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@RCTk_IDLink_Activation", SqlDbType.Int);
+            _PQ_ServicingAPI_Client_BankDetail.Parameters.Add("@RCTk_Type", SqlDbType.Int);
+
+            _PQ_ServicingAPI_Product_ControlRatio = new SqlCommand(PQ_ServicingAPI_Product_ControlRatio,_Connection);
+            _PQ_ServicingAPI_Product_ControlRatio.Parameters.Add("@RCTi_IDLink_RMR", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_ControlRatio.Parameters.Add("@RCTi_IDLink_XRTi", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_ControlRatio.Parameters.Add("@RCTi_CurrentValue", SqlDbType.Decimal);
+
+            _PQ_ServicingAPI_Product_LoanInsurance = new SqlCommand(PQ_ServicingAPI_Product_LoanInsurance,_Connection);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_IDLink_RMR", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_LMIProduct", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_PolicyID", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_PremiumAmount", SqlDbType.Float);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_PremiumTax", SqlDbType.Float);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_PremiumTotal", SqlDbType.Float);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_PolicyID_Existing", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_LMIType", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_LMIFlag_Upfront", SqlDbType.Bit);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_LMIFlag_RUInterventation", SqlDbType.Bit);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_LMIPayor", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_Status", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_LMIPayorOverrideFlag", SqlDbType.Bit);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_IsManualOverride", SqlDbType.Bit);
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters.Add("@RLMi_PolicyID_Final", SqlDbType.VarChar);
+
+            _PQ_ServicingAPI_Product_LoanPayment = new SqlCommand(PQ_ServicingAPI_Product_LoanPayment,_Connection);
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters.Add("@RLP_IDLink_RMR", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters.Add("@RLP_Type", SqlDbType.Int);
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters.Add("@RLP_Fixed", SqlDbType.Float);
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters.Add("@RLP_Interest", SqlDbType.Float);    
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters.Add("@RLP_Principal", SqlDbType.Float); 
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters.Add("@RLP_Term", SqlDbType.Float); 
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters.Add("@RLP_Period", SqlDbType.Int); 
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters.Add("@RLP_IDLink_Link", SqlDbType.VarChar);   
+
+            _PQ_ServicingAPI_Task_Pending = new SqlCommand(PQ_ServicingAPI_Task_Pending,_Connection);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_IDLink_Code",SqlDbType.VarChar); 
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_IDLink_XTKM",SqlDbType.VarChar);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_Type",SqlDbType.Int);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_ProcessOrder",SqlDbType.Int);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_DateStart",SqlDbType.DateTime);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_DateEnd",SqlDbType.DateTime);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_DateNext",SqlDbType.DateTime);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_DatePrev",SqlDbType.DateTime);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_DayStart",SqlDbType.Int);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_IDLink_Key",SqlDbType.VarChar);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_IDLink_CBD",SqlDbType.VarChar);
+
+
         }
 
         public List<User> PQ_CutomerAPI_GetAPIUsersListFunc()
@@ -1268,6 +1348,183 @@ namespace PQ_API.DataConnect
             return result;
         }
 
+        /*Kyle Changes here*/
+        public string PQ_ServicingAPI_Client_BankDetailFunc ( string CBD_IDLink_CMR, string CBD_AccountName, string CBD_AccountNumber, string CBD_BankName, string CBD_BranchLocation, bool CBD_Default, string CBD_AccountTransitNo_CAN, string CBD_AccountInstitutionNo_CAN )
+        {
+            _PQ_ServicingAPI_Client_BankDetail.Parameters["@CBD_IDLink_CMR"].Value = (object)CBD_IDLink_CMR ?? DBNull.Value;
+            _PQ_ServicingAPI_Client_BankDetail.Parameters["@CBD_AccountName"].Value = (object)CBD_AccountName ?? DBNull.Value;
+            _PQ_ServicingAPI_Client_BankDetail.Parameters["@CBD_AccountNumber"].Value = (object)CBD_AccountNumber ?? DBNull.Value;
+            _PQ_ServicingAPI_Client_BankDetail.Parameters["@CBD_BankName"].Value = (object)CBD_BankName ?? DBNull.Value;
+            _PQ_ServicingAPI_Client_BankDetail.Parameters["@CBD_BranchLocation"].Value = (object)CBD_BranchLocation ?? DBNull.Value;
+            _PQ_ServicingAPI_Client_BankDetail.Parameters["@CBD_Default"].Value = (object)CBD_Default ?? DBNull.Value;
+            _PQ_ServicingAPI_Client_BankDetail.Parameters["@CBD_AccountTransitNo_CAN"].Value = (object)CBD_AccountTransitNo_CAN ?? DBNull.Value;
+            _PQ_ServicingAPI_Client_BankDetail.Parameters["@CBD_AccountInstitutionNo_CAN"].Value = (object)CBD_AccountInstitutionNo_CAN ?? DBNull.Value;
+
+            string result = null;
+
+            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = _rs["Result"].ToString();
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public string PQ_ServicingAPI_Product_ControlTaskFunc ( string RCTk_IDLink_RMR, string RCTk_IDLink_XTKM, int RCTk_IDLink_Activation, int RCTk_Type)
+        {
+            _PQ_ServicingAPI_Product_ControlTask.Parameters["@RCTk_IDLink_RMR"].Value = (object)RCTk_IDLink_RMR ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_ControlTask.Parameters["@RCTk_IDLink_XTKM"].Value = (object)RCTk_IDLink_XTKM ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_ControlTask.Parameters["@RCTk_IDLink_Activation"].Value = (object)RCTk_IDLink_Activation ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_ControlTask.Parameters["@RCTk_Type"].Value = (object)RCTk_Type ?? DBNull.Value;
+            
+
+            string result = null;
+
+            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = _rs["Result"].ToString();
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public string PQ_ServicingAPI_Product_ControlRatioFunc ( string RCTi_IDLink_RMR, string RCTi_IDLink_XRTi, Decimal RCTi_CurrentValue)
+        {
+            _PQ_ServicingAPI_Product_ControlRatio.Parameters["@RCTi_IDLink_RMR"].Value = (object)RCTi_IDLink_RMR ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_ControlRatio.Parameters["@RCTi_IDLink_XRTi"].Value = (object)RCTi_IDLink_XRTi ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_ControlRatio.Parameters["@RCTi_CurrentValue"].Value = (object)RCTi_CurrentValue ?? DBNull.Value;
+            
+
+            string result = null;
+
+            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = _rs["Result"].ToString();
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public string PQ_ServicingAPI_iO_Product_LoanInsuranceFunc ( string RLMi_IDLink_RMR, string RLMi_LMIProduct, string RLMi_PolicyID, float RLMi_PremiumAmount, float RLMi_PremiumTax, float RLMi_PremiumTotal, string RLMi_PolicyID_Existing, string RLMi_LMIType, bool RLMi_LMIFlag_Upfront, bool RLMi_LMIFlag_RUInterventation, string RLMi_LMIPayor, string RLMi_Status, bool RLMi_LMIPayorOverrideFlag, bool RLMi_IsManualOverride, string RLMi_PolicyID_Final)
+        {
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_IDLink_RMR"].Value = (object)RLMi_IDLink_RMR ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_LMIProduct"].Value = (object)RLMi_LMIProduct ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_PolicyID"].Value = (object)RLMi_PolicyID ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_PremiumAmount"].Value = (object)RLMi_PremiumAmount ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_PremiumTax"].Value = (object)RLMi_PremiumTax ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_PremiumTotal"].Value = (object)RLMi_PremiumTotal ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_PolicyID_Existing"].Value = (object)RLMi_PolicyID_Existing ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_LMIType"].Value = (object)RLMi_LMIType ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_LMIFlag_Upfront"].Value = (object)RLMi_LMIFlag_Upfront ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_LMIFlag_RUInterventation"].Value = (object)RLMi_LMIFlag_RUInterventation ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_LMIPayor"].Value = (object)RLMi_LMIPayor ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_LMIFlag_RUInterventation"].Value = (object)RLMi_LMIFlag_RUInterventation ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_LMIPayor"].Value = (object)RLMi_LMIPayor ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_Status"].Value = (object)RLMi_Status ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_LMIFlag_RUInterventation"].Value = (object)RLMi_LMIFlag_RUInterventation ?? DBNull.Value;         
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_LMIPayorOverrideFlag"].Value = (object)RLMi_LMIPayorOverrideFlag ?? DBNull.Value;     
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_IsManualOverride"].Value = (object)RLMi_IsManualOverride ?? DBNull.Value;    
+            _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_PolicyID_Final"].Value = (object)RLMi_PolicyID_Final ?? DBNull.Value;     
+
+
+
+            string result = null;
+
+            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = _rs["Result"].ToString();
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public string PQ_ServicingAPI_Product_LoanPaymentFunc ( string RLP_IDLink_RMR, int RLP_Type, float RLP_Fixed, float RLP_Interest, float RLP_Principal, float RLP_Term, int RLP_Period, string RLP_IDLink_Link)
+        {
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters["@RLP_IDLink_RMR"].Value = (object)RLP_IDLink_RMR ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters["@RLP_Type"].Value = (object)RLP_Type ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters["@RLP_Fixed"].Value = (object)RLP_Fixed ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters["@RLP_Interest"].Value = (object)RLP_Interest ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters["@RLP_Principal"].Value = (object)RLP_Principal ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters["@RLP_Term"].Value = (object)RLP_Term ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters["@RLP_Period"].Value = (object)RLP_Period ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanPayment.Parameters["@RLP_IDLink_Link"].Value = (object)RLP_IDLink_Link ?? DBNull.Value;
+            
+            string result = null;
+
+            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = _rs["Result"].ToString();
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public string PQ_ServicingAPI_Task_PendingFunc ( string KPD_IDLink_Code, string KPD_IDLink_XTKM, int KPD_Type, int KPD_ProcessOrder, DateTime KPD_DateStart, DateTime KPD_DateEnd, DateTime KPD_DateNext, DateTime KPD_DatePrev, int KPD_DayStart, string KPD_IDLink_Key, string KPD_IDLink_CBD)
+        {
+            _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_IDLink_Code"].Value = (object)KPD_IDLink_Code ?? DBNull.Value;
+            _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_IDLink_XTKM"].Value = (object)KPD_IDLink_XTKM ?? DBNull.Value;
+            _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_Type"].Value = (object)KPD_Type ?? DBNull.Value;
+            _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_ProcessOrder"].Value = (object)KPD_ProcessOrder ?? DBNull.Value;
+            _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_DateStart"].Value = (object)KPD_DateStart ?? DBNull.Value;
+            _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_DateEnd"].Value = (object)KPD_DateEnd ?? DBNull.Value;
+            _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_DateNext"].Value = (object)KPD_DateNext ?? DBNull.Value;
+            _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_DatePrev"].Value = (object)KPD_DatePrev ?? DBNull.Value;
+            _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_DayStart"].Value = (object)KPD_DayStart ?? DBNull.Value;
+            _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_IDLink_Key"].Value = (object)KPD_IDLink_Key ?? DBNull.Value;
+            _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_IDLink_CBD"].Value = (object)KPD_IDLink_CBD ?? DBNull.Value;           
+            
+            
+            string result = null;
+
+            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = _rs["Result"].ToString();
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
 
         protected virtual void Dispose(bool disposing)
         {
