@@ -4,6 +4,7 @@ using PQ_API.Helpers;
 using PQ_API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace PQ_API.Controllers
 {
@@ -31,12 +32,21 @@ namespace PQ_API.Controllers
         [HttpGet("brandInfo")]
         public IActionResult BrandInfo(string Brand_CMR_ID)
         {
-            if (Brand_CMR_ID == null)
-                return BadRequest(new { message = "Brand_CMR_ID is missing" });
-            
-            BrandInfo brandInfo = _brandService.GetById(Brand_CMR_ID);
+            try
+            {
+                if (Brand_CMR_ID == null)
+                {
+                    throw new Exception(message:"Missing Brand_CMR_ID.");
+                }                    
 
-            return Ok(brandInfo);
+                BrandInfo brandInfo = _brandService.GetById(Brand_CMR_ID);
+                return Ok(brandInfo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, message:"Exception Occurred.");
+                return new StatusCodeResult(500);
+            }        
         }
     }
 }

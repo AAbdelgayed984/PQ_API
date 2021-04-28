@@ -115,7 +115,7 @@ namespace PQ_API.DataConnect
 
             _PQ_CutomerAPI_SetMailAddress = new SqlCommand(PQ_CutomerAPI_SetMailAddress, _Connection);
             _PQ_CutomerAPI_SetMailAddress.Parameters.Add("@AddressID", SqlDbType.VarChar);
-             _PQ_CutomerAPI_SetMailAddress.Parameters.Add("@AddressType", SqlDbType.VarChar);
+            _PQ_CutomerAPI_SetMailAddress.Parameters.Add("@AddressType", SqlDbType.VarChar);
             _PQ_CutomerAPI_SetMailAddress.Parameters.Add("@UnitNumber", SqlDbType.VarChar);
             _PQ_CutomerAPI_SetMailAddress.Parameters.Add("@StreetNumber", SqlDbType.VarChar);
             _PQ_CutomerAPI_SetMailAddress.Parameters.Add("@StreetName", SqlDbType.VarChar);
