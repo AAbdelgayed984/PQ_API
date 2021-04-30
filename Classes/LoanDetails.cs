@@ -29,7 +29,7 @@ namespace PQ_API.Classes
         public DateTime ClosingDate {get;set;}
         public DateTime ApplicationDate {get;set;}
         public DateTime DisbursementDate {get;set;}
-        public Enums.PaymentFrequencies PaymentFrequcey {get;set;}
+        public Enums.PaymentFrequencies PaymentFrequency {get;set;}
         public decimal InterestRate {get;set;}
         public int Spread {get;set;}
         public int CombinedGDS {get;set;}

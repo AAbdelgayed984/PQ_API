@@ -57,6 +57,7 @@ namespace PQ_API.DataConnect
         private SqlCommand _PQ_CustomerAPI_AskQuestion;
         private SqlCommand _PQ_CutomerAPI_SetContactInfo;
         private SqlCommand _PQ_CutomerAPI_SetMailAddress;
+
         private SqlCommand _PQ_ServicingAPI_Product_MasterReference;
         private SqlCommand _PQ_ServicingAPI_Keys_MasterReference;
         private SqlCommand _PQ_ServicingAPI_Product_LoanAssetProperty;
@@ -77,6 +78,7 @@ namespace PQ_API.DataConnect
         private SqlCommand _PQ_ServicingAPI_Client_IndividualEmployment;
         private SqlCommand _PQ_ServicingAPI_client_individualincome;
         private SqlCommand _PQ_ServicingAPI_Product_LoanLiabilityCredit;
+
         private SqlCommand _PQ_ServicingAPI_Client_BankDetail;
         private SqlCommand _PQ_ServicingAPI_Product_ControlTask;
         private SqlCommand _PQ_ServicingAPI_Product_ControlRatio;
@@ -1343,7 +1345,6 @@ namespace PQ_API.DataConnect
             return result;
         }
 
-        /*Kyle Changes here*/
         public string PQ_ServicingAPI_Client_BankDetailFunc ( string CBD_IDLink_CMR, string CBD_AccountName, string CBD_AccountNumber, string CBD_BankName, string CBD_BranchLocation, bool CBD_Default, string CBD_AccountTransitNo_CAN, string CBD_AccountInstitutionNo_CAN )
         {
             _PQ_ServicingAPI_Client_BankDetail.Parameters["@CBD_IDLink_CMR"].Value = (object)CBD_IDLink_CMR ?? DBNull.Value;
@@ -1525,15 +1526,15 @@ namespace PQ_API.DataConnect
         {
             if (disposing)
             {
-                _PQ_CutomerAPI_GetAPIUsersList.Dispose();
-                _PQ_CutomerAPI_GetStreetTypeList.Dispose();
-                _PQ_CutomerAPI_GetUserBrandsList.Dispose();
-                _PQ_CutomerAPI_GetBrandDealsList.Dispose();
-                _PQ_CutomerAPI_GetRequestTypeList.Dispose();
-                _PQ_CustomerAPI_AskQuestion.Dispose();
+                _PQ_CutomerAPI_GetDealClientsList.Dispose();
                 _PQ_CutomerAPI_GetMailAddress.Dispose();
                 _PQ_CutomerAPI_GetContactInfo.Dispose();
-                _PQ_CutomerAPI_GetDealClientsList.Dispose();
+                _PQ_CutomerAPI_GetAPIUsersList.Dispose();
+                _PQ_CutomerAPI_GetUserBrandsList.Dispose();
+                _PQ_CutomerAPI_GetStreetTypeList.Dispose();
+                _PQ_CutomerAPI_GetRequestTypeList.Dispose();
+                _PQ_CutomerAPI_GetBrandDealsList.Dispose();
+                _PQ_CustomerAPI_AskQuestion.Dispose();
                 _PQ_CutomerAPI_SetContactInfo.Dispose();
                 _PQ_CutomerAPI_SetMailAddress.Dispose();
 
@@ -1557,12 +1558,14 @@ namespace PQ_API.DataConnect
                 _PQ_ServicingAPI_Client_IndividualEmployment.Dispose();
                 _PQ_ServicingAPI_client_individualincome.Dispose();
                 _PQ_ServicingAPI_Product_LoanLiabilityCredit.Dispose();
+
                 _PQ_ServicingAPI_Client_BankDetail.Dispose();
                 _PQ_ServicingAPI_Product_ControlTask.Dispose();
                 _PQ_ServicingAPI_Product_ControlRatio.Dispose();
                 _PQ_ServicingAPI_Product_LoanInsurance.Dispose();
                 _PQ_ServicingAPI_Product_LoanPayment.Dispose();
                 _PQ_ServicingAPI_Task_Pending.Dispose();
+
                 _Connection.Dispose();
                 _rs.Dispose();
             }
