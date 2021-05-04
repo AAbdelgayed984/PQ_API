@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System;
+using System.Net;
 
 namespace PQ_API.Controllers
 {
@@ -48,7 +49,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, message:"Exception Occurred.");
-                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
             } 
         }
 
@@ -74,7 +75,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, message:"Exception Occurred.");
-                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
 
@@ -100,8 +101,15 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, message:"Exception Occurred.");
-                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
             }
         }
+
+        private static ActionResult Result(HttpStatusCode statusCode, string reason) => new ContentResult
+        {
+            StatusCode = (int)statusCode,
+            Content = $"Status Code: {(int)statusCode}; {statusCode}; Reason: {reason}",
+            ContentType = "text/plain",
+        };
     }
 }

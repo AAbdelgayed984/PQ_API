@@ -30,13 +30,17 @@ namespace PQ_API.Controllers
                 _logger.LogInformation($"SubmitDeal Call with submitDealRequest.RequestID {submitDealRequest.RequestID}");
 
                 if (string.IsNullOrEmpty(submitDealRequest.RequestID))
-                {
-                    throw new Exception(message:"RequestID is missing.");
-                }
+                    throw new Exception(message:"RequestID is missing.");             
+                else if (submitDealRequest.AccountDetails == null)
+                    throw new Exception(message:"AccountDetails Object is missing.");
+                else if (submitDealRequest.Borrowers == null)
+                    throw new Exception(message:"Borrowers Object is missing.");
+                else if (submitDealRequest.LoanDetails == null)
+                    throw new Exception(message:"LoanDetails Object is missing.");
+                else if (submitDealRequest.SecurityPropertyDetails == null)
+                    throw new Exception(message:"SecurityPropertyDetails Object is missing.");
                 else if (submitDealRequest.PreauthorizedPaymentAccount == null)
-                {
                     throw new Exception(message:"PreauthorizedPaymentAccount Object is missing.");
-                }
 
                 SubmitDealResponse SubmitDealResponse = _SubmitDealService.SubmitDeal(submitDealRequest);
 

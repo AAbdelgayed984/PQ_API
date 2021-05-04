@@ -40,7 +40,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, message:"Exception Occurred.");
-                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
             }  
         }
 
@@ -63,7 +63,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, message:"Exception Occurred.");
-                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
             }  
         }
 
@@ -87,7 +87,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, message:"Exception Occurred.");
-                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
             } 
         }
 
@@ -111,7 +111,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, message:"Exception Occurred.");
-                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
             } 
         }
 
