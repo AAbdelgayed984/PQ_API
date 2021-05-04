@@ -22,7 +22,7 @@ namespace PQ_API.Classes
         public string Unit {get;set;}
         public string Number {get;set;}
         public string StreetName {get;set;}
-        public StreetType.StreetTypes StreetType {get;set;}
+        public string StreetType {get;set;}
         public string City {get;set;}
         public Enums.Province Province {get;set;}
         public string PostalCode {get;set;}

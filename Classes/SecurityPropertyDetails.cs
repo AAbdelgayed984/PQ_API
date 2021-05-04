@@ -8,7 +8,7 @@ namespace PQ_API.Classes
         public string UnitNumber { get; set; }
         public string StreetNumber { get; set; }
         public string StreetName { get; set; }
-        public StreetType.StreetTypes StreetType { get; set; }
+        public string StreetType { get; set; }
         public string Direction { get; set; }
         public string City { get; set; }
         public Enums.Province Province { get; set; }

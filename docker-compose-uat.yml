@@ -1,39 +1,25 @@
-version: '2.2'
+version: '3.4'
 
 services:
-  es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
-    container_name: es01
-    environment:
-      - cluster.name=es-docker-cluster
-      - cluster.initial_master_bodes=es01
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - data01:/usr/share/elasticsearch/data
+  pq_api:
+    image: aabdelgayed/pq_api:uat_latest
     ports:
-      - 9200:9200
-    networks:
-      - elastic
+      - 80:80
+      - 1433:1433
+    deploy:
+      replicas: 10
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
 
-  ki01:
-      image: docker.elastic.co/kibana/kibana:7.12.1
-      container_name: ki01
-      environment:
-        - ELASTICSEARCH_URL: http://es01:9200
-        - ELASTICSEARCH_HOSTS: http://es01:9200
+  visualizer:
+      image: dockersamples/visualizer:stable
       ports:
-        - 5601:5601
-      networks:
-        - elastic
-volumes: 
-  data01:
-    driver: local
-
-networks: 
-  elastic:
-    driver: bridge
+        - "8080:8080"
+      volumes:
+        - "/var/run/docker.sock:/var/run/docker.sock"
+      deploy:
+        placement:
+          constraints: [node.role == manager]

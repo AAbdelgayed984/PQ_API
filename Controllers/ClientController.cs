@@ -4,6 +4,7 @@ using PQ_API.Helpers;
 using PQ_API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace PQ_API.Controllers
 {
@@ -21,40 +22,96 @@ namespace PQ_API.Controllers
 
         [Authorize]
         [HttpGet("ClientsList")]
-        public IEnumerable<Client> ClientsList(string RMR_ID)
+        public IActionResult ClientsList(string RMR_ID)
         {
-            List<Client> listClientsInfo = _ClientService.GetAll(RMR_ID);
-            return listClientsInfo.ToArray();
+            try
+            {
+                _logger.LogInformation($"ClientsList Call with RMR_ID {RMR_ID}");
+                if (String.IsNullOrEmpty(RMR_ID))
+                {
+                    throw new Exception(message:"Missing RMR_ID.");
+                }
+                
+                List<Client> listClientsInfo = _ClientService.GetAll(RMR_ID);
+                return Ok(listClientsInfo);
+                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, message:"Exception Occurred.");
+                return new StatusCodeResult(500);
+            }  
         }
 
         [Authorize]
         [HttpGet("ClientInfo")]
         public IActionResult ClientInfo(string CMR_ID, string RMR_ID)
         {
-            if (CMR_ID == null)
-                return BadRequest(new { message = "CMR_ID is missing" });
-            
-            Client ClientInfo = _ClientService.GetById(CMR_ID, RMR_ID);
-
-            return Ok(ClientInfo);
+            try
+            {
+                _logger.LogInformation($"ClientInfo Call with CMR_ID {CMR_ID}, RMR_ID {RMR_ID}");
+                if (String.IsNullOrEmpty(CMR_ID))
+                {
+                    throw new Exception(message:"Missing CMR_ID.");
+                }
+                
+                Client ClientInfo = _ClientService.GetById(CMR_ID, RMR_ID);
+                return Ok(ClientInfo);
+                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, message:"Exception Occurred.");
+                return new StatusCodeResult(500);
+            }  
         }
 
         [Authorize]
         [HttpPost("UpdateClientAddress")]
         public IActionResult UpdateClientAddress([FromBody] Address address)
         {
-            Address UpdateClientAddressResponse = _ClientService.UpdateClientAddress(address);
-
-            return Ok(UpdateClientAddressResponse);
+            try
+            {
+                string addressString = address.ToString();
+                _logger.LogInformation($"UpdateClientAddress Call with {addressString}");
+                if (String.IsNullOrEmpty(address.AddressId))
+                {
+                    throw new Exception(message:"Missing AddressId.");
+                }
+                
+                Address UpdateClientAddressResponse = _ClientService.UpdateClientAddress(address);
+                return Ok(UpdateClientAddressResponse);
+                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, message:"Exception Occurred.");
+                return new StatusCodeResult(500);
+            } 
         }
 
         [Authorize]
         [HttpPost("UpdateContactInfo")]
         public IActionResult UpdateContactInfo([FromBody] ContactInfo contactInfo)
         {
-            ContactInfo UpdateContactInfoResponse = _ClientService.UpdateContactInfo(contactInfo);
-
-            return Ok(UpdateContactInfoResponse);
+            try
+            {
+                string contactInfoString = contactInfo.ToString();
+                _logger.LogInformation($"UpdateClientAddress Call with {contactInfoString}");
+                if (String.IsNullOrEmpty(contactInfo.ContactId))
+                {
+                    throw new Exception(message:"Missing ContactId.");
+                }
+                
+                ContactInfo UpdateContactInfoResponse = _ClientService.UpdateContactInfo(contactInfo);
+                return Ok(UpdateContactInfoResponse);
+                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, message:"Exception Occurred.");
+                return new StatusCodeResult(500);
+            } 
         }
     }
 }

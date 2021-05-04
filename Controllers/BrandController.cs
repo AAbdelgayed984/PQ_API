@@ -22,10 +22,20 @@ namespace PQ_API.Controllers
 
         [Authorize]
         [HttpGet("brandsList")]
-        public IEnumerable<BrandInfo> BrandsList()
+        public IActionResult BrandsList()
         {
-            List<BrandInfo> listBrandInfo = _brandService.GetAll();
-            return listBrandInfo.ToArray();
+            try
+            {
+                _logger.LogInformation("Brands List Call with");
+                List<BrandInfo> listBrandInfo = _brandService.GetAll();
+                return Ok(listBrandInfo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, message:"Exception Occurred.");
+                return new StatusCodeResult(500);
+            } 
+            
         }
 
         [Authorize]
@@ -34,7 +44,8 @@ namespace PQ_API.Controllers
         {
             try
             {
-                if (Brand_CMR_ID == null)
+                _logger.LogInformation($"Brand Info Call with Brand_CMR_ID {Brand_CMR_ID}");
+                if (String.IsNullOrEmpty(Brand_CMR_ID))
                 {
                     throw new Exception(message:"Missing Brand_CMR_ID.");
                 }                    

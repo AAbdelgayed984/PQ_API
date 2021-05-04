@@ -11,7 +11,7 @@ namespace PQ_API.Classes
         public Enums.Broker Broker {get;set;} 
         public Enums.Brand Brand {get;set;}
         public Enums.Investor Investor {get;set;}
-        public Enums.Product Product {get;set;}
+        public string Product {get;set;}
 
     }
 }

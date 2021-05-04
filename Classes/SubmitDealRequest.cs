@@ -4,6 +4,7 @@ namespace PQ_API.Classes
 {
     public class SubmitDealRequest
     {
+        public string RequestID { get; set; }
         public AccountDetails AccountDetails { get; set; }
         public List<Borrower> Borrowers { get; set; }
         public LoanDetails LoanDetails { get; set; }

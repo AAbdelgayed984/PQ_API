@@ -28,7 +28,7 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_Product_LoanMDT = "EXEC dbo.PQ_ServicingAPI_Product_LoanMDT @RLM_IDLink_RMR, @RLM_IDLink_XRPu, @RLM_IDLink_XRPy, @MortgageType";
         public const string PQ_ServicingAPI_Product_ControlFeature = "EXEC dbo.PQ_ServicingAPI_Product_ControlFeature @RCFf_IDLink_RMR, @RCFf_IDLink_XRFf";
         public const string PQ_ServicingAPI_Product_ControlDate = "EXEC dbo.PQ_ServicingAPI_Product_ControlDate @RCD_IDLink_RMR, @RCD_Type, @RCD_CurrentStart";
-        public const string PQ_ServicingAPI_Product_SecurityPTY = "EXEC dbo.PQ_ServicingAPI_Product_SecurityPTY @RSP_IDLink_RMR, @RSP_IDLink_StreetType, @RSP_IDLink_Country, @RSP_IDLink_XRTy, @RSP_IDLink_XRTu, @RSP_IDLink_XRTt, @RSP_PurchasePrice, @RSP_EstimatedValue, @RSP_UnitNumber, @RSP_StreetNumber, @RSP_StreetName, @RSP_City, @RSP_State, @RSP_PostCode, @RSP_Direction, @RSP_IDLink_XRTc, @RSP_HeatingValue, @RSP_IDLink_XRTs, @RSP_IDLink_XRTw";        
+        public const string PQ_ServicingAPI_Product_SecurityPTY = "EXEC dbo.PQ_ServicingAPI_Product_SecurityPTY @RSP_IDLink_RMR, @RSP_IDLink_StreetType, @RSP_IDLink_Country, @RSP_IDLink_XRTy, @RSP_IDLink_XRTu, @RSP_IDLink_XRTt, @RSP_PurchasePrice, @RSP_EstimatedValue, @RSP_UnitNumber, @RSP_StreetNumber, @RSP_StreetName, @RSP_City, @RSP_State, @RSP_PostCode, @RSP_Direction, @RSP_IDLink_XRTc, @RSP_HeatingValue, @RSP_IDLink_XRTs, @RSP_IDLink_XRTw, @RSP_UnitCount";        
         public const string PQ_ServicingAPI_Product_LoanLiabilityMaster = "EXEC dbo.PQ_ServicingAPI_Product_LoanLiabilityMaster @RLLm_IDLink_RMR, @RLLm_IDLink_XLBo, @RLLm_IDLink_XFR, @RLLm_Value, @RLLm_ValuePerYear, @RLLm_IDLink_RSP";
         public const string PQ_ServicingAPI_Link_MasterReference = "EXEC dbo.PQ_ServicingAPI_Link_MasterReference @LMR_IDLink_CMR, @LMR_IDLink_Code_ID,	@LMR_IDLink_Association";
         public const string PQ_ServicingAPI_Client_MasterReference = "EXEC dbo.PQ_ServicingAPI_Client_MasterReference @CMR_Name, @CMR_LanguagePreference";
@@ -45,7 +45,10 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_Product_LoanInsurance = "EXEC dbo.PQ_ServicingAPI_Product_LoanInsurance @RLMi_IDLink_RMR, @RLMi_LMIProduct, @RLMi_PolicyID, @RLMi_PremiumAmount, @RLMi_PremiumTax, @RLMi_PremiumTotal, @RLMi_PolicyID_Existing, @RLMi_LMIType, @RLMi_LMIFlag_Upfront, @RLMi_LMIFlag_RUInterventation, @RLMi_LMIPayor, @RLMi_Status, @RLMi_LMIPayorOverrideFlag, @RLMi_IsManualOverride, @RLMi_PolicyID_Final";
         public const string PQ_ServicingAPI_Product_LoanPayment = "EXEC dbo.PQ_ServicingAPI_Product_LoanPayment @RLP_IDLink_RMR, @RLP_Type, @RLP_Fixed, @RLP_Interest, @RLP_Fixed, @RLP_Principal, @RLP_Term, @RLP_Period, @RLP_IDLink_Link";
         public const string PQ_ServicingAPI_Task_Pending = "EXEC dbo.PQ_ServicingAPI_Task_Pending @KPD_IDLink_Code, @KPD_IDLink_XTKM, @KPD_Type, @KPD_ProcessOrder, @KPD_DateStart, @KPD_DateEnd, @KPD_DateNext, @KPD_DatePrev, @KPD_DayStart, @KPD_IDLink_Key, @KPD_IDLink_CBD";
-      
+        public const string PQ_ServicingAPI_ProductsList = "EXEC dbo.PQ_ServicingAPI_ProductsList @Brand_CMR_ID";
+        public const string PQ_ServicingAPI_IsValid_RMR_ID = "EXEC PQ_ServicingAPI_IsValid_RMR_ID @RMR_ID";
+        public const string PQ_ServicingAPI_IsValid_CMR_ID = "EXEC PQ_ServicingAPI_IsValid_CMR_ID @CMR_ID";
+
         private SqlCommand _PQ_CutomerAPI_GetDealClientsList;
         private SqlCommand _PQ_CutomerAPI_GetMailAddress;
         private SqlCommand _PQ_CutomerAPI_GetContactInfo;
@@ -85,6 +88,9 @@ namespace PQ_API.DataConnect
         private SqlCommand _PQ_ServicingAPI_Product_LoanInsurance;
         private SqlCommand _PQ_ServicingAPI_Product_LoanPayment;
         private SqlCommand _PQ_ServicingAPI_Task_Pending;
+        private SqlCommand _PQ_ServicingAPI_ProductsList;
+        private SqlCommand _PQ_ServicingAPI_IsValid_RMR_ID;
+        private SqlCommand _PQ_ServicingAPI_IsValid_CMR_ID;
 
         private SqlConnection _Connection;
         private SqlDataReader _rs;
@@ -215,6 +221,7 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_HeatingValue", SqlDbType.Decimal); 
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_IDLink_XRTs", SqlDbType.VarChar);
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_IDLink_XRTw", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_UnitCount", SqlDbType.Int);
 
             _PQ_ServicingAPI_Product_LoanLiabilityMaster = new SqlCommand(PQ_ServicingAPI_Product_LoanLiabilityMaster, _Connection);
             _PQ_ServicingAPI_Product_LoanLiabilityMaster.Parameters.Add("@RLLm_IDLink_RMR", SqlDbType.VarChar);
@@ -358,7 +365,14 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_IDLink_Key",SqlDbType.VarChar);
             _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_IDLink_CBD",SqlDbType.VarChar);
 
+            _PQ_ServicingAPI_ProductsList = new SqlCommand(PQ_ServicingAPI_ProductsList, _Connection);
+            _PQ_ServicingAPI_ProductsList.Parameters.Add("@Brand_CMR_ID", SqlDbType.VarChar);
 
+            _PQ_ServicingAPI_IsValid_RMR_ID = new SqlCommand(PQ_ServicingAPI_IsValid_RMR_ID, _Connection);
+            _PQ_ServicingAPI_IsValid_RMR_ID.Parameters.Add("@RMR_ID", SqlDbType.VarChar);
+
+            _PQ_ServicingAPI_IsValid_CMR_ID = new SqlCommand(PQ_ServicingAPI_IsValid_CMR_ID, _Connection);
+            _PQ_ServicingAPI_IsValid_CMR_ID.Parameters.Add("@CMR_ID", SqlDbType.VarChar);
         }
 
         public List<User> PQ_CutomerAPI_GetAPIUsersListFunc()
@@ -529,6 +543,75 @@ namespace PQ_API.DataConnect
                     TypeOfRequest_lbl_Fq = _rs["TypeOfRequest_lbl_Fq"].ToString();
                     RequestType customerRequestType = new RequestType(TypeOfRequest_En, TypeOfRequest_Fq, TypeOfRequest_lbl_En, TypeOfRequest_lbl_Fq);
                     result.Add(customerRequestType);
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public List<Product> GetProductsListFunc(string Brand_CMR_ID)
+        {
+            _PQ_ServicingAPI_ProductsList.Parameters["@Brand_CMR_ID"].Value = (object)Brand_CMR_ID ?? DBNull.Value; ;
+            List<Product> result = new List<Product>();
+            string ProductID = null;
+            string ProductName = null;
+            DateTime? DateStart = null;
+            DateTime? DateEnd = null;
+
+            _rs = _PQ_ServicingAPI_ProductsList.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    ProductID = _rs["ProductID"].ToString();
+                    ProductName = _rs["ProductName"].ToString();
+                    if (_rs["DateStart"] != DBNull.Value) DateStart = Convert.ToDateTime(_rs["DateStart"]);
+                    if (_rs["DateEnd"] != DBNull.Value) DateEnd = Convert.ToDateTime(_rs["DateEnd"]);
+                    Product product = new Product(ProductID, ProductName, DateStart, DateEnd);
+                    result.Add(product);
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public bool IsValid_CMR_ID(string CMR_ID)
+        {
+            _PQ_ServicingAPI_IsValid_CMR_ID.Parameters["@CMR_ID"].Value = (object)CMR_ID ?? DBNull.Value; ;
+            bool result = false;
+
+            _rs = _PQ_ServicingAPI_IsValid_CMR_ID.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = Convert.ToBoolean(_rs["Result"]);
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public bool IsValid_RMR_ID(string RMR_ID)
+        {
+            _PQ_ServicingAPI_IsValid_RMR_ID.Parameters["@RMR_ID"].Value = (object)RMR_ID ?? DBNull.Value; ;
+            bool result = false;
+
+            _rs = _PQ_ServicingAPI_IsValid_RMR_ID.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = Convert.ToBoolean(_rs["Result"]);
                 }
                 _rs.Close();
                 return result;
@@ -1227,7 +1310,8 @@ namespace PQ_API.DataConnect
             string RSP_IDLink_XRTc,
             decimal RSP_HeatingValue,
             string RSP_IDLink_XRTs,
-            string RSP_IDLink_XRTw
+            string RSP_IDLink_XRTw,
+            int RSP_UnitCount
         )
         {
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_RMR"].Value = (object)RSP_IDLink_RMR ?? DBNull.Value;
@@ -1249,6 +1333,7 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_HeatingValue"].Value = (object)RSP_HeatingValue ?? DBNull.Value;
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_XRTs"].Value = (object)RSP_IDLink_XRTs ?? DBNull.Value;
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_XRTw"].Value = (object)RSP_IDLink_XRTw ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_UnitCount"].Value = (object)RSP_UnitCount ?? DBNull.Value;
 
             string result = null;
 

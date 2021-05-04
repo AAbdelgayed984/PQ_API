@@ -3,6 +3,7 @@ using PQ_API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using System;
 
 namespace PQ_API.Controllers
 {
@@ -23,21 +24,24 @@ namespace PQ_API.Controllers
         [HttpPost("SubmitDeal")]
         public IActionResult SubmitDeal([FromBody] SubmitDealRequest submitDealRequest)
         {
-            //
-            //if (item == null)
-            //{
-            //    var resp = new HttpResponseMessage(HttpStatusCode.NotFound)
-            //    {
-            //        Content = new StringContent(string.Format("No product with ID = {0}", id)),
-            //        ReasonPhrase = "Product ID Not Found"
-            //    };
-            //    throw new HttpResponseException(resp);
-            //}
-            //
+            try
+            {
+                _logger.LogInformation($"SubmitDeal Call with submitDealRequest.RequestID {submitDealRequest.RequestID}");
 
-            SubmitDealResponse SubmitDealResponse = _SubmitDealService.SubmitDeal(submitDealRequest);
+                if (string.IsNullOrEmpty(submitDealRequest.RequestID))
+                {
+                    throw new Exception(message:"RequestID is missing.");
+                }
 
-            return Ok(SubmitDealResponse);
+                SubmitDealResponse SubmitDealResponse = _SubmitDealService.SubmitDeal(submitDealRequest);
+
+                return Ok(SubmitDealResponse);
+            }
+            catch (Exception ex)
+            {
+                 _logger.LogError(ex, message:"Exception Occurred.");
+                return new StatusCodeResult(500);
+            }             
         }
     }
 }
