@@ -1443,7 +1443,7 @@ namespace PQ_API.DataConnect
 
             string result = null;
 
-            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+            _rs = _PQ_ServicingAPI_Client_BankDetail.ExecuteReader();
 
             if (_rs.HasRows)
             {
@@ -1468,7 +1468,7 @@ namespace PQ_API.DataConnect
 
             string result = null;
 
-            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+            _rs = _PQ_ServicingAPI_Product_ControlTask.ExecuteReader();
 
             if (_rs.HasRows)
             {
@@ -1492,7 +1492,7 @@ namespace PQ_API.DataConnect
 
             string result = null;
 
-            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+            _rs = _PQ_ServicingAPI_Product_ControlRatio.ExecuteReader();
 
             if (_rs.HasRows)
             {
@@ -1507,7 +1507,7 @@ namespace PQ_API.DataConnect
             return result;
         }
 
-        public string PQ_ServicingAPI_iO_Product_LoanInsuranceFunc ( string RLMi_IDLink_RMR, string RLMi_LMIProduct, string RLMi_PolicyID, float RLMi_PremiumAmount, float RLMi_PremiumTax, float RLMi_PremiumTotal, string RLMi_PolicyID_Existing, string RLMi_LMIType, bool RLMi_LMIFlag_Upfront, bool RLMi_LMIFlag_RUInterventation, string RLMi_LMIPayor, string RLMi_Status, bool RLMi_LMIPayorOverrideFlag, bool RLMi_IsManualOverride, string RLMi_PolicyID_Final)
+        public string PQ_ServicingAPI_Product_LoanInsuranceFunc ( string RLMi_IDLink_RMR, string RLMi_LMIProduct, string RLMi_PolicyID, float RLMi_PremiumAmount, float RLMi_PremiumTax, float RLMi_PremiumTotal, string RLMi_PolicyID_Existing, string RLMi_LMIType, bool RLMi_LMIFlag_Upfront, bool RLMi_LMIFlag_RUInterventation, string RLMi_LMIPayor, string RLMi_Status, bool RLMi_LMIPayorOverrideFlag, bool RLMi_IsManualOverride, string RLMi_PolicyID_Final)
         {
             _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_IDLink_RMR"].Value = (object)RLMi_IDLink_RMR ?? DBNull.Value;
             _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_LMIProduct"].Value = (object)RLMi_LMIProduct ?? DBNull.Value;
@@ -1532,7 +1532,7 @@ namespace PQ_API.DataConnect
 
             string result = null;
 
-            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+            _rs = _PQ_ServicingAPI_Product_LoanInsurance.ExecuteReader();
 
             if (_rs.HasRows)
             {
@@ -1560,7 +1560,7 @@ namespace PQ_API.DataConnect
             
             string result = null;
 
-            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+            _rs = _PQ_ServicingAPI_Product_LoanPayment.ExecuteReader();
 
             if (_rs.HasRows)
             {
@@ -1592,7 +1592,7 @@ namespace PQ_API.DataConnect
             
             string result = null;
 
-            _rs = _PQ_ServicingAPI_Client_MasterReference.ExecuteReader();
+            _rs = _PQ_ServicingAPI_Task_Pending.ExecuteReader();
 
             if (_rs.HasRows)
             {

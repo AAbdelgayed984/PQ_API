@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
 using System;
+using System.Net;
 
 namespace PQ_API.Controllers
 {
@@ -32,6 +33,10 @@ namespace PQ_API.Controllers
                 {
                     throw new Exception(message:"RequestID is missing.");
                 }
+                else if (submitDealRequest.PreauthorizedPaymentAccount == null)
+                {
+                    throw new Exception(message:"PreauthorizedPaymentAccount Object is missing.");
+                }
 
                 SubmitDealResponse SubmitDealResponse = _SubmitDealService.SubmitDeal(submitDealRequest);
 
@@ -39,9 +44,16 @@ namespace PQ_API.Controllers
             }
             catch (Exception ex)
             {
-                 _logger.LogError(ex, message:"Exception Occurred.");
-                return new StatusCodeResult(500);
+                _logger.LogError(ex, message:"Exception Occurred.");
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
             }             
         }
+
+        private static ActionResult Result(HttpStatusCode statusCode, string reason) => new ContentResult
+        {
+            StatusCode = (int)statusCode,
+            Content = $"Status Code: {(int)statusCode} {statusCode}; Reason: {reason}",
+            ContentType = "text/plain",
+        };
     }
 }

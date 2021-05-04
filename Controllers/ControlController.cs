@@ -48,7 +48,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, message:"Exception Occurred.");
-                return new StatusCodeResult(500);
+                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
             } 
         }
 
@@ -74,7 +74,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, message:"Exception Occurred.");
-                return new StatusCodeResult(500);
+                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
             }
         }
 
@@ -100,7 +100,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, message:"Exception Occurred.");
-                return new StatusCodeResult(500);
+                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
             }
         }
     }

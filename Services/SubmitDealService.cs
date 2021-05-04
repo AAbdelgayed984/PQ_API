@@ -67,7 +67,7 @@ namespace PQ_API.Services
             string MortgageInsurer_PremiumAmount_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.MortgageInsurancePremium),request.MortgageInsuranceDetails.PremiumAmount); 
             string MortgageInsurer_TaxAmount_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.MortgageInsuranceTax),request.MortgageInsuranceDetails.TaxAmount); 
             
-            string CertificateNumber_RLMI_ID = _rubiDataConnect.PQ_ServicingAPI_iO_Product_LoanInsuranceFunc(RMR_ID, request.MortgageInsuranceDetails.BulkFlag, null, 0, 0, 0, null, null, false, false, null, null, false, false, request.MortgageInsuranceDetails.CertificateNumber);
+            string CertificateNumber_RLMI_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanInsuranceFunc(RMR_ID, request.MortgageInsuranceDetails.BulkFlag, null, 0, 0, 0, null, null, false, false, null, null, false, false, request.MortgageInsuranceDetails.CertificateNumber);
  
             // Product Term and Amortization
             string ProductTerm_RCTe_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTermFunc(RMR_ID, request.LoanDetails.ProductTerm_Years, request.LoanDetails.ProductTerm_Months, ( request.LoanDetails.ProductTerm_Years * 12 ) + request.LoanDetails.ProductTerm_Months, 1);

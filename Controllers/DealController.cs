@@ -16,11 +16,13 @@ namespace PQ_API.Controllers
         private readonly ILogger<DealController> _logger;
         private readonly RubiDBSettings _rubiDBSettings;
         private IDealService _dealService;
+        private RUBIDataConnect rubiDataConnect;
         public DealController(ILogger<DealController> logger, IDealService brandService, RubiDBSettings rubiDBSettings )
         {
             _logger = logger;
             _dealService = brandService;
             _rubiDBSettings = rubiDBSettings;
+            rubiDataConnect = new RUBIDataConnect(_rubiDBSettings.ConnectionString);
         }
 
         [Authorize]
@@ -43,7 +45,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                  _logger.LogError(ex, message:"Exception Occurred.");
-                return new StatusCodeResult(500);
+                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
             } 
         }
 
@@ -71,7 +73,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                  _logger.LogError(ex, message:"Exception Occurred.");
-                return new StatusCodeResult(500);
+                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
             } 
         }
 
@@ -84,8 +86,6 @@ namespace PQ_API.Controllers
                 string questionString = question.ToString();
                 _logger.LogInformation($"AskQuestion Call with question {questionString}");
 
-                RUBIDataConnect rubiDataConnect = new RUBIDataConnect(_rubiDBSettings.ConnectionString);
-                
                 if (string.IsNullOrEmpty(question.CMR_ID))
                 {
                     throw new Exception(message:"CMR_ID is missing.");
@@ -118,7 +118,7 @@ namespace PQ_API.Controllers
             catch (Exception ex)
             {
                  _logger.LogError(ex, message:"Exception Occurred.");
-                return new StatusCodeResult(500);
+                return new BadRequestObjectResult(new { message = ex.Message, currentDate = DateTime.Now });
             } 
         }
     }
