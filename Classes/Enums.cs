@@ -22,13 +22,13 @@ namespace PQ_API.Classes
             [Description("{ab9ae444-3ec5-425c-be24-121b1618669e}")]AvailableCredit,
             [Description("{b0d3b9a3-a4e6-40c9-818f-e9e60df7643b}")]Unadvanced,
             [Description("{e5c24ad5-75f4-4cf6-8bc0-5b0e833d4cc4}")]Unapplied,
-            [Description("{1d235e92-e720-4a6c-8f2e-5be920c0726c}")]LoanLTV
+            [Description("{1d235e92-e720-4a6c-8f2e-5be920c0726c}")]LoanLTV,
+            [Description("{79965eeb-23ab-4dfa-ae5c-f2c6c65ad098}")]MortgageInsurancePremium,
+            [Description("{5eafa5fc-7a12-4f7c-88dd-fa8a493a5ca2}")]MortgageInsuranceTax,
+            [Description("{9aa4f4c2-dd44-4cc6-9b88-b0e57a22df05}")]CashBack,
 
-        }
-        public enum StreetTypes {
-            [Description("{a5572a98-1eec-43c9-ab44-a18d5ab626b6}")]Street,
-            [Description("{9932b46e-ee35-4ade-b0f6-18d087fc8a0b}")]Avenue,
-            [Description("{b3a449b6-1f4a-4647-a25b-20f190d0c302}")]Road
+            [Description("{f838aa0b-746e-435e-8630-ea6d10a3004d}")]CMHCLoanLTV
+
         }
         public enum Keys {
             [Description("{67436ac7-d398-41d1-84bc-c471e5d8d1a6}")]CustomerAccountNumber,
@@ -59,10 +59,6 @@ namespace PQ_API.Classes
         public enum Investor {
             [Description("{798b53e1-5b9d-490a-8001-5005d97d4ba5}")]NBF8,
             [Description("{5f1b0058-130f-461f-aa53-5b685e60d185}")]TDSI3,
-        }
-        public enum Product {
-            [Description("{dce2b5e4-c3a2-4fdc-9fa3-da56dfeb15d9}")]Five_Year_Fixed_NBF8_NestoConversion,
-            [Description("{b24b8415-c1e9-47cc-9480-1763e583c82f}")]Five_Year_Fixed_NBF8_LessFrillsNestoConversion
         }
         public enum MartialStatus { 
             [Description("{1c28faaa-3f5e-48c0-8023-2ac2a8bf3816}")]Widowed, 

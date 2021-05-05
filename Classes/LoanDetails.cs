@@ -15,7 +15,20 @@ namespace PQ_API.Classes
         public int ProductTerm_Years {get;set;}
         public int ProductTerm_Months {get;set;}
         public string ProductCode {get;set;}
-        public Enums.LoanPurposes LoanPurpose {get;set;}
+        private Enums.LoanPurposes _LoanPurpose;
+        public Enums.LoanPurposes LoanPurpose 
+        {
+            get
+            {
+                return _LoanPurpose;
+            }
+            set
+            {
+                if (!Enum.IsDefined(typeof(Enums.LoanPurposes), value))
+                    throw new System.ArgumentException(string.Format("Invalid Enums.LoanPurposes {0}.", value));
+                _LoanPurpose = value;
+            }
+        }
         public Decimal InterestAccrualBalance {get;set;}
         public int AmortizationOriginal_Years {get;set;}
         public int AmortizationOriginal_Months {get;set;}
@@ -29,7 +42,20 @@ namespace PQ_API.Classes
         public DateTime ClosingDate {get;set;}
         public DateTime ApplicationDate {get;set;}
         public DateTime DisbursementDate {get;set;}
-        public Enums.PaymentFrequencies PaymentFrequcey {get;set;}
+        private Enums.PaymentFrequencies _PaymentFrequency;
+        public Enums.PaymentFrequencies PaymentFrequency 
+        {
+            get
+            {
+                return _PaymentFrequency;
+            }
+            set
+            {
+                if (!Enum.IsDefined(typeof(Enums.PaymentFrequencies), value))
+                    throw new System.ArgumentException(string.Format("Invalid Enums.PaymentFrequencies {0}.", value));
+                _PaymentFrequency = value;
+            }
+        }
         public decimal InterestRate {get;set;}
         public int Spread {get;set;}
         public int CombinedGDS {get;set;}

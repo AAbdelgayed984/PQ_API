@@ -4,6 +4,9 @@ using PQ_API.Helpers;
 using PQ_API.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using PQ_API.DataConnect;
+using System.Net;
 
 namespace PQ_API.Controllers
 {
@@ -12,40 +15,119 @@ namespace PQ_API.Controllers
     public class DealController : ControllerBase
     {
         private readonly ILogger<DealController> _logger;
+        private readonly RubiDBSettings _rubiDBSettings;
         private IDealService _dealService;
-        public DealController(ILogger<DealController> logger, IDealService brandService)
+        private RUBIDataConnect rubiDataConnect;
+        public DealController(ILogger<DealController> logger, IDealService brandService, RubiDBSettings rubiDBSettings )
         {
             _logger = logger;
             _dealService = brandService;
+            _rubiDBSettings = rubiDBSettings;
+            rubiDataConnect = new RUBIDataConnect(_rubiDBSettings.ConnectionString);
         }
 
         [Authorize]
         [HttpGet("dealsList")]
-        public IEnumerable<Deal> DealsList(string Brand_CMR_ID)
+        public IActionResult DealsList(string Brand_CMR_ID)
         {
-            List<Deal> listdealsInfo = _dealService.GetAll(Brand_CMR_ID);
-            return listdealsInfo.ToArray();
+            try
+            {
+                _logger.LogInformation($"DealsList Call with Brand_CMR_ID {Brand_CMR_ID}" );
+
+                if (string.IsNullOrEmpty(Brand_CMR_ID))
+                {
+                    throw new Exception(message:"Brand_CMR_ID is missing.");
+                }
+
+                List<Deal> listdealsInfo = _dealService.GetAll(Brand_CMR_ID);
+
+                return Ok(listdealsInfo);
+            }
+            catch (Exception ex)
+            {
+                 _logger.LogError(ex, message:"Exception Occurred.");
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
+            } 
         }
 
         [Authorize]
         [HttpGet("dealInfo")]
         public IActionResult DealInfo(string RMR_ID, string Brand_CMR_ID)
         {
-            if (RMR_ID == null)
-                return BadRequest(new { message = "RMR_ID is missing" });
-            
-            Deal dealInfo = _dealService.GetById(RMR_ID, Brand_CMR_ID);
+            try
+            {
+                _logger.LogInformation($"DealInfo Call with Brand_CMR_ID {Brand_CMR_ID} and RMR_ID {RMR_ID}");
 
-            return Ok(dealInfo);
+                if (string.IsNullOrEmpty(Brand_CMR_ID))
+                {
+                    throw new Exception(message:"Brand_CMR_ID is missing.");
+                }
+                else if (string.IsNullOrEmpty(RMR_ID))
+                {
+                    throw new Exception(message:"RMR_ID is missing.");
+                }
+
+                Deal dealInfo = _dealService.GetById(RMR_ID, Brand_CMR_ID);
+
+                return Ok(dealInfo);
+            }
+            catch (Exception ex)
+            {
+                 _logger.LogError(ex, message:"Exception Occurred.");
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
+            } 
         }
 
         [Authorize]
         [HttpPost("AskQuestion")]
         public IActionResult AskQuestion([FromBody] AskQuestion question)
         {
-            AskQuestion AskQuestionResponse = _dealService.AskQuestion(question);
+            try
+            {
+                string questionString = question.ToString();
+                _logger.LogInformation($"AskQuestion Call with question {questionString}");
 
-            return Ok(AskQuestionResponse);
+                if (string.IsNullOrEmpty(question.CMR_ID))
+                {
+                    throw new Exception(message:"CMR_ID is missing.");
+                }
+                else if (string.IsNullOrEmpty(question.RMR_ID))
+                {
+                    throw new Exception(message:"RMR_ID is missing.");
+                }
+                else if (string.IsNullOrEmpty(question.ContactInformation))
+                {
+                    throw new Exception(message:"ContactInformation is missing.");
+                }
+                else if (string.IsNullOrEmpty(question.RequestType))
+                {
+                    throw new Exception(message:"RequestType is missing.");
+                }
+                else if (!rubiDataConnect.IsValid_CMR_ID(question.CMR_ID))
+                {
+                    throw new Exception(message:"Invalid CMR_ID.");
+                }
+                else if (!rubiDataConnect.IsValid_RMR_ID(question.RMR_ID))
+                {
+                    throw new Exception(message:"Invalid RMR_ID.");
+                }
+
+                AskQuestion AskQuestionResponse = _dealService.AskQuestion(question);
+
+                return Ok(AskQuestionResponse);
+            }
+            catch (Exception ex)
+            {
+                 _logger.LogError(ex, message:"Exception Occurred.");
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
+            } 
         }
+
+        private static ActionResult Result(HttpStatusCode statusCode, string reason) => new ContentResult
+        {
+            StatusCode = (int)statusCode,
+            Content = $"Status Code: {(int)statusCode}; {statusCode}; Reason: {reason}",
+            ContentType = "text/plain",
+        };
     }
 }

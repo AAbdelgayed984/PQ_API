@@ -1,3 +1,7 @@
+using System;
+using System.ComponentModel;
+using System.Reflection;
+
 namespace PQ_API.Classes
 {
     public class StreetType
