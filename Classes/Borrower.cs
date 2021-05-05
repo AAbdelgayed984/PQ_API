@@ -119,5 +119,16 @@ namespace PQ_API.Classes
                 _Language = value;
             }
         }
+
+        public int TimeInServiceYear;
+        public int TimeInServiceMonth;
+
+        public DateTime EmploymentStart;
+        public string EmploymentName;
+        public Address EmploymentAddress;
+
+        public Decimal IncomeAmount;
+        public string IncomeType;
+
     }
 }
