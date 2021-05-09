@@ -26,13 +26,15 @@ namespace PQ_API.Classes
             [Description("{79965eeb-23ab-4dfa-ae5c-f2c6c65ad098}")]MortgageInsurancePremium,
             [Description("{5eafa5fc-7a12-4f7c-88dd-fa8a493a5ca2}")]MortgageInsuranceTax,
             [Description("{9aa4f4c2-dd44-4cc6-9b88-b0e57a22df05}")]CashBack,
-
-            [Description("{f838aa0b-746e-435e-8630-ea6d10a3004d}")]CMHCLoanLTV
+            [Description("{f838aa0b-746e-435e-8630-ea6d10a3004d}")]CMHCLoanLTV,
+            [Description("{1fa7b943-bf68-425e-83ef-9e88bb4f7acd}")]LoanAmount
 
         }
         public enum Keys {
             [Description("{67436ac7-d398-41d1-84bc-c471e5d8d1a6}")]CustomerAccountNumber,
-            [Description("{ef3baea0-8d36-4c5a-8a2d-6ce9e119335b}")]MortgageAccountNumber,
+            [Description("{6985ea0a-9c9b-42d7-8b7d-1392f6f38c03}")]NestoAccountID,
+            [Description("{ae772b76-e943-4627-a295-16fd754596a3}")]NestoSubmissionID,
+            [Description("{ef3baea0-8d36-4c5a-8a2d-6ce9e119335b}")]ARMnetControlID,
             [Description("{55cddee5-a67b-465a-9ddd-2faf2967c6f0}")]CustomerBeaconScore
         }
         public enum Association {
@@ -79,19 +81,19 @@ namespace PQ_API.Classes
             [Description("{a94e0e95-e380-4548-b35e-6798ad35ac4f}")]Female
         }
         public enum Province { 
-            [Description("{c83d18a5-9e0e-45c8-8b6e-540f967568af}")]Alberta, 
-            [Description("{67c901ea-3dd8-4a76-a484-4b87e58210b7}")]BritishColumbia, 
-            [Description("{dc776021-dc28-4735-8097-68e791e53ad5}")]Manitoba, 
-            [Description("{64688a2c-79e6-49a9-9727-1fbea6ace067}")]NewBrunsWick, 
-            [Description("{975770fd-ca59-4968-a46d-d38068310e03}")]Newfoundland, 
-            [Description("{e27c701d-302a-400d-85c9-1a7439e9634d}")]NorthWestTerritories, 
-            [Description("{e7b7bb10-cb93-45b0-b35e-f7850ed5606a}")]NovaScotia, 
-            [Description("{206fcaec-7b5b-4653-bd81-2e47293a99c9}")]Nunavut, 
-            [Description("{3158056b-987a-44f3-9753-62830297d1ae}")]Ontario, 
-            [Description("{c81bec84-ec29-45cd-88dd-0eef76855ff6}")]PrinceWdwardIsland, 
-            [Description("{794e7e04-6b05-41ca-82e0-862817fc4876}")]Quebec, 
-            [Description("{b2240751-a3ca-4300-9a1f-e156eb14a80c}")]Saskatchewan, 
-            [Description("{861c4f9d-01be-467e-a9ac-797a7d9bf141}")]Yukon 
+            [Description("Alberta")]Alberta, 
+            [Description("BritishColumbia")]BritishColumbia, 
+            [Description("Manitoba")]Manitoba, 
+            [Description("NewBrunsWick")]NewBrunsWick, 
+            [Description("Newfoundland")]Newfoundland, 
+            [Description("NorthWestTerritories")]NorthWestTerritories, 
+            [Description("NovaScotia")]NovaScotia, 
+            [Description("Nunavut")]Nunavut, 
+            [Description("Ontario")]Ontario, 
+            [Description("PrinceWdwardIsland")]PrinceWdwardIsland, 
+            [Description("Quebec")]Quebec, 
+            [Description("Saskatchewan")]Saskatchewan, 
+            [Description("Yukon")]Yukon 
         };
         public enum Country { [Description("{0df084f1-797c-4ec1-b899-5e3f0df40060}")]Canada }
         public enum Language { 
