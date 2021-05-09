@@ -43,7 +43,7 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_Product_ControlTask = "EXEC dbo.PQ_ServicingAPI_Product_ControlTask @RCTk_IDLink_RMR, @RCTk_IDLink_XTKM, @RCTk_IDLink_Activation, @RCTk_Type";
         public const string PQ_ServicingAPI_Product_ControlRatio = "EXEC dbo.PQ_ServicingAPI_Product_ControlRatio @RCTi_IDLink_RMR, @RCTi_IDLink_XRTi, @RCTi_CurrentValue";
         public const string PQ_ServicingAPI_Product_LoanInsurance = "EXEC dbo.PQ_ServicingAPI_Product_LoanInsurance @RLMi_IDLink_RMR, @RLMi_LMIProduct, @RLMi_PolicyID, @RLMi_PremiumAmount, @RLMi_PremiumTax, @RLMi_PremiumTotal, @RLMi_PolicyID_Existing, @RLMi_LMIType, @RLMi_LMIFlag_Upfront, @RLMi_LMIFlag_RUInterventation, @RLMi_LMIPayor, @RLMi_Status, @RLMi_LMIPayorOverrideFlag, @RLMi_IsManualOverride, @RLMi_PolicyID_Final";
-        public const string PQ_ServicingAPI_Product_LoanPayment = "EXEC dbo.PQ_ServicingAPI_Product_LoanPayment @RLP_IDLink_RMR, @RLP_Type, @RLP_Fixed, @RLP_Interest, @RLP_Fixed, @RLP_Principal, @RLP_Term, @RLP_Period, @RLP_IDLink_Link";
+        public const string PQ_ServicingAPI_Product_LoanPayment = "EXEC dbo.PQ_ServicingAPI_Product_LoanPayment @RLP_IDLink_RMR, @RLP_Type, @RLP_Fixed, @RLP_Interest, @RLP_Principal, @RLP_Term, @RLP_Period, @RLP_IDLink_Link";
         public const string PQ_ServicingAPI_Task_Pending = "EXEC dbo.PQ_ServicingAPI_Task_Pending @KPD_IDLink_Code, @KPD_IDLink_XTKM, @KPD_Type, @KPD_ProcessOrder, @KPD_DateStart, @KPD_DateEnd, @KPD_DateNext, @KPD_DatePrev, @KPD_DayStart, @KPD_IDLink_Key, @KPD_IDLink_CBD";
         public const string PQ_ServicingAPI_ProductsList = "EXEC dbo.PQ_ServicingAPI_ProductsList @Brand_CMR_ID";
         public const string PQ_ServicingAPI_IsValid_RMR_ID = "EXEC PQ_ServicingAPI_IsValid_RMR_ID @RMR_ID";
@@ -670,10 +670,10 @@ namespace PQ_API.DataConnect
                     _PQ_CutomerAPI_GetContactInfo.Parameters["@CMR_ID"].Value = (object)clientFromList.CMR_ID ?? DBNull.Value;
                     _rs = _PQ_CutomerAPI_GetContactInfo.ExecuteReader();
                     if (_rs.HasRows)
-                    {
-                        ContactInfo contactInfo = new ContactInfo();
+                    {                        
                         while (_rs.Read())
                         {  
+                            ContactInfo contactInfo = new ContactInfo();
                             contactInfo.ContactId = _rs["ContactId"].ToString();                          
                             contactInfo.ContactType = _rs["ContactType"].ToString();
                             contactInfo.ContactDetails = _rs["ContactDetails"].ToString();
@@ -683,7 +683,8 @@ namespace PQ_API.DataConnect
                         clientFromList.ContactInfo = contactInfoList;
                     }
                     _rs.Close();
-                    addressList = new List<Address>();;
+                    addressList = new List<Address>();
+                    contactInfoList = new List<ContactInfo>();
                 }
 
                 _rs.Close();

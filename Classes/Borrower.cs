@@ -1,5 +1,4 @@
 using System;
-using System.Text.Json.Serialization;
 
 namespace PQ_API.Classes
 {
@@ -119,5 +118,7 @@ namespace PQ_API.Classes
                 _Language = value;
             }
         }
+
+        public Income Income {get;set;}
     }
 }
