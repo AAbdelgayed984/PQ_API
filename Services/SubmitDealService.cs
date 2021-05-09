@@ -201,12 +201,32 @@ namespace PQ_API.Services
                 string MobilePhone_CCD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_ContactDetailFunc(Borrower_CMR_ID, Enums.GetEnumDescription(Enums.ContactType.MobilePhone), borrower.MobilePhone, null);
                 string Email_CCD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_ContactDetailFunc(Borrower_CMR_ID, Enums.GetEnumDescription(Enums.ContactType.Email), borrower.Email, null);
 
-                // Employment
-                string sad = _rubiDataConnect.PQ_ServicingAPI_Client_IndividualEmploymentFunc(Borrower_CMR_ID,null,null,borrower.EmploymentName,borrower.EmploymentAddress.UnitNumber,borrower.EmploymentAddress.StreetNumber,borrower.EmploymentAddress.StreetName,borrower.EmploymentAddress.City,borrower.EmploymentAddress.Province,borrower.EmploymentAddress.PostalCode,borrower.TimeInServiceYear,borrower.TimeInServiceMonth,null,borrower.EmploymentStart,null);
+                
+                if (borrower.Income != null)
+                {
+                    // Employment
+                    string Employment_CED_ID = _rubiDataConnect.PQ_ServicingAPI_Client_IndividualEmploymentFunc(
+                        Borrower_CMR_ID,
+                        null,
+                        null,
+                        borrower.Income.EmploymentName,
+                        borrower.Income.EmploymentAddress.UnitNumber,
+                        borrower.Income.EmploymentAddress.StreetNumber,
+                        borrower.Income.EmploymentAddress.StreetName,
+                        borrower.Income.EmploymentAddress.City,borrower.
+                        Income.EmploymentAddress.Province,
+                        borrower.Income.EmploymentAddress.PostalCode,
+                        borrower.Income.TimeInServiceYear,
+                        borrower.Income.TimeInServiceMonth,
+                        null,
+                        borrower.Income.EmploymentStart,
+                        null
+                    );
 
-                // Income
-                string income = _rubiDataConnect.PQ_ServicingAPI_client_individualincomeFunc( Borrower_CMR_ID, borrower.IncomeType, null, borrower.IncomeAmount, null );
-
+                    // Income
+                    string Income_CINc_ID = _rubiDataConnect.PQ_ServicingAPI_client_individualincomeFunc( Borrower_CMR_ID, borrower.Income.IncomeType, null, borrower.Income.IncomeAmount, null );
+                }    
+                
                 //Client Bank detail
                 string BankDetail_CBD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_BankDetailFunc(Borrower_CMR_ID,  null, request.PreauthorizedPaymentAccount.CustomerAccountNumber.ToString(),null,null,false, request.PreauthorizedPaymentAccount.Transit.ToString(),request.PreauthorizedPaymentAccount.BankID.ToString());
 

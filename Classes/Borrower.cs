@@ -1,5 +1,4 @@
 using System;
-using System.Text.Json.Serialization;
 
 namespace PQ_API.Classes
 {
@@ -120,15 +119,6 @@ namespace PQ_API.Classes
             }
         }
 
-        public int TimeInServiceYear;
-        public int TimeInServiceMonth;
-
-        public DateTime EmploymentStart;
-        public string EmploymentName;
-        public Address EmploymentAddress;
-
-        public Decimal IncomeAmount;
-        public string IncomeType;
-
+        public Income Income {get;set;}
     }
 }
