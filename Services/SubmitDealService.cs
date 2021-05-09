@@ -202,8 +202,10 @@ namespace PQ_API.Services
                 string Email_CCD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_ContactDetailFunc(Borrower_CMR_ID, Enums.GetEnumDescription(Enums.ContactType.Email), borrower.Email, null);
 
                 // Employment
+                string sad = _rubiDataConnect.PQ_ServicingAPI_Client_IndividualEmploymentFunc(Borrower_CMR_ID,null,null,borrower.EmploymentName,borrower.EmploymentAddress.UnitNumber,borrower.EmploymentAddress.StreetNumber,borrower.EmploymentAddress.StreetName,borrower.EmploymentAddress.City,borrower.EmploymentAddress.Province,borrower.EmploymentAddress.PostalCode,borrower.TimeInServiceYear,borrower.TimeInServiceMonth,null,borrower.EmploymentStart,null);
 
                 // Income
+                string income = _rubiDataConnect.PQ_ServicingAPI_client_individualincomeFunc( Borrower_CMR_ID, borrower.IncomeType, null, borrower.IncomeAmount, null );
 
                 //Client Bank detail
                 string BankDetail_CBD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_BankDetailFunc(Borrower_CMR_ID,  null, request.PreauthorizedPaymentAccount.CustomerAccountNumber.ToString(),null,null,false, request.PreauthorizedPaymentAccount.Transit.ToString(),request.PreauthorizedPaymentAccount.BankID.ToString());

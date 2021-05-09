@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ahmed.Abdelgayed\\Desktop\\Projects\\PQ_API\\PQ_API.csproj": {}
+    "C:\\Users\\kyle.cheng\\Desktop\\Projects\\PQ_API\\PQ_API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ahmed.Abdelgayed\\Desktop\\Projects\\PQ_API\\PQ_API.csproj": {
+    "C:\\Users\\kyle.cheng\\Desktop\\Projects\\PQ_API\\PQ_API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ahmed.Abdelgayed\\Desktop\\Projects\\PQ_API\\PQ_API.csproj",
+        "projectUniqueName": "C:\\Users\\kyle.cheng\\Desktop\\Projects\\PQ_API\\PQ_API.csproj",
         "projectName": "PQ_API",
-        "projectPath": "C:\\Users\\Ahmed.Abdelgayed\\Desktop\\Projects\\PQ_API\\PQ_API.csproj",
-        "packagesPath": "C:\\Users\\Ahmed.Abdelgayed\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ahmed.Abdelgayed\\Desktop\\Projects\\PQ_API\\obj\\",
+        "projectPath": "C:\\Users\\kyle.cheng\\Desktop\\Projects\\PQ_API\\PQ_API.csproj",
+        "packagesPath": "C:\\Users\\kyle.cheng\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kyle.cheng\\Desktop\\Projects\\PQ_API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ahmed.Abdelgayed\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\kyle.cheng\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -95,7 +93,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
