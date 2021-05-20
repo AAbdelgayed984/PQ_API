@@ -213,8 +213,8 @@ namespace PQ_API.Services
                         borrower.Income.EmploymentAddress.UnitNumber,
                         borrower.Income.EmploymentAddress.StreetNumber,
                         borrower.Income.EmploymentAddress.StreetName,
-                        borrower.Income.EmploymentAddress.City,borrower.
-                        Income.EmploymentAddress.Province,
+                        borrower.Income.EmploymentAddress.City,
+                        borrower.Income.EmploymentAddress.Province.ToString(),
                         borrower.Income.EmploymentAddress.PostalCode,
                         borrower.Income.TimeInServiceYear,
                         borrower.Income.TimeInServiceMonth,

@@ -105,6 +105,69 @@ namespace PQ_API.Controllers
             }
         }
 
+        [Authorize]
+        [HttpGet("GetIncomeTypes")]
+        public IActionResult GetIncomeTypes()
+        {
+            try
+            {
+                _logger.LogInformation($"Get GetIncomeTypes Call");
+                
+                RUBIDataConnect rubiDataConnect = new RUBIDataConnect(_rubiDBSettings.ConnectionString);
+
+                List<IncomeType> listIncomeTypes = rubiDataConnect.GetIncomeTypesListFunc();
+                return Ok(listIncomeTypes);
+                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, message:"Exception Occurred.");
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpGet("GetOccupationTypes")]
+        public IActionResult GetOccupationTypes()
+        {
+            try
+            {
+                _logger.LogInformation($"Get GetOccupationTypes Call");
+                
+                RUBIDataConnect rubiDataConnect = new RUBIDataConnect(_rubiDBSettings.ConnectionString);
+
+                List<OccupationType> listOccupationTypes = rubiDataConnect.GetOccupationTypesListFunc();
+                return Ok(listOccupationTypes);
+                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, message:"Exception Occurred.");
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpGet("GetIndustrySectors")]
+        public IActionResult GetIndustrySectors()
+        {
+            try
+            {
+                _logger.LogInformation($"Get GetIndustrySectors Call");
+                
+                RUBIDataConnect rubiDataConnect = new RUBIDataConnect(_rubiDBSettings.ConnectionString);
+
+                List<IndustrySector> listGetIndustrySectors = rubiDataConnect.GetIndustrySectorsListFunc();
+                return Ok(listGetIndustrySectors);
+                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, message:"Exception Occurred.");
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
         private static ActionResult Result(HttpStatusCode statusCode, string reason) => new ContentResult
         {
             StatusCode = (int)statusCode,
