@@ -11,6 +11,9 @@ namespace PQ_API.DataConnect
         public const string PQ_CutomerAPI_GetAPIUsersList = "EXEC dbo.PQ_CutomerAPI_GetAPIUsersList"; 
         public const string PQ_CutomerAPI_GetUserBrandsList = "EXEC dbo.PQ_CutomerAPI_GetUserBrandsList @UserId";
         public const string PQ_CutomerAPI_GetStreetTypeList = "EXEC dbo.PQ_CutomerAPI_GetStreetTypeList";
+        public const string PQ_CutomerAPI_GetIncomeTypeList = "EXEC dbo.PQ_CutomerAPI_GetIncomeTypeList";
+        public const string PQ_CutomerAPI_GetOccupationTypeList = "EXEC dbo.PQ_CutomerAPI_GetOccupationTypeList";
+        public const string PQ_CutomerAPI_GetIndustrySectorList = "EXEC dbo.PQ_CutomerAPI_GetIndustrySectorList";
         public const string PQ_CutomerAPI_GetBrandDealsList = "EXEC dbo.PQ_CutomerAPI_GetBrandDealsList @Brand_CMR_ID";
         public const string PQ_CutomerAPI_GetRequestTypeList = "EXEC dbo.PQ_CutomerAPI_GetRequestTypeList @Brand_CMR_ID";
         public const string PQ_CustomerAPI_AskQuestion = "EXEC dbo.PQ_CustomerAPI_AskQuestion @CMR_ID, @RMR_ID, @RequestType, @Comments, @ContactInformation, @ContactTime";
@@ -55,6 +58,9 @@ namespace PQ_API.DataConnect
         private SqlCommand _PQ_CutomerAPI_GetAPIUsersList;
         private SqlCommand _PQ_CutomerAPI_GetUserBrandsList;
         private SqlCommand _PQ_CutomerAPI_GetStreetTypeList;
+        private SqlCommand _PQ_CutomerAPI_GetIncomeTypeList;
+        private SqlCommand _PQ_CutomerAPI_GetOccupationTypeList;
+        private SqlCommand _PQ_CutomerAPI_GetIndustrySectorList;
         private SqlCommand _PQ_CutomerAPI_GetRequestTypeList;
         private SqlCommand _PQ_CutomerAPI_GetBrandDealsList;
         private SqlCommand _PQ_CustomerAPI_AskQuestion;
@@ -123,6 +129,9 @@ namespace PQ_API.DataConnect
             _PQ_CutomerAPI_GetRequestTypeList.Parameters.Add("@Brand_CMR_ID", SqlDbType.VarChar);
 
             _PQ_CutomerAPI_GetStreetTypeList = new SqlCommand(PQ_CutomerAPI_GetStreetTypeList, _Connection);
+            _PQ_CutomerAPI_GetIncomeTypeList = new SqlCommand(PQ_CutomerAPI_GetIncomeTypeList, _Connection);
+            _PQ_CutomerAPI_GetOccupationTypeList = new SqlCommand(PQ_CutomerAPI_GetOccupationTypeList, _Connection);
+            _PQ_CutomerAPI_GetIndustrySectorList = new SqlCommand(PQ_CutomerAPI_GetIndustrySectorList, _Connection);
 
             _PQ_CustomerAPI_AskQuestion = new SqlCommand(PQ_CustomerAPI_AskQuestion, _Connection);
             _PQ_CustomerAPI_AskQuestion.Parameters.Add("@CMR_ID", SqlDbType.VarChar);
@@ -712,6 +721,78 @@ namespace PQ_API.DataConnect
                     XSYSst_Description = _rs["XSYSst_Description"].ToString();
                     StreetType streetType = new StreetType(XSYSst_ID, XSYSst_Code, XSYSst_Description);
                     result.Add(streetType);
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public List<IncomeType> GetIncomeTypesListFunc()
+        {
+            List<IncomeType> result = new List<IncomeType>();
+            string XIN_ID = null;
+            string XIN_Detail = null;
+
+            _rs = _PQ_CutomerAPI_GetIncomeTypeList.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    XIN_ID = _rs["XIN_ID"].ToString();
+                    XIN_Detail = _rs["XIN_Detail"].ToString();
+                    IncomeType incomeType = new IncomeType(XIN_ID, XIN_Detail);
+                    result.Add(incomeType);
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public List<OccupationType> GetOccupationTypesListFunc()
+        {
+            List<OccupationType> result = new List<OccupationType>();
+            string XCO_ID = null;
+            string XCO_Detail = null;
+
+            _rs = _PQ_CutomerAPI_GetOccupationTypeList.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    XCO_ID = _rs["XCO_ID"].ToString();
+                    XCO_Detail = _rs["XCO_Detail"].ToString();
+                    OccupationType occupationType = new OccupationType(XCO_ID, XCO_Detail);
+                    result.Add(occupationType);
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public List<IndustrySector> GetIndustrySectorsListFunc()
+        {
+            List<IndustrySector> result = new List<IndustrySector>();
+            string XCI_ID = null;
+            string XCI_Detail = null;
+
+            _rs = _PQ_CutomerAPI_GetIndustrySectorList.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    XCI_ID = _rs["XCI_ID"].ToString();
+                    XCI_Detail = _rs["XCI_Detail"].ToString();
+                    IndustrySector occupationType = new IndustrySector(XCI_ID, XCI_Detail);
+                    result.Add(occupationType);
                 }
                 _rs.Close();
                 return result;
