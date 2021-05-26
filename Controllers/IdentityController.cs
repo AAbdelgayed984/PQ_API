@@ -2,6 +2,9 @@ using PQ_API.Classes;
 using PQ_API.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Net;
 
 namespace PQ_API.Controllers
 {
@@ -13,21 +16,40 @@ namespace PQ_API.Controllers
     public class IdentityController : ControllerBase
     {
         private IUserService _userService;
-
-        public IdentityController(IUserService userService)
+        private readonly ILogger<IdentityController> _logger;
+        public IdentityController(ILogger<IdentityController> logger, IUserService userService)
         {
+            _logger = logger;
             _userService = userService;
         }
 
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthenticateRequest model)
         {
-            var response = _userService.Authenticate(model);
+            try
+            {
+                _logger.LogInformation($"Authenticate Call with model.Username {model.Username}, model.Password {model.Password}");
+                var response = _userService.Authenticate(model);
 
-            if (response == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+                if (response == null)
+                {
+                    throw new Exception(message:"Username or password is incorrect.");
+                }
 
-            return Ok(response);
+                return Ok(response);
+            }
+            catch (Exception ex)
+            {
+                 _logger.LogError(ex, message:"Exception Occurred.");
+                return Result(HttpStatusCode.InternalServerError, ex.Message);
+            }           
         }
+
+        private static ActionResult Result(HttpStatusCode statusCode, string reason) => new ContentResult
+        {
+            StatusCode = (int)statusCode,
+            Content = $"Status Code: {(int)statusCode}; {statusCode}; Reason: {reason}",
+            ContentType = "text/plain",
+        };
     }
 }

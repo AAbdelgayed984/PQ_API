@@ -22,17 +22,19 @@ namespace PQ_API.Classes
             [Description("{ab9ae444-3ec5-425c-be24-121b1618669e}")]AvailableCredit,
             [Description("{b0d3b9a3-a4e6-40c9-818f-e9e60df7643b}")]Unadvanced,
             [Description("{e5c24ad5-75f4-4cf6-8bc0-5b0e833d4cc4}")]Unapplied,
-            [Description("{1d235e92-e720-4a6c-8f2e-5be920c0726c}")]LoanLTV
+            [Description("{1d235e92-e720-4a6c-8f2e-5be920c0726c}")]LoanLTV,
+            [Description("{79965eeb-23ab-4dfa-ae5c-f2c6c65ad098}")]MortgageInsurancePremium,
+            [Description("{5eafa5fc-7a12-4f7c-88dd-fa8a493a5ca2}")]MortgageInsuranceTax,
+            [Description("{9aa4f4c2-dd44-4cc6-9b88-b0e57a22df05}")]CashBack,
+            [Description("{f838aa0b-746e-435e-8630-ea6d10a3004d}")]CMHCLoanLTV,
+            [Description("{1fa7b943-bf68-425e-83ef-9e88bb4f7acd}")]LoanAmount
 
-        }
-        public enum StreetTypes {
-            [Description("{a5572a98-1eec-43c9-ab44-a18d5ab626b6}")]Street,
-            [Description("{9932b46e-ee35-4ade-b0f6-18d087fc8a0b}")]Avenue,
-            [Description("{b3a449b6-1f4a-4647-a25b-20f190d0c302}")]Road
         }
         public enum Keys {
             [Description("{67436ac7-d398-41d1-84bc-c471e5d8d1a6}")]CustomerAccountNumber,
-            [Description("{ef3baea0-8d36-4c5a-8a2d-6ce9e119335b}")]MortgageAccountNumber,
+            [Description("{6985ea0a-9c9b-42d7-8b7d-1392f6f38c03}")]NestoAccountID,
+            [Description("{ae772b76-e943-4627-a295-16fd754596a3}")]NestoSubmissionID,
+            [Description("{ef3baea0-8d36-4c5a-8a2d-6ce9e119335b}")]ARMnetControlID,
             [Description("{55cddee5-a67b-465a-9ddd-2faf2967c6f0}")]CustomerBeaconScore
         }
         public enum Association {
@@ -60,10 +62,6 @@ namespace PQ_API.Classes
             [Description("{798b53e1-5b9d-490a-8001-5005d97d4ba5}")]NBF8,
             [Description("{5f1b0058-130f-461f-aa53-5b685e60d185}")]TDSI3,
         }
-        public enum Product {
-            [Description("{dce2b5e4-c3a2-4fdc-9fa3-da56dfeb15d9}")]Five_Year_Fixed_NBF8_NestoConversion,
-            [Description("{b24b8415-c1e9-47cc-9480-1763e583c82f}")]Five_Year_Fixed_NBF8_LessFrillsNestoConversion
-        }
         public enum MartialStatus { 
             [Description("{1c28faaa-3f5e-48c0-8023-2ac2a8bf3816}")]Widowed, 
             [Description("{70ff199a-78ab-478a-9024-9e75ed4420fd}")]Single, 
@@ -76,28 +74,53 @@ namespace PQ_API.Classes
             [Description("{bdd8ab1a-cae4-4ff5-b856-a547229f711d}")]Mr, 
             [Description("{19f2dc66-3760-4579-802b-9fbb2e86dfad}")]Ms, 
             [Description("{36affe6b-2f82-4129-a562-8fead2eb890f}")]Mrs, 
-            [Description("{b7ce8dda-ac9d-465e-81e9-0eeaf77671bc}")]Miss
+            [Description("{b7ce8dda-ac9d-465e-81e9-0eeaf77671bc}")]Miss,
+            [Description("{6d1f48b5-2f7b-4caf-9247-894e1da21dce}")]Dr, 
+            [Description("{b77a0038-83a9-49e7-8cfa-e61963323e85}")]Rev, 
+            [Description("{3fbcd2ca-757c-4ac4-8559-358444be74de}")]Judge
+            
         };
         public enum Gender { 
             [Description("{194c7aac-d71d-4b55-a656-54730963d070}")]Male, 
             [Description("{a94e0e95-e380-4548-b35e-6798ad35ac4f}")]Female
         }
+        public enum BasisOfEmployment { 
+            [Description("{580BF359-6991-488e-9DBB-ED65CF92BF41}")]PartTime, 
+            [Description("{32B24966-AF08-4d18-86D8-1BEC4D6C3FE2}")]FullTime,
+            [Description("{399c41dd-92ed-454a-bfd9-b72161084d68}")]Seasonal
+        }
+
+        public enum IncomeFrequency { 
+            [Description("{2B6B0933-34B8-4004-9788-ACE33BAC581B}")]	Six_Monthly,
+            [Description("{b5dd2e27-2ac1-4921-9caf-f1cf4e8a4ca8}")]	Accelerated_Biweekly,
+            [Description("{caf97048-abd2-4bf6-b3d0-b04ff78195eb}")]	Accelerated_Weekly,
+            [Description("{EC2E0FC0-7025-4b95-A89F-DE7275E67CFB}")]	Annual,
+            [Description("{529F0DF2-3394-4e32-B336-895699D75488}")]	Biweekly,
+            [Description("{52A3A7A8-AF07-4327-B5AA-B66FB4288206}")]	Monthly,
+            [Description("{3EC333B0-7CC8-484f-A06E-D077A1C60208}")]	Quarterly,
+            [Description("{0c0c1d15-02d7-4efa-8390-426166c1d034}")]	Semi_Monthly,
+            [Description("{FC99A346-78A0-44fd-9E4F-A4DC9E926EFB}")]	Weekly
+        }
         public enum Province { 
-            [Description("{c83d18a5-9e0e-45c8-8b6e-540f967568af}")]Alberta, 
-            [Description("{67c901ea-3dd8-4a76-a484-4b87e58210b7}")]BritishColumbia, 
-            [Description("{dc776021-dc28-4735-8097-68e791e53ad5}")]Manitoba, 
-            [Description("{64688a2c-79e6-49a9-9727-1fbea6ace067}")]NewBrunsWick, 
-            [Description("{975770fd-ca59-4968-a46d-d38068310e03}")]Newfoundland, 
-            [Description("{e27c701d-302a-400d-85c9-1a7439e9634d}")]NorthWestTerritories, 
-            [Description("{e7b7bb10-cb93-45b0-b35e-f7850ed5606a}")]NovaScotia, 
-            [Description("{206fcaec-7b5b-4653-bd81-2e47293a99c9}")]Nunavut, 
-            [Description("{3158056b-987a-44f3-9753-62830297d1ae}")]Ontario, 
-            [Description("{c81bec84-ec29-45cd-88dd-0eef76855ff6}")]PrinceWdwardIsland, 
-            [Description("{794e7e04-6b05-41ca-82e0-862817fc4876}")]Quebec, 
-            [Description("{b2240751-a3ca-4300-9a1f-e156eb14a80c}")]Saskatchewan, 
-            [Description("{861c4f9d-01be-467e-a9ac-797a7d9bf141}")]Yukon 
+            [Description("Alberta")]Alberta, 
+            [Description("BritishColumbia")]BritishColumbia, 
+            [Description("Manitoba")]Manitoba, 
+            [Description("NewBrunsWick")]NewBrunsWick, 
+            [Description("Newfoundland")]Newfoundland, 
+            [Description("NorthWestTerritories")]NorthWestTerritories, 
+            [Description("NovaScotia")]NovaScotia, 
+            [Description("Nunavut")]Nunavut, 
+            [Description("Ontario")]Ontario, 
+            [Description("PrinceWdwardIsland")]PrinceWdwardIsland, 
+            [Description("Quebec")]Quebec, 
+            [Description("Saskatchewan")]Saskatchewan, 
+            [Description("Yukon")]Yukon 
         };
-        public enum Country { [Description("{0df084f1-797c-4ec1-b899-5e3f0df40060}")]Canada }
+        public enum Country { 
+            [Description("{0df084f1-797c-4ec1-b899-5e3f0df40060}")]Canada, 
+            [Description("{FBBCC9C5-3D35-40c8-A093-90BC18720514}")]US    
+        }
+
         public enum Language { 
             [Description("English")]English, 
             [Description("French")]French 
