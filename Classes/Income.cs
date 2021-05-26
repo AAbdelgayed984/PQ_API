@@ -7,7 +7,7 @@ namespace PQ_API.Classes
     {
         public int TimeInServiceYear {get;set;}
         public int TimeInServiceMonth{get;set;}
-        public DateTime EmploymentStart {get;set;}
+        public DateTime? EmploymentStart {get;set;}
         public string JobTitle {get;set;}
         public string EmploymentName {get;set;}
         public EmploymentAddress EmploymentAddress {get;set;}

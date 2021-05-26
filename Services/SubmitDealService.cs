@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
@@ -217,10 +218,7 @@ namespace PQ_API.Services
                         borrower.Income.EmploymentAddress.Province.ToString(),
                         borrower.Income.EmploymentAddress.PostalCode,
                         borrower.Income.TimeInServiceYear,
-                        borrower.Income.TimeInServiceMonth,
-                        null,
-                        borrower.Income.EmploymentStart,
-                        null
+                        borrower.Income.TimeInServiceMonth
                     );
 
                     // Income
