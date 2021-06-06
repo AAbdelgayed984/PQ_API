@@ -27,6 +27,8 @@ namespace PQ_API.Classes
             [Description("{5eafa5fc-7a12-4f7c-88dd-fa8a493a5ca2}")]MortgageInsuranceTax,
             [Description("{9aa4f4c2-dd44-4cc6-9b88-b0e57a22df05}")]CashBack,
             [Description("{f838aa0b-746e-435e-8630-ea6d10a3004d}")]CMHCLoanLTV,
+            [Description("{1d235e92-e720-4a6c-8f2e-5be920c0726c}")]LoanApplicationLTV,
+            [Description("{af123d17-e8cf-4c6d-8cf3-64b4c8adf334}")]CombinedLTV,
             [Description("{1fa7b943-bf68-425e-83ef-9e88bb4f7acd}")]LoanAmount
 
         }
@@ -227,6 +229,11 @@ namespace PQ_API.Classes
             [Description("{87ea126c-ff0f-4a7b-a3c8-328fd00e2407}")]LakeIntake, 
             [Description("{a85d4ef6-0d46-4c79-9b5f-4a4c070ce830}")]Municipal,
             [Description("{721203d0-d197-4bc1-b0cc-0793a2c3582c}")]Cistern
+        }
+        public enum ValueIndex {
+            [Description("{26037eb2-73be-4f5d-ba91-82d9b9a8e095}")]Estimated, 
+            [Description("{2e0bc9fc-2ecf-4d9b-8065-36a1ea09c298}")]Appraised, 
+            [Description("{3ae5df92-cb42-44fb-afa8-0e33b6c230d8}")]PurchasePrice
         }
         public enum ConstructionTypes { 
             [Description("{eb4abc9f-08dc-491d-98c3-854222b93363}")]New, 
