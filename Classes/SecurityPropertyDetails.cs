@@ -181,6 +181,21 @@ namespace PQ_API.Classes
                     throw new System.ArgumentException(string.Format("Invalid Enums.BorrowerFlag {0}.", value));
                 _BorrowerFlag = value;
             }
-        }        
+        }
+
+        private Enums.PropertyListingType _PropertyListingType;
+        public Enums.PropertyListingType PropertyListingType 
+        {
+            get
+            {
+                return _PropertyListingType;
+            }
+            set
+            {
+                if (!Enum.IsDefined(typeof(Enums.PropertyListingType), value))
+                    throw new System.ArgumentException(string.Format("Invalid Enums.PropertyListingType {0}.", value));
+                _PropertyListingType = value;
+            }
+        }     
     }
 }

@@ -31,7 +31,7 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_Product_LoanMDT = "EXEC dbo.PQ_ServicingAPI_Product_LoanMDT @RLM_IDLink_RMR, @RLM_IDLink_XRPu, @RLM_IDLink_XRPy, @MortgageType";
         public const string PQ_ServicingAPI_Product_ControlFeature = "EXEC dbo.PQ_ServicingAPI_Product_ControlFeature @RCFf_IDLink_RMR, @RCFf_IDLink_XRFf";
         public const string PQ_ServicingAPI_Product_ControlDate = "EXEC dbo.PQ_ServicingAPI_Product_ControlDate @RCD_IDLink_RMR, @RCD_Type, @RCD_CurrentStart";
-        public const string PQ_ServicingAPI_Product_SecurityPTY = "EXEC dbo.PQ_ServicingAPI_Product_SecurityPTY @RSP_IDLink_RMR, @RSP_IDLink_StreetType, @RSP_IDLink_Country, @RSP_IDLink_XRTy, @RSP_IDLink_XRTu, @RSP_IDLink_XRTt, @RSP_PurchasePrice, @RSP_EstimatedValue, @RSP_UnitNumber, @RSP_StreetNumber, @RSP_StreetName, @RSP_City, @RSP_State, @RSP_PostCode, @RSP_Direction, @RSP_IDLink_XRTc, @RSP_HeatingValue, @RSP_IDLink_XRTs, @RSP_IDLink_XRTw, @RSP_UnitCount, @RSP_IDLink_XRTz, @RSP_IDLink_XRTvi, @RSP_IDLink_XRTl";        
+        public const string PQ_ServicingAPI_Product_SecurityPTY = "EXEC dbo.PQ_ServicingAPI_Product_SecurityPTY @RSP_IDLink_RMR, @RSP_IDLink_StreetType, @RSP_IDLink_Country, @RSP_IDLink_XRTy, @RSP_IDLink_XRTu, @RSP_IDLink_XRTt, @RSP_PurchasePrice, @RSP_EstimatedValue, @RSP_UnitNumber, @RSP_StreetNumber, @RSP_StreetName, @RSP_City, @RSP_State, @RSP_PostCode, @RSP_Direction, @RSP_IDLink_XRTc, @RSP_HeatingValue, @RSP_IDLink_XRTs, @RSP_IDLink_XRTw, @RSP_UnitCount, @RSP_IDLink_XRTz, @RSP_IDLink_XRTvi, @RSP_IDLink_XRTl, @RSP_FISBO, @RSP_MLSListing";        
         public const string PQ_ServicingAPI_Product_LoanLiabilityMaster = "EXEC dbo.PQ_ServicingAPI_Product_LoanLiabilityMaster @RLLm_IDLink_RMR, @RLLm_IDLink_XLBo, @RLLm_IDLink_XFR, @RLLm_Value, @RLLm_ValuePerYear, @RLLm_IDLink_RSP";
         public const string PQ_ServicingAPI_Link_MasterReference = "EXEC dbo.PQ_ServicingAPI_Link_MasterReference @LMR_IDLink_CMR, @LMR_IDLink_Code_ID,	@LMR_IDLink_Association";
         public const string PQ_ServicingAPI_Client_MasterReference = "EXEC dbo.PQ_ServicingAPI_Client_MasterReference @CMR_Name, @CMR_LanguagePreference";
@@ -234,6 +234,8 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_UnitCount", SqlDbType.Int);
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_IDLink_XRTvi", SqlDbType.VarChar);
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_IDLink_XRTl", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_FISBO", SqlDbType.Bit);
+            _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_MLSListing", SqlDbType.Bit);
 
             _PQ_ServicingAPI_Product_LoanLiabilityMaster = new SqlCommand(PQ_ServicingAPI_Product_LoanLiabilityMaster, _Connection);
             _PQ_ServicingAPI_Product_LoanLiabilityMaster.Parameters.Add("@RLLm_IDLink_RMR", SqlDbType.VarChar);
@@ -1399,7 +1401,9 @@ namespace PQ_API.DataConnect
             int RSP_UnitCount,
             string RSP_IDLink_XRTz,
             string RSP_IDLink_XRTvi,
-            string RSP_IDLink_XRTl
+            string RSP_IDLink_XRTl,
+            bool RSP_FISBO,
+            bool RSP_MLSListing
         )
         {
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_RMR"].Value = (object)RSP_IDLink_RMR ?? DBNull.Value;
@@ -1425,6 +1429,8 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_XRTz"].Value = (object)RSP_IDLink_XRTz ?? DBNull.Value;
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_XRTvi"].Value = (object)RSP_IDLink_XRTvi ?? DBNull.Value;
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_XRTl"].Value = (object)RSP_IDLink_XRTl ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_FISBO"].Value = (object)RSP_FISBO ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_MLSListing"].Value = (object)RSP_MLSListing ?? DBNull.Value;
 
 
             string result = null;

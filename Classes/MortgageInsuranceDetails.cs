@@ -23,5 +23,34 @@ namespace PQ_API.Classes
         public Decimal TaxAmount {get;set;}
         public string CertificateNumber {get;set;}      
         public string BulkFlag {get;set;}  
+        private Enums.MIType _MIType;
+        public Enums.MIType MIType 
+        {
+            get
+            {
+                return _MIType;
+            }
+            set
+            {
+                if (!Enum.IsDefined(typeof(Enums.MIType), value))
+                    throw new System.ArgumentException(string.Format("Invalid Enums.MIType {0}.", value));
+                _MIType = value;
+            }
+        }
+
+        private Enums.MIType _MIStatus;
+        public Enums.MIType MIStatus 
+        {
+            get
+            {
+                return _MIStatus;
+            }
+            set
+            {
+                if (!Enum.IsDefined(typeof(Enums.MIStatus), value))
+                    throw new System.ArgumentException(string.Format("Invalid Enums.MIStatus {0}.", value));
+                _MIStatus = value;
+            }
+        }
     }
 }
