@@ -38,8 +38,8 @@ namespace PQ_API.Classes
             }
         }
 
-        private Enums.MIType _MIStatus;
-        public Enums.MIType MIStatus 
+        private Enums.MIStatus _MIStatus;
+        public Enums.MIStatus MIStatus 
         {
             get
             {
