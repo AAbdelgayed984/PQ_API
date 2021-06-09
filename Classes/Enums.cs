@@ -39,6 +39,31 @@ namespace PQ_API.Classes
             [Description("{ef3baea0-8d36-4c5a-8a2d-6ce9e119335b}")]ARMnetControlID,
             [Description("{55cddee5-a67b-465a-9ddd-2faf2967c6f0}")]CustomerBeaconScore
         }
+        public enum MIStatus {
+            [Description("Approved")]Approved,
+            [Description("Approved_Insurable")]Approved_Insurable,
+            [Description("Cancel_Confirmation")]Cancel_Confirmation,
+            [Description("Error")]Error,
+            [Description("INSURABLE")]INSURABLE
+        }
+        public enum MIType {
+            [Description("{79e873bc-433b-44a0-b19e-dc6c88c524b9}")]CMHC_Full_Service,
+            [Description("{58a8e638-bcab-443c-aabf-56837988b141}")]CMHC_Self_Employed_Simplified,
+            [Description("{296ef5df-ace1-49b9-9343-8e43ec59f34f}")]GNW_CG_Heloc_Partial_5yr,
+            [Description("{2e5be5b2-d94f-40ff-8ddb-0829917c26c0}")]GNW_CG_Family_Plan,
+            [Description("{45ce96ac-65b6-4296-9469-999978eac347}")]GNW_CG_Spousal_Buyout,
+            [Description("{71cb7285-6e3a-4ca7-9145-84c75d866bee}")]GNW_CG_Borrowed_Downpayment,
+            [Description("{ba619467-88ae-4227-a05b-b672dc6b3c1b}")]GNW_CG_Staff_Loan,
+            [Description("{bbeb5f05-7a52-49e9-b454-6ae9dd51601a}")]GNW_CG_Cash_Back,
+            [Description("{c62a38c7-be99-427f-a821-465b688a6eb2}")]GNW_CG_Full_Service,
+            [Description("{cb20eda2-eb29-4e88-a6bc-46349dfc07d9}")]GNW_CG_New_To_Canada,
+            [Description("{ece4b7e6-2ff8-4f40-927f-ae395c3fc20f}")]GNW_CG_Vacation_Property,
+            [Description("{fc41020b-2e1f-4743-b380-172c834c053d}")]GNW_CG_Alt_A ,
+        }
+        public enum PropertyListingType {
+            [Description("1")]MLSListing,
+            [Description("2")]FISBO,
+        }
         public enum Association {
             [Description("{9060212e-b888-4c3a-b9e9-6715f509b9a7}")]Brand,
             [Description("{b71597db-b0e9-47ad-82c9-9d591227ad28}")]Investor,

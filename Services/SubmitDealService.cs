@@ -74,7 +74,23 @@ namespace PQ_API.Services
             string MortgageInsurer_PremiumAmount_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.MortgageInsurancePremium),request.MortgageInsuranceDetails.PremiumAmount); 
             string MortgageInsurer_TaxAmount_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.MortgageInsuranceTax),request.MortgageInsuranceDetails.TaxAmount); 
             
-            string CertificateNumber_RLMI_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanInsuranceFunc(RMR_ID, request.MortgageInsuranceDetails.BulkFlag, null, 0, 0, 0, null, null, false, false, null, null, false, false, request.MortgageInsuranceDetails.CertificateNumber);
+            string CertificateNumber_RLMI_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanInsuranceFunc(
+                RMR_ID, 
+                request.MortgageInsuranceDetails.BulkFlag, 
+                null, 
+                0, 
+                0, 
+                0, 
+                null, 
+                Enums.GetEnumDescription(request.MortgageInsuranceDetails.MIType), 
+                false, 
+                false, 
+                null, 
+                Enums.GetEnumDescription(request.MortgageInsuranceDetails.MIStatus), 
+                false, 
+                false, 
+                request.MortgageInsuranceDetails.CertificateNumber
+            );
  
             // Product Term and Amortization
             string ProductTerm_RCTe_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTermFunc(RMR_ID, request.LoanDetails.ProductTerm_Years, request.LoanDetails.ProductTerm_Months, ( request.LoanDetails.ProductTerm_Years * 12 ) + request.LoanDetails.ProductTerm_Months, 1);
@@ -90,6 +106,25 @@ namespace PQ_API.Services
             string PaymentFrequency_RCTK_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTaskFunc(RMR_ID, Enums.GetEnumDescription(request.LoanDetails.PaymentFrequency), 0, 3);
             // Security
             int RSP_UnitCount;
+            bool RSP_MLSListing = false;
+            bool RSP_FISBO = false;
+
+            switch (request.SecurityPropertyDetails.PropertyListingType)
+                {
+                    case Enums.PropertyListingType.MLSListing:
+                        RSP_MLSListing = true;
+                        RSP_FISBO = false;
+                        break;
+                    case Enums.PropertyListingType.FISBO:
+                        RSP_MLSListing = false;
+                        RSP_FISBO = true;
+                        break;
+                    default:
+                        RSP_MLSListing = false;
+                        RSP_FISBO = false;
+                        break;
+                }
+
             switch (request.SecurityPropertyDetails.PropertyType)
                 {
                     case Enums.PropertyTypes.Filogix_TwoStorey:
@@ -147,7 +182,9 @@ namespace PQ_API.Services
                 RSP_UnitCount,
                 Enums.GetEnumDescription(request.SecurityPropertyDetails.PropertyZone),
                 Enums.GetEnumDescription(request.SecurityPropertyDetails.ValuationMethod),
-                Enums.GetEnumDescription(request.SecurityPropertyDetails.PropertyStyle)
+                Enums.GetEnumDescription(request.SecurityPropertyDetails.PropertyStyle),
+                RSP_FISBO,
+                RSP_MLSListing
             );
 
             // Borrowers
