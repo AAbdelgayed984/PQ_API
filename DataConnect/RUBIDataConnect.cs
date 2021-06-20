@@ -49,9 +49,10 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_Product_LoanPayment = "EXEC dbo.PQ_ServicingAPI_Product_LoanPayment @RLP_IDLink_RMR, @RLP_Type, @RLP_Fixed, @RLP_Interest, @RLP_Principal, @RLP_Term, @RLP_Period, @RLP_IDLink_Link";
         public const string PQ_ServicingAPI_Task_Pending = "EXEC dbo.PQ_ServicingAPI_Task_Pending @KPD_IDLink_Code, @KPD_IDLink_XTKM, @KPD_Type, @KPD_ProcessOrder, @KPD_DateStart, @KPD_DateEnd, @KPD_DateNext, @KPD_DatePrev, @KPD_DayStart, @KPD_IDLink_Key, @KPD_IDLink_CBD";
         public const string PQ_ServicingAPI_ProductsList = "EXEC dbo.PQ_ServicingAPI_ProductsList @Brand_CMR_ID";
-        public const string PQ_ServicingAPI_IsValid_RMR_ID = "EXEC PQ_ServicingAPI_IsValid_RMR_ID @RMR_ID";
-        public const string PQ_ServicingAPI_IsValid_CMR_ID = "EXEC PQ_ServicingAPI_IsValid_CMR_ID @CMR_ID";
-
+        public const string PQ_ServicingAPI_IsValid_RMR_ID = "EXEC dbo.PQ_ServicingAPI_IsValid_RMR_ID @RMR_ID";
+        public const string PQ_ServicingAPI_IsValid_CMR_ID = "EXEC dbo.PQ_ServicingAPI_IsValid_CMR_ID @CMR_ID";
+        public const string PQ_ServicingAPI_Product_FundingTransations = "EXEC dbo.PQ_ServicingAPI_Product_FundingTransations @RTM_IDLink_RMR, @RTM_IDLink_Funder, @RTM_TransactionValue, @RTM_MIPremiumValue, @RTM_MITaxValue, @RTM_DisbursementDate";
+        public const string PQ_ServicingAPI_Product_ControlRate = "EXEC dbo.PQ_ServicingAPI_Product_ControlRate @RCR_IDLink_RMR, @ProductID, @RateType, @PrimeRate, @BaseRate, @QualifyingRate";
         private SqlCommand _PQ_CutomerAPI_GetDealClientsList;
         private SqlCommand _PQ_CutomerAPI_GetMailAddress;
         private SqlCommand _PQ_CutomerAPI_GetContactInfo;
@@ -97,6 +98,8 @@ namespace PQ_API.DataConnect
         private SqlCommand _PQ_ServicingAPI_ProductsList;
         private SqlCommand _PQ_ServicingAPI_IsValid_RMR_ID;
         private SqlCommand _PQ_ServicingAPI_IsValid_CMR_ID;
+        private SqlCommand _PQ_ServicingAPI_Product_FundingTransations;
+        private SqlCommand _PQ_ServicingAPI_Product_ControlRate;
 
         private SqlConnection _Connection;
         private SqlDataReader _rs;
@@ -388,6 +391,23 @@ namespace PQ_API.DataConnect
 
             _PQ_ServicingAPI_IsValid_CMR_ID = new SqlCommand(PQ_ServicingAPI_IsValid_CMR_ID, _Connection);
             _PQ_ServicingAPI_IsValid_CMR_ID.Parameters.Add("@CMR_ID", SqlDbType.VarChar);
+
+            _PQ_ServicingAPI_Product_FundingTransations  = new SqlCommand(PQ_ServicingAPI_Product_FundingTransations, _Connection);
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters.Add("@RTM_IDLink_RMR", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters.Add("@RTM_IDLink_Funder", SqlDbType.VarChar); 
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters.Add("@RTM_TransactionValue", SqlDbType.Decimal); 
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters.Add("@RTM_MIPremiumValue", SqlDbType.Decimal); 
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters.Add("@RTM_MITaxValue", SqlDbType.Decimal); 
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters.Add("@RTM_DisbursementDate", SqlDbType.DateTime);
+            
+            _PQ_ServicingAPI_Product_ControlRate  = new SqlCommand(PQ_ServicingAPI_Product_ControlRate, _Connection);
+            _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@RCR_IDLink_RMR", SqlDbType.VarChar); 
+            _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@ProductID", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@RateType", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@PrimeRate", SqlDbType.Decimal); 
+            _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@BaseRate", SqlDbType.Decimal);
+            _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@QualifyingRate", SqlDbType.Decimal);
+        
         }
 
         public List<User> PQ_CutomerAPI_GetAPIUsersListFunc()
@@ -1691,6 +1711,59 @@ namespace PQ_API.DataConnect
             string result = null;
 
             _rs = _PQ_ServicingAPI_Task_Pending.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = _rs["Result"].ToString();
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+
+        public string PQ_ServicingAPI_Product_FundingTransationsFunc  ( string RTM_IDLink_RMR, string RTM_IDLink_Funder, decimal RTM_TransactionValue, decimal RTM_MIPremiumValue, decimal RTM_MITaxValue, DateTime RTM_DisbursementDate)
+        {
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters["@RTM_IDLink_RMR"].Value = (object)RTM_IDLink_RMR ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters["@RTM_IDLink_Funder"].Value = (object)RTM_IDLink_Funder ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters["@RTM_TransactionValue"].Value = (object)RTM_TransactionValue ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters["@RTM_MIPremiumValue"].Value = (object)RTM_MIPremiumValue ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters["@RTM_MITaxValue"].Value = (object)RTM_MITaxValue ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_FundingTransations.Parameters["@RTM_DisbursementDate"].Value = (object)RTM_DisbursementDate ?? DBNull.Value;
+            
+            string result = null;
+
+            _rs = _PQ_ServicingAPI_Product_FundingTransations.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = _rs["Result"].ToString();
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+            
+        }
+            
+        public string PQ_ServicingAPI_Product_ControlRateFunc ( string RCR_IDLink_RMR, string ProductID, string @RateType, decimal BaseRate )
+        {
+            _PQ_ServicingAPI_Product_ControlRate.Parameters["@RCR_IDLink_RMR"].Value = (object)RCR_IDLink_RMR ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_ControlRate.Parameters["@ProductID"].Value = (object)ProductID ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_ControlRate.Parameters["@RateType"].Value = (object)RateType ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_ControlRate.Parameters["@PrimeRate"].Value = DBNull.Value;
+            _PQ_ServicingAPI_Product_ControlRate.Parameters["@BaseRate"].Value = (object)BaseRate ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_ControlRate.Parameters["@QualifyingRate"].Value = DBNull.Value;
+
+            string result = null;
+
+            _rs = _PQ_ServicingAPI_Product_ControlRate.ExecuteReader();
 
             if (_rs.HasRows)
             {

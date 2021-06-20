@@ -22,14 +22,14 @@ namespace PQ_API.Classes
             [Description("{ab9ae444-3ec5-425c-be24-121b1618669e}")]AvailableCredit,
             [Description("{b0d3b9a3-a4e6-40c9-818f-e9e60df7643b}")]Unadvanced,
             [Description("{e5c24ad5-75f4-4cf6-8bc0-5b0e833d4cc4}")]Unapplied,
-            [Description("{1d235e92-e720-4a6c-8f2e-5be920c0726c}")]LoanLTV,
             [Description("{79965eeb-23ab-4dfa-ae5c-f2c6c65ad098}")]MortgageInsurancePremium,
             [Description("{5eafa5fc-7a12-4f7c-88dd-fa8a493a5ca2}")]MortgageInsuranceTax,
             [Description("{9aa4f4c2-dd44-4cc6-9b88-b0e57a22df05}")]CashBack,
             [Description("{f838aa0b-746e-435e-8630-ea6d10a3004d}")]CMHCLoanLTV,
             [Description("{1d235e92-e720-4a6c-8f2e-5be920c0726c}")]LoanApplicationLTV,
             [Description("{af123d17-e8cf-4c6d-8cf3-64b4c8adf334}")]CombinedLTV,
-            [Description("{1fa7b943-bf68-425e-83ef-9e88bb4f7acd}")]LoanAmount
+            [Description("{1fa7b943-bf68-425e-83ef-9e88bb4f7acd}")]LoanAmount,
+            [Description("{f6e26460-bf66-40fd-9bb2-112ebc2f2b07}")]Application
 
         }
         public enum Keys {
@@ -158,11 +158,11 @@ namespace PQ_API.Classes
             [Description("{f3fdab19-241b-4243-861b-4d0a4509f127}")]Guarantor 
         }
         public enum PaymentFrequencies { 
-            [Description("")]EndOfMonth, 
-            [Description("")]Monthly, 
-            [Description("")]Weekly, 
-            [Description("")]BiWeekly, 
-            [Description("")]SemiMonthly 
+            [Description("{12b8909a-5401-422b-950a-8fa742d9893d}")]EndOfMonth, 
+            [Description("{88a98817-c0f0-4206-8290-167bb524aa65}")]Monthly, 
+            [Description("{935dbb77-1602-4dbe-96aa-42f1a91e2abb}")]Weekly, 
+            [Description("{a2c31b0a-c34a-4431-a991-e090f05c9318}")]BiWeekly, 
+            [Description("{fcb0709a-5916-45e4-91d5-76ff5f2f81a3}")]SemiMonthly 
         }
         public enum LoanPurposes { 
             [Description("{42657ef3-305c-4598-83b1-dd0f86bdd601}")]ETO, 
@@ -176,7 +176,7 @@ namespace PQ_API.Classes
         public enum MortgageInsurers { 
             [Description("")]CMHC, 
             [Description("")]Genworth, 
-            [Description("")]CandadGauranty 
+            [Description("")]CanadaGauranty 
         }
 
         public enum PropertyStyles {
