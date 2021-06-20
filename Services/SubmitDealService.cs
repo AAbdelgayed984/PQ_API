@@ -67,9 +67,9 @@ namespace PQ_API.Services
             // Balances
             string PrincipalBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.Principal), request.LoanDetails.OriginalLoanAmount); 
             string CurrentLoanAmountBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.LoanAmount), request.LoanDetails.OriginalLoanAmount); 
-            string ApprovedBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.Approved), request.LoanDetails.ApprovedBalance);            
-            string LoanLTV_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.LoanLTV), request.LoanDetails.OriginalLTV);            
-            string LoanDetails_OriginalLTV_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.LoanApplicationLTV),request.LoanDetails.OriginalLTV);
+            string ApplicationAmountBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.Application), request.LoanDetails.OriginalLoanAmount);
+            string ApprovedBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.Approved), request.LoanDetails.ApprovedBalance);                       
+            string LoanDetails_LoanApplicationLTV_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.LoanApplicationLTV),request.LoanDetails.OriginalLTV);
             string LoanDetails_CombinedLTV_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.CombinedLTV),request.LoanDetails.OriginalLTV);
             string MortgageInsurer_PremiumAmount_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.MortgageInsurancePremium),request.MortgageInsuranceDetails.PremiumAmount); 
             string MortgageInsurer_TaxAmount_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.MortgageInsuranceTax),request.MortgageInsuranceDetails.TaxAmount); 
@@ -102,8 +102,10 @@ namespace PQ_API.Services
             string ClosingDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 1001, request.LoanDetails.ClosingDate);
             string ApplicationDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 1, request.LoanDetails.ApplicationDate);
             string FirstPaymentDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 99000, request.PrePaymentPrivileges.NextPaymentDate);
+            
             //Tasks
             string PaymentFrequency_RCTK_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTaskFunc(RMR_ID, Enums.GetEnumDescription(request.LoanDetails.PaymentFrequency), 0, 3);
+            
             // Security
             int RSP_UnitCount;
             bool RSP_MLSListing = false;
@@ -185,6 +187,24 @@ namespace PQ_API.Services
                 Enums.GetEnumDescription(request.SecurityPropertyDetails.PropertyStyle),
                 RSP_FISBO,
                 RSP_MLSListing
+            );
+
+            //Transactions
+            string RTM_ID = _rubiDataConnect.PQ_ServicingAPI_Product_FundingTransationsFunc(
+                RMR_ID,
+                Brand_CMR_ID,
+                request.LoanDetails.OriginalLoanAmount,
+                request.MortgageInsuranceDetails.PremiumAmount,
+                request.MortgageInsuranceDetails.TaxAmount,
+                request.LoanDetails.DisbursementDate
+            );
+
+            //Rates
+            string RCR_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlRateFunc(
+                RMR_ID,
+                request.AccountDetails.Product,
+                request.LoanDetails.ProductType,
+                request.LoanDetails.InterestRate
             );
 
             // Borrowers
