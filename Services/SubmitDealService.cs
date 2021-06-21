@@ -290,6 +290,7 @@ namespace PQ_API.Services
                         borrower.Income.EmploymentAddress.PostalCode,
                         borrower.Income.TimeInServiceYear,
                         borrower.Income.TimeInServiceMonth,
+                        borrower.Income.Occupation,
                         borrower.Income.IndustrySector
                     );
 

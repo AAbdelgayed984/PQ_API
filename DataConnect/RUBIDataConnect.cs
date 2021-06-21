@@ -1310,6 +1310,7 @@ namespace PQ_API.DataConnect
             string CED_PostCode_C,
             Int32 CED_TimeInServiceY_C, 
             Int32 CED_TimeInServiceM_C,
+            string CED_IDLink_Occupation_C,
             string CED_IDLink_XCI
         )
         {
@@ -1325,7 +1326,7 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_PostCode_C"].Value = (object)CED_PostCode_C ?? DBNull.Value;
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_TimeInServiceY_C"].Value = (object)CED_TimeInServiceY_C ?? DBNull.Value;
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_TimeInServiceM_C"].Value = (object)CED_TimeInServiceM_C ?? DBNull.Value;
-            _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_IDLink_Occupation_C"].Value = DBNull.Value;
+            _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_IDLink_Occupation_C"].Value = (object)CED_IDLink_Occupation_C ?? DBNull.Value;
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_StartDate"].Value = DBNull.Value;
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_JobTitle"].Value = DBNull.Value;
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_IDLink_XCI"].Value = DBNull.Value;
