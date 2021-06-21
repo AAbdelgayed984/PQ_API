@@ -61,8 +61,6 @@ namespace PQ_API.Services
 
             string GDS_RCTi_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlRatioFunc(RMR_ID,null,request.LoanDetails.CombinedGDS);
             string TDS_RCTi_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlRatioFunc(RMR_ID,null,request.LoanDetails.CombinedTDS);
-    
-            string MaturityDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID,0,request.LoanDetails.MaturityDate);
 
             // Balances
             string PrincipalBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.Principal), request.LoanDetails.OriginalLoanAmount); 
@@ -97,11 +95,20 @@ namespace PQ_API.Services
             string AmortizationOriginal_RCTe_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTermFunc(RMR_ID, request.LoanDetails.AmortizationOriginal_Years, request.LoanDetails.AmortizationOriginal_Months, ( request.LoanDetails.ProductTerm_Years * 12 ) + request.LoanDetails.ProductTerm_Months, 2);
 
             // Features
+            if (request.PrePaymentPrivileges.IndicatorForNearPrime == "No")
+            {
+                string LOB_A_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.LOB_A));
+            }
+            else if (request.PrePaymentPrivileges.IndicatorForNearPrime == "Yes")
+            {
+                string LOB_B_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.LOB_B));
+            }
 
             // Dates
             string ClosingDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 1001, request.LoanDetails.ClosingDate);
             string ApplicationDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 1, request.LoanDetails.ApplicationDate);
             string FirstPaymentDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 99000, request.PrePaymentPrivileges.NextPaymentDate);
+            string MaturityDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 4, request.LoanDetails.MaturityDate);
             
             //Tasks
             string PaymentFrequency_RCTK_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTaskFunc(RMR_ID, Enums.GetEnumDescription(request.LoanDetails.PaymentFrequency), 0, 3);
@@ -186,7 +193,8 @@ namespace PQ_API.Services
                 Enums.GetEnumDescription(request.SecurityPropertyDetails.ValuationMethod),
                 Enums.GetEnumDescription(request.SecurityPropertyDetails.PropertyStyle),
                 RSP_FISBO,
-                RSP_MLSListing
+                RSP_MLSListing,
+                request.SecurityPropertyDetails.AgeOfStructure
             );
 
             //Transactions
@@ -281,7 +289,8 @@ namespace PQ_API.Services
                         borrower.Income.EmploymentAddress.Province.ToString(),
                         borrower.Income.EmploymentAddress.PostalCode,
                         borrower.Income.TimeInServiceYear,
-                        borrower.Income.TimeInServiceMonth
+                        borrower.Income.TimeInServiceMonth,
+                        borrower.Income.IndustrySector
                     );
 
                     // Income

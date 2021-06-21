@@ -16,6 +16,10 @@ namespace PQ_API.Classes
             [Description("{fde55d9b-a337-41e9-a08f-1cc2f013ee3a}")]WorkPhone,
             [Description("{e55bf678-498b-4d57-89d7-20e933a7cf37}")]Email,
         }
+        public enum LoanFeatures {
+            [Description("{92eca3f0-4744-4396-ae04-032b577bffcf}")]LOB_A,
+            [Description("{cc417448-be71-47ce-a517-d85b30f67749}")]LOB_B
+        }
         public enum BalanceType {
             [Description("{cf421ec7-af23-474c-9f8f-46e6b899075f}")]Principal,
             [Description("{57af2f0d-9ec7-46c7-9468-cf633f9b4930}")]Approved,
