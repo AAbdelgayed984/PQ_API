@@ -196,6 +196,8 @@ namespace PQ_API.Classes
                     throw new System.ArgumentException(string.Format("Invalid Enums.PropertyListingType {0}.", value));
                 _PropertyListingType = value;
             }
-        }     
+        }  
+
+        public Int32 AgeOfStructure {set; get;}   
     }
 }

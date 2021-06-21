@@ -31,7 +31,7 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_Product_LoanMDT = "EXEC dbo.PQ_ServicingAPI_Product_LoanMDT @RLM_IDLink_RMR, @RLM_IDLink_XRPu, @RLM_IDLink_XRPy, @MortgageType";
         public const string PQ_ServicingAPI_Product_ControlFeature = "EXEC dbo.PQ_ServicingAPI_Product_ControlFeature @RCFf_IDLink_RMR, @RCFf_IDLink_XRFf";
         public const string PQ_ServicingAPI_Product_ControlDate = "EXEC dbo.PQ_ServicingAPI_Product_ControlDate @RCD_IDLink_RMR, @RCD_Type, @RCD_CurrentStart";
-        public const string PQ_ServicingAPI_Product_SecurityPTY = "EXEC dbo.PQ_ServicingAPI_Product_SecurityPTY @RSP_IDLink_RMR, @RSP_IDLink_StreetType, @RSP_IDLink_Country, @RSP_IDLink_XRTy, @RSP_IDLink_XRTu, @RSP_IDLink_XRTt, @RSP_PurchasePrice, @RSP_EstimatedValue, @RSP_UnitNumber, @RSP_StreetNumber, @RSP_StreetName, @RSP_City, @RSP_State, @RSP_PostCode, @RSP_Direction, @RSP_IDLink_XRTc, @RSP_HeatingValue, @RSP_IDLink_XRTs, @RSP_IDLink_XRTw, @RSP_UnitCount, @RSP_IDLink_XRTz, @RSP_IDLink_XRTvi, @RSP_IDLink_XRTl, @RSP_FISBO, @RSP_MLSListing";        
+        public const string PQ_ServicingAPI_Product_SecurityPTY = "EXEC dbo.PQ_ServicingAPI_Product_SecurityPTY @RSP_IDLink_RMR, @RSP_IDLink_StreetType, @RSP_IDLink_Country, @RSP_IDLink_XRTy, @RSP_IDLink_XRTu, @RSP_IDLink_XRTt, @RSP_PurchasePrice, @RSP_EstimatedValue, @RSP_UnitNumber, @RSP_StreetNumber, @RSP_StreetName, @RSP_City, @RSP_State, @RSP_PostCode, @RSP_Direction, @RSP_IDLink_XRTc, @RSP_HeatingValue, @RSP_IDLink_XRTs, @RSP_IDLink_XRTw, @RSP_UnitCount, @RSP_IDLink_XRTz, @RSP_IDLink_XRTvi, @RSP_IDLink_XRTl, @RSP_FISBO, @RSP_MLSListing, @RSP_AgeOfStructure";        
         public const string PQ_ServicingAPI_Product_LoanLiabilityMaster = "EXEC dbo.PQ_ServicingAPI_Product_LoanLiabilityMaster @RLLm_IDLink_RMR, @RLLm_IDLink_XLBo, @RLLm_IDLink_XFR, @RLLm_Value, @RLLm_ValuePerYear, @RLLm_IDLink_RSP";
         public const string PQ_ServicingAPI_Link_MasterReference = "EXEC dbo.PQ_ServicingAPI_Link_MasterReference @LMR_IDLink_CMR, @LMR_IDLink_Code_ID,	@LMR_IDLink_Association";
         public const string PQ_ServicingAPI_Client_MasterReference = "EXEC dbo.PQ_ServicingAPI_Client_MasterReference @CMR_Name, @CMR_LanguagePreference";
@@ -39,7 +39,7 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_Client_AddressDetail = "EXEC dbo.PQ_ServicingAPI_Client_AddressDetail @CAD_IDLink_CMR, @CAD_IDLink_XAT, @CAD_IDLink_StreetType, @CAD_IDLink_Country, @CAD_UnitNumber, @CAD_StreetNumber, @CAD_StreetName, @CAD_City, @CAD_State, @CAD_PostCode";
         public const string PQ_ServicingAPI_Client_TypeIndividual = "EXEC dbo.PQ_ServicingAPI_Client_TypeIndividual @CTI_IDLink_CMR, @CTI_IDLink_XCM, @CTI_FirstName, @CTI_MiddleName, @CTI_Surname, @CTI_DOB, @CTI_IDLink_XCT";
         public const string PQ_ServicingAPI_Client_UniqueIdentifier = "EXEC dbo.PQ_ServicingAPI_Client_UniqueIdentifier @CUI_IDLink_CMR, @CUI_IDLink_XDI, @CUI_IDLink_XSYSct, @CUI_DocumentNumber";
-        public const string PQ_ServicingAPI_Client_IndividualEmployment = "EXEC dbo.PQ_ServicingAPI_Client_IndividualEmployment @CED_IDLink_CMR, @CED_IDLink_XCEt, @CED_IDLink_Country_C, @CED_EmployerName_C, @CED_UnitNumber_C, @CED_StreetNumber_C, @CED_StreetName_C, @CED_City_C, @CED_State_C, @CED_PostCode_C, @CED_TimeInServiceY_C, @CED_TimeInServiceM_C, @CED_IDLink_Occupation_C , @CED_StartDate, @CED_JobTitle";
+        public const string PQ_ServicingAPI_Client_IndividualEmployment = "EXEC dbo.PQ_ServicingAPI_Client_IndividualEmployment @CED_IDLink_CMR, @CED_IDLink_XCEt, @CED_IDLink_Country_C, @CED_EmployerName_C, @CED_UnitNumber_C, @CED_StreetNumber_C, @CED_StreetName_C, @CED_City_C, @CED_State_C, @CED_PostCode_C, @CED_TimeInServiceY_C, @CED_TimeInServiceM_C, @CED_IDLink_Occupation_C , @CED_StartDate, @CED_JobTitle, @CED_IDLink_XCI";
         public const string PQ_ServicingAPI_client_individualincome = "EXEC dbo.PQ_ServicingAPI_client_individualincome @CINc_IDLink_CMR, @CINc_IDLink_XIN, @CINc_IDLink_XFR, @CINc_Value, @CINc_IDLink_CED";
         public const string PQ_ServicingAPI_Product_LoanLiabilityCredit = "EXEC dbo.PQ_ServicingAPI_Product_LoanLiabilityCredit @RLLc_IDLink_RMR, @RLLc_IDLink_XLBc, @RLLc_CreditProvider, @RLLc_MonthlyRepayment, @RLLc_BalanceOwing";
         public const string PQ_ServicingAPI_Client_BankDetail = "EXEC dbo.PQ_ServicingAPI_Client_BankDetail @CBD_IDLink_CMR, @CBD_AccountName, @CBD_AccountNumber, @CBD_BankName, @CBD_BranchLocation, @CBD_Default, @CBD_AccountTransitNo_CAN, @CBD_AccountInstitutionNo_CAN";
@@ -239,6 +239,7 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_IDLink_XRTl", SqlDbType.VarChar);
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_FISBO", SqlDbType.Bit);
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_MLSListing", SqlDbType.Bit);
+            _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_AgeOfStructure", SqlDbType.Int);
 
             _PQ_ServicingAPI_Product_LoanLiabilityMaster = new SqlCommand(PQ_ServicingAPI_Product_LoanLiabilityMaster, _Connection);
             _PQ_ServicingAPI_Product_LoanLiabilityMaster.Parameters.Add("@RLLm_IDLink_RMR", SqlDbType.VarChar);
@@ -306,6 +307,7 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters.Add("@CED_IDLink_Occupation_C", SqlDbType.VarChar);
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters.Add("@CED_StartDate", SqlDbType.Date);
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters.Add("@CED_JobTitle", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Client_IndividualEmployment.Parameters.Add("@CED_IDLink_XCI", SqlDbType.VarChar);
 
             _PQ_ServicingAPI_client_individualincome = new SqlCommand(PQ_ServicingAPI_client_individualincome, _Connection);
             _PQ_ServicingAPI_client_individualincome.Parameters.Add("@CINc_IDLink_CMR", SqlDbType.VarChar); 
@@ -1307,7 +1309,8 @@ namespace PQ_API.DataConnect
             string CED_State_C,
             string CED_PostCode_C,
             Int32 CED_TimeInServiceY_C, 
-            Int32 CED_TimeInServiceM_C
+            Int32 CED_TimeInServiceM_C,
+            string CED_IDLink_XCI
         )
         {
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_IDLink_CMR"].Value = (object)CED_IDLink_CMR ?? DBNull.Value;
@@ -1325,6 +1328,7 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_IDLink_Occupation_C"].Value = DBNull.Value;
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_StartDate"].Value = DBNull.Value;
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_JobTitle"].Value = DBNull.Value;
+            _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_IDLink_XCI"].Value = DBNull.Value;
 
             string result = null;
 
@@ -1423,7 +1427,8 @@ namespace PQ_API.DataConnect
             string RSP_IDLink_XRTvi,
             string RSP_IDLink_XRTl,
             bool RSP_FISBO,
-            bool RSP_MLSListing
+            bool RSP_MLSListing,
+            Int32 RSP_AgeOfStructure
         )
         {
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_RMR"].Value = (object)RSP_IDLink_RMR ?? DBNull.Value;
@@ -1451,7 +1456,7 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_XRTl"].Value = (object)RSP_IDLink_XRTl ?? DBNull.Value;
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_FISBO"].Value = (object)RSP_FISBO ?? DBNull.Value;
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_MLSListing"].Value = (object)RSP_MLSListing ?? DBNull.Value;
-
+            _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_AgeOfStructure"].Value = (object)RSP_AgeOfStructure ?? DBNull.Value;
 
             string result = null;
 
