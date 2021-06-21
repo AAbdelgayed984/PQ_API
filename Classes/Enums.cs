@@ -174,23 +174,24 @@ namespace PQ_API.Classes
         }
         
         public enum MortgageInsurers { 
-            [Description("")]CMHC, 
-            [Description("")]Genworth, 
-            [Description("")]CanadaGauranty 
+            [Description("{2a43edda-fb7b-4e4f-b33c-e624a48c63e2}")]CMHC, 
+            [Description("{b9d52524-7952-4da9-872e-7b5ae1da86d1}")]Genworth, 
+            [Description("{797e876e-411f-47f4-b73a-d2d67c0a9798}")]CanadaGauranty 
         }
 
         public enum PropertyStyles {
-            [Description("")]SplitLevel,
-            [Description("")]ThreeStorey,
-            [Description("")]TwoStorey,
-            [Description("")]OneStorey,
-            [Description("")]StoreyAndAHalf,
-            [Description("")]BiLevel,Other
+            [Description("{1da8e0d7-8a73-468c-8d02-ed8bb44551d9}")]SplitLevel,
+            [Description("{3b806ac7-9262-4420-bdd9-20e19d8f93aa}")]ThreeStorey,
+            [Description("{622ea90c-bfb7-42ee-a607-e6ea76c0723b}")]TwoStorey,
+            [Description("{7c8944f2-c510-484a-80ac-085b37f76dfc}")]OneStorey,
+            [Description("{912c3e04-c2c4-4a2b-a7c9-9f6bd4f796de}")]StoreyAndAHalf,
+            [Description("{c56b6919-ad07-49f0-813f-465789427e20}")]BiLevel,
+            [Description("{dc703287-f0c8-4bba-9d0d-12cf1a59eab0}")]Other
         } 
         public enum ValuationMethods {
-            [Description("")]Appraised,
-            [Description("")]Estimated,
-            [Description("")]PurchasePrice
+            [Description("{2e0bc9fc-2ecf-4d9b-8065-36a1ea09c298}")]Appraised,
+            [Description("{26037eb2-73be-4f5d-ba91-82d9b9a8e095}")]Estimated,
+            [Description("{3ae5df92-cb42-44fb-afa8-0e33b6c230d8}")]PurchasePrice
         }
         public enum PropertyTypes { 
             [Description("{fe50b0db-e29a-44c9-ae25-429cb2ba8bd4}")]ApartmentHighRise,
@@ -219,17 +220,19 @@ namespace PQ_API.Classes
             [Description("{3cebdbbc-6462-4e04-8882-4a1d9439eeeb}")]TriPlex_Semi_Detached,
         }
         public enum DwellingTypes { 
-            [Description("")]StrataTitle, 
-            [Description("")]CompanyTitle, 
-            [Description("")]CrownLease, 
-            [Description("")]Freehold, 
-            [Description("")]OtherTitle, 
-            [Description("")]CommunityTitle, 
-            [Description("")]TorrensTitle, 
-            [Description("")]Leasehold, 
-            [Description("")]MiningLease, 
-            [Description("")]IndianReserve, 
-            [Description("")]Condo 
+            [Description("{04157226-e7a1-4c79-be52-83900c41b2ce}")]StrataTitle, 
+            [Description("{04d9ea76-ad43-4860-befb-6081d382103e}")]CompanyTitle, 
+            [Description("{71cd3202-a5ae-4764-8512-97666327e596}")]CrownLease, 
+            [Description("{829c04f0-a5d6-4499-b415-9957f6801585}")]Freehold, 
+            [Description("{8dad99e1-80ce-4da6-a61b-23bd4b60e6b9}")]OtherTitle, 
+            [Description("{a176fef3-7a75-44ec-b9aa-af85eebcad7d}")]CommunityTitle, 
+            [Description("{b7d44d0f-7182-44d3-9201-22a08708ce16}")]TorrensTitle, 
+            [Description("{ccb6c947-1877-4476-a8fa-b1c3bf8f40ff}")]Leasehold, 
+            [Description("{dda326cf-987f-4685-b8b7-10b2951e6878}")]MiningLease, 
+            [Description("{eb5091cc-e192-4c61-817d-a9ba155375ec}")]IndianReserve, 
+            [Description("{eea20a2d-6c95-4eb3-95fe-5816555ff37e}")]Condo,
+            [Description("{201a9ee8-0755-48c6-ae19-73bedc27def8}")]CommonLaw
+
         }
         public enum Occupancies { 
             [Description("{cc43d708-e4f0-4a26-a6ec-d452d7824b83}")]OwnerOccupied, 
@@ -238,10 +241,10 @@ namespace PQ_API.Classes
             [Description("{203697e3-5967-4f17-9e56-a3d46325fc43}")]SecondHome 
         }
         public enum PropertyZones { 
-            [Description("")]Residential, 
-            [Description("")]Commercial, 
-            [Description("")]MixedBusiness, 
-            [Description("")]Farm 
+            [Description("{80baf9da-932f-48d4-9bac-fc3feb3084ef}")]Residential, 
+            [Description("{4b96b39b-1b2a-414a-8c5c-43ef40a09a6c}")]Commercial, 
+            [Description("{0a332076-465e-416b-985a-bf30f09e93e2}")]MixedBusiness, 
+            [Description("{04ae3049-4e29-461b-a2fe-56edf8292cc7}")]Farm 
         }
         public enum SewageTypes {
             [Description("{caeef52d-b807-4f4a-8e4d-7c6a4a40ae92}")]HoldingTank, 
