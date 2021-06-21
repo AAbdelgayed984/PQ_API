@@ -30,6 +30,9 @@ namespace PQ_API.Services
 
         public SubmitDealResponse SubmitDeal(SubmitDealRequest request)
         {
+            if (request.LoanDetails.DisbursementDate != request.LoanDetails.ClosingDate)
+                throw new System.ArgumentException(string.Format("Invalid Input. DisbursementDate and ClosingDate should be equal."));
+
             // Declarations
             string Product_XSU_ID = Enums.GetEnumDescription( request.AccountDetails.Status);
             string Brand_CMR_ID = Enums.GetEnumDescription( request.AccountDetails.Brand);
@@ -104,6 +107,20 @@ namespace PQ_API.Services
                 string LOB_B_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.LOB_B));
             }
 
+            if (request.PrePaymentPrivileges.ChargePosition == "First")
+            {
+                string MortgageType_First_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.FirstMortgage));
+            }
+            else if (request.PrePaymentPrivileges.ChargePosition == "Second")
+            {
+                string MortgageType_Second_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.SecondMortgage));
+            }
+            else if (request.PrePaymentPrivileges.ChargePosition == "Third")
+            {
+                string MortgageType_Second_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.ThirdMortgage));
+            }
+
+
             // Dates
             string ClosingDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 1001, request.LoanDetails.ClosingDate);
             string ApplicationDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 1, request.LoanDetails.ApplicationDate);
@@ -117,6 +134,33 @@ namespace PQ_API.Services
             int RSP_UnitCount;
             bool RSP_MLSListing = false;
             bool RSP_FISBO = false;
+            decimal ? PurchasePrice;
+            decimal ? EstimatedValue;
+            decimal ? AppraisedValue;
+
+            switch (request.SecurityPropertyDetails.ValuationMethod)
+                {
+                    case Enums.ValuationMethods.PurchasePrice:
+                        PurchasePrice = request.SecurityPropertyDetails.PropertyValue;
+                        EstimatedValue = 0;
+                        AppraisedValue = 0;
+                        break;
+                    case Enums.ValuationMethods.Estimated:
+                        PurchasePrice = 0;
+                        EstimatedValue = request.SecurityPropertyDetails.PropertyValue;
+                        AppraisedValue = 0;
+                        break;
+                    case Enums.ValuationMethods.Appraised:
+                        PurchasePrice = 0;
+                        EstimatedValue = 0;
+                        AppraisedValue = request.SecurityPropertyDetails.PropertyValue;
+                        break;
+                    default:
+                        PurchasePrice = 0;
+                        EstimatedValue = 0;
+                        AppraisedValue = 0;
+                        break;
+                }
 
             switch (request.SecurityPropertyDetails.PropertyListingType)
                 {
@@ -168,6 +212,7 @@ namespace PQ_API.Services
                         break;
                 }
 
+            
             string RSP_ID = _rubiDataConnect.PQ_ServicingAPI_Product_SecurityPTYFunc(
                 RMR_ID,
                 request.SecurityPropertyDetails.StreetType,
@@ -175,8 +220,8 @@ namespace PQ_API.Services
                 Enums.GetEnumDescription(request.SecurityPropertyDetails.PropertyType),
                 Enums.GetEnumDescription(request.SecurityPropertyDetails.Occupancy),
                 Enums.GetEnumDescription(request.SecurityPropertyDetails.DwellingType),
-                request.SecurityPropertyDetails.PropertyValue,
-                request.SecurityPropertyDetails.PropertyValue,
+                PurchasePrice,
+                EstimatedValue,
                 request.SecurityPropertyDetails.UnitNumber,
                 request.SecurityPropertyDetails.StreetNumber,
                 request.SecurityPropertyDetails.StreetName,
@@ -196,6 +241,11 @@ namespace PQ_API.Services
                 RSP_MLSListing,
                 request.SecurityPropertyDetails.AgeOfStructure
             );
+
+            if ( AppraisedValue > 0)
+            {
+                _rubiDataConnect.PQ_ServicingAPI_Product_SecurityPTYValuationFunc(RSP_ID, AppraisedValue);
+            }
 
             //Transactions
             string RTM_ID = _rubiDataConnect.PQ_ServicingAPI_Product_FundingTransationsFunc(
@@ -305,6 +355,7 @@ namespace PQ_API.Services
 
             string OriginalPaymentAmount_RLP_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanPaymentFunc(RMR_ID,7700,(float)request.PrePaymentPrivileges.OriginalPaymentAmount,0,0,0,0,null);
             string CurrentPaymentAmount_RLP_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanPaymentFunc(RMR_ID,1,(float)request.PrePaymentPrivileges.CurrentPaymentAmount,0,0,0,0,null);
+            string FixedPaymentAmount_RLP_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanPaymentFunc(RMR_ID,150,(float)request.PrePaymentPrivileges.CurrentPaymentAmount,0,0,0,0,null);
             
             string CashBack_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.CashBack),request.PrePaymentPrivileges.CashBack);
 

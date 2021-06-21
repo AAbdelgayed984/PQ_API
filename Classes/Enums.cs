@@ -18,7 +18,10 @@ namespace PQ_API.Classes
         }
         public enum LoanFeatures {
             [Description("{92eca3f0-4744-4396-ae04-032b577bffcf}")]LOB_A,
-            [Description("{cc417448-be71-47ce-a517-d85b30f67749}")]LOB_B
+            [Description("{cc417448-be71-47ce-a517-d85b30f67749}")]LOB_B,
+            [Description("{7d57b0b4-e802-4dbb-9030-e835d2dfbcd6}")]FirstMortgage,
+            [Description("{6b91ca7a-583f-4efa-b2bb-f681ffb81f5b}")]SecondMortgage,
+            [Description("{2234842e-3f58-46a2-869c-d7488d05b2eb}")]ThirdMortgage
         }
         public enum BalanceType {
             [Description("{cf421ec7-af23-474c-9f8f-46e6b899075f}")]Principal,
@@ -84,7 +87,7 @@ namespace PQ_API.Classes
             [Description("{a5f629d3-ac8a-4a4b-afb8-e99dca3de68f}")]Current,
         }
         public enum Broker {
-            [Description("{71998d81-bf1a-4ccf-a14c-500d28133378}")]OliverioVittorio
+            [Description("{48228209-0b00-4716-870e-fcf48f53b34c}")]NestoBroker
         }
         public enum Brand {
             [Description("{48228209-0b00-4716-870e-fcf48f53b34c}")]Nesto
