@@ -32,6 +32,7 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_Product_ControlFeature = "EXEC dbo.PQ_ServicingAPI_Product_ControlFeature @RCFf_IDLink_RMR, @RCFf_IDLink_XRFf";
         public const string PQ_ServicingAPI_Product_ControlDate = "EXEC dbo.PQ_ServicingAPI_Product_ControlDate @RCD_IDLink_RMR, @RCD_Type, @RCD_CurrentStart";
         public const string PQ_ServicingAPI_Product_SecurityPTY = "EXEC dbo.PQ_ServicingAPI_Product_SecurityPTY @RSP_IDLink_RMR, @RSP_IDLink_StreetType, @RSP_IDLink_Country, @RSP_IDLink_XRTy, @RSP_IDLink_XRTu, @RSP_IDLink_XRTt, @RSP_PurchasePrice, @RSP_EstimatedValue, @RSP_UnitNumber, @RSP_StreetNumber, @RSP_StreetName, @RSP_City, @RSP_State, @RSP_PostCode, @RSP_Direction, @RSP_IDLink_XRTc, @RSP_HeatingValue, @RSP_IDLink_XRTs, @RSP_IDLink_XRTw, @RSP_UnitCount, @RSP_IDLink_XRTz, @RSP_IDLink_XRTvi, @RSP_IDLink_XRTl, @RSP_FISBO, @RSP_MLSListing, @RSP_AgeOfStructure";        
+        public const string PQ_ServicingAPI_Product_SecurityPTYValuation = "EXEC dbo.PQ_ServicingAPI_Product_SecurityPTYValuation @RSPv_IDLink_RSP, @RSPv_CMV_MaxAmount";
         public const string PQ_ServicingAPI_Product_LoanLiabilityMaster = "EXEC dbo.PQ_ServicingAPI_Product_LoanLiabilityMaster @RLLm_IDLink_RMR, @RLLm_IDLink_XLBo, @RLLm_IDLink_XFR, @RLLm_Value, @RLLm_ValuePerYear, @RLLm_IDLink_RSP";
         public const string PQ_ServicingAPI_Link_MasterReference = "EXEC dbo.PQ_ServicingAPI_Link_MasterReference @LMR_IDLink_CMR, @LMR_IDLink_Code_ID,	@LMR_IDLink_Association";
         public const string PQ_ServicingAPI_Client_MasterReference = "EXEC dbo.PQ_ServicingAPI_Client_MasterReference @CMR_Name, @CMR_LanguagePreference";
@@ -78,6 +79,7 @@ namespace PQ_API.DataConnect
         private SqlCommand _PQ_ServicingAPI_Product_ControlFeature;
         private SqlCommand _PQ_ServicingAPI_Product_ControlDate;
         private SqlCommand _PQ_ServicingAPI_Product_SecurityPTY;
+        private SqlCommand _PQ_ServicingAPI_Product_SecurityPTYValuation;
         private SqlCommand _PQ_ServicingAPI_Product_LoanLiabilityMaster;
         private SqlCommand _PQ_ServicingAPI_Link_MasterReference;
         private SqlCommand _PQ_ServicingAPI_Client_MasterReference;
@@ -240,6 +242,10 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_FISBO", SqlDbType.Bit);
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_MLSListing", SqlDbType.Bit);
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_AgeOfStructure", SqlDbType.Int);
+
+            _PQ_ServicingAPI_Product_SecurityPTYValuation = new SqlCommand(PQ_ServicingAPI_Product_SecurityPTYValuation, _Connection);
+            _PQ_ServicingAPI_Product_SecurityPTYValuation.Parameters.Add("@RSPv_IDLink_RSP", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_SecurityPTYValuation.Parameters.Add("@RSPv_CMV_MaxAmount", SqlDbType.Decimal); 
 
             _PQ_ServicingAPI_Product_LoanLiabilityMaster = new SqlCommand(PQ_ServicingAPI_Product_LoanLiabilityMaster, _Connection);
             _PQ_ServicingAPI_Product_LoanLiabilityMaster.Parameters.Add("@RLLm_IDLink_RMR", SqlDbType.VarChar);
@@ -1401,7 +1407,29 @@ namespace PQ_API.DataConnect
             }
             _rs.Close();
             return result;
-        }      
+        }    
+
+        public string PQ_ServicingAPI_Product_SecurityPTYValuationFunc (string RSPv_IDLink_RSP, decimal ? RSPv_CMV_MaxAmount)
+        {
+            _PQ_ServicingAPI_Product_SecurityPTYValuation.Parameters["@RSPv_IDLink_RSP"].Value = (object)RSPv_IDLink_RSP ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_SecurityPTYValuation.Parameters["@RSPv_CMV_MaxAmount"].Value = (object)RSPv_CMV_MaxAmount ?? DBNull.Value;
+
+            string result = null;
+
+            _rs = _PQ_ServicingAPI_Product_SecurityPTYValuation.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = _rs["Result"].ToString();
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
 
         public string PQ_ServicingAPI_Product_SecurityPTYFunc ( 
             string RSP_IDLink_RMR, 
@@ -1410,8 +1438,8 @@ namespace PQ_API.DataConnect
             string RSP_IDLink_XRTy, 
             string RSP_IDLink_XRTu, 
             string RSP_IDLink_XRTt, 
-            decimal RSP_PurchasePrice,
-            decimal RSP_EstimatedValue,
+            decimal ? RSP_PurchasePrice,
+            decimal ? RSP_EstimatedValue,
             string RSP_UnitNumber,
             string RSP_StreetNumber,
             string RSP_StreetName,
