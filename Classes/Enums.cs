@@ -21,7 +21,8 @@ namespace PQ_API.Classes
             [Description("{cc417448-be71-47ce-a517-d85b30f67749}")]LOB_B,
             [Description("{7d57b0b4-e802-4dbb-9030-e835d2dfbcd6}")]FirstMortgage,
             [Description("{6b91ca7a-583f-4efa-b2bb-f681ffb81f5b}")]SecondMortgage,
-            [Description("{2234842e-3f58-46a2-869c-d7488d05b2eb}")]ThirdMortgage
+            [Description("{2234842e-3f58-46a2-869c-d7488d05b2eb}")]ThirdMortgage,
+            [Description("{98c22b71-18a4-40f7-bd92-117135bfa775}")]Loan_LessFrills
         }
         public enum BalanceType {
             [Description("{cf421ec7-af23-474c-9f8f-46e6b899075f}")]Principal,
