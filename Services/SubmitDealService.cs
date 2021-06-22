@@ -120,6 +120,10 @@ namespace PQ_API.Services
                 string MortgageType_Second_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.ThirdMortgage));
             }
 
+            if (request.AccountDetails.Product == "{b24b8415-c1e9-47cc-9480-1763e583c82f}")
+            {
+                string LessFrills_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.Loan_LessFrills));
+            }
 
             // Dates
             string ClosingDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 1001, request.LoanDetails.ClosingDate);
