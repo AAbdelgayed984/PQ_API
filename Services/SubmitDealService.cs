@@ -273,7 +273,7 @@ namespace PQ_API.Services
             foreach (Borrower borrower in request.Borrowers)
             {
                 // Borrower Master Details
-                string Borrower_CMR_ID = _rubiDataConnect.PQ_ServicingAPI_Client_MasterReferenceFunc(borrower.LastName + borrower.FirstName, Enums.GetEnumDescription(borrower.Language));
+                string Borrower_CMR_ID = _rubiDataConnect.PQ_ServicingAPI_Client_MasterReferenceFunc(borrower.LastName + " " + borrower.FirstName, Enums.GetEnumDescription(borrower.Language));
                 string Borrower_CTI_ID = _rubiDataConnect.PQ_ServicingAPI_Client_TypeIndividualFunc(Borrower_CMR_ID, Enums.GetEnumDescription(borrower.MartialStatus), borrower.FirstName, borrower.MiddleName, borrower.LastName, borrower.DOB, Enums.GetEnumDescription(borrower.Title));
 
                 // Address
@@ -289,6 +289,7 @@ namespace PQ_API.Services
                     Enums.GetEnumDescription(borrower.Province),
                     borrower.PostalCode
                 );
+                
                 string CurrentAddress_CAD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_AddressDetailFunc(
                     Borrower_CMR_ID,
                     Enums.GetEnumDescription(Enums.AddressType.Current),
@@ -326,7 +327,6 @@ namespace PQ_API.Services
                 string HomePhone_CCD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_ContactDetailFunc(Borrower_CMR_ID, Enums.GetEnumDescription(Enums.ContactType.HomePhone), borrower.HomePhone, null);
                 string MobilePhone_CCD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_ContactDetailFunc(Borrower_CMR_ID, Enums.GetEnumDescription(Enums.ContactType.MobilePhone), borrower.MobilePhone, null);
                 string Email_CCD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_ContactDetailFunc(Borrower_CMR_ID, Enums.GetEnumDescription(Enums.ContactType.Email), borrower.Email, null);
-
                 
                 if (borrower.Income != null)
                 {
