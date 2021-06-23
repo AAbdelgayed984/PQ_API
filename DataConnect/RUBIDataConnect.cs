@@ -1338,7 +1338,7 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_IDLink_Occupation_C"].Value = (object)CED_IDLink_Occupation_C ?? DBNull.Value;
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_StartDate"].Value = DBNull.Value;
             _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_JobTitle"].Value = (object)CED_JobTitle ?? DBNull.Value;
-            _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_IDLink_XCI"].Value = DBNull.Value;
+            _PQ_ServicingAPI_Client_IndividualEmployment.Parameters["@CED_IDLink_XCI"].Value = (object) CED_IDLink_XCI ?? DBNull.Value;
 
             string result = null;
 
