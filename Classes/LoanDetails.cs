@@ -37,7 +37,20 @@ namespace PQ_API.Classes
         public int AmortizationRemaining_Years {get;set;}
         public int AmortizationRemaining_Months {get;set;}
         public int OriginalLTV {get;set;}
-        public string LoanType {get;set;}
+        private Enums.LoanType _LoanType;
+        public Enums.LoanType LoanType 
+        {
+            get
+            {
+                return _LoanType;
+            }
+            set
+            {
+                if (!Enum.IsDefined(typeof(Enums.LoanType), value))
+                    throw new System.ArgumentException(string.Format("Invalid Enums.LoanType {0}.", value));
+                _LoanType = value;
+            }
+        }
         public int LoanTerm {get;set;}
         public DateTime ClosingDate {get;set;}
         public DateTime ApplicationDate {get;set;}

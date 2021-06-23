@@ -59,11 +59,11 @@ namespace PQ_API.Services
             string MortgageAccountNumber_YMR_ID = _rubiDataConnect.PQ_ServicingAPI_Keys_MasterReferenceFunc(RMR_ID, request.AccountDetails.MortgageAccountNumber, Enums.GetEnumDescription(Enums.Keys.NestoAccountID));
 
             // Details
-            string LoanDetails_RLM_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanMDTFunc(RMR_ID, Enums.GetEnumDescription(request.LoanDetails.LoanPurpose), null, null);
+            string LoanDetails_RLM_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanMDTFunc(RMR_ID, Enums.GetEnumDescription(request.LoanDetails.LoanPurpose), Enums.GetEnumDescription(Enums.PaymentType.PrincipalAndInterest), null, Enums.GetEnumDescription(request.LoanDetails.LoanType));
             string LoanDetails_RCTk_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTaskFunc(RMR_ID,Enums.GetEnumDescription(request.LoanDetails.PaymentFrequency),0,0);
 
-            string GDS_RCTi_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlRatioFunc(RMR_ID,null,request.LoanDetails.CombinedGDS);
-            string TDS_RCTi_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlRatioFunc(RMR_ID,null,request.LoanDetails.CombinedTDS);
+            string GDS_RCTi_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlRatioFunc(RMR_ID,Enums.GetEnumDescription(Enums.RatioType.Actual_GDS),request.LoanDetails.CombinedGDS);
+            string TDS_RCTi_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlRatioFunc(RMR_ID,Enums.GetEnumDescription(Enums.RatioType.Actual_TDS),request.LoanDetails.CombinedTDS);
 
             // Balances
             string PrincipalBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.Principal), request.LoanDetails.OriginalLoanAmount); 
@@ -78,7 +78,7 @@ namespace PQ_API.Services
             string CertificateNumber_RLMI_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanInsuranceFunc(
                 RMR_ID, 
                 request.MortgageInsuranceDetails.BulkFlag, 
-                null, 
+                request.MortgageInsuranceDetails.CertificateNumber, 
                 0, 
                 0, 
                 0, 
@@ -333,7 +333,7 @@ namespace PQ_API.Services
                     // Employment
                     string Employment_CED_ID = _rubiDataConnect.PQ_ServicingAPI_Client_IndividualEmploymentFunc(
                         Borrower_CMR_ID,
-                        null,
+                        Enums.GetEnumDescription(borrower.Income.BasisOfEmployment),
                         null,
                         borrower.Income.EmploymentName,
                         borrower.Income.EmploymentAddress.UnitNumber,
@@ -345,11 +345,12 @@ namespace PQ_API.Services
                         borrower.Income.TimeInServiceYear,
                         borrower.Income.TimeInServiceMonth,
                         borrower.Income.Occupation,
-                        borrower.Income.IndustrySector
+                        Enums.GetEnumDescription(borrower.Income.IndustrySector),
+                        borrower.Income.JobTitle
                     );
 
                     // Income
-                    string Income_CINc_ID = _rubiDataConnect.PQ_ServicingAPI_client_individualincomeFunc( Borrower_CMR_ID, borrower.Income.IncomeType, null, borrower.Income.IncomeAmount, null );
+                    string Income_CINc_ID = _rubiDataConnect.PQ_ServicingAPI_client_individualincomeFunc( Borrower_CMR_ID, borrower.Income.IncomeType, Enums.GetEnumDescription(borrower.Income.IncomeFrequency), borrower.Income.IncomeAmount, Employment_CED_ID );
                 }    
                 
                 //Client Bank detail

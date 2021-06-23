@@ -136,6 +136,50 @@ namespace PQ_API.Classes
             [Description("{0c0c1d15-02d7-4efa-8390-426166c1d034}")]	Semi_Monthly,
             [Description("{FC99A346-78A0-44fd-9E4F-A4DC9E926EFB}")]	Weekly
         }
+        public enum IndustrySector {
+            [Description("{80c8fa19-c35f-460a-84ee-21d1f34e38e5}")] Accomodation,
+            [Description("{e6a58efb-f0d4-427b-9a99-8dec4546b511}")] Accounting,
+            [Description("{51490aea-4e26-4578-8ebd-d63f35f0f3b6}")] Administration,
+            [Description("{5d901307-e38b-4df9-9fc9-0fb1af1c303c}")] Agriculture,
+            [Description("{039f8fff-5bb0-4fa8-9a9c-64ba432a91b6}")] ArtsAndEntertainment,
+            [Description("{d06df872-f55e-4344-a3dc-71000752ea85}")] Banking_Finance,
+            [Description("{49838f01-a644-4839-9e86-7a1299ce82cc}")] BusinessServices,
+            [Description("{abf1b6c9-6211-4e4f-982a-2cbfcd972460}")] Construction,
+            [Description("{05b0f72e-8e40-4c13-89c2-52f6d2364540}")] Consulting,
+            [Description("{25462b7f-7ce0-4191-8f19-f54d647b57d0}")] ConsumerServices,
+            [Description("{c22de49e-b16b-47dd-b7ec-b64f2d48b7d3}")] Design_DirectionAndCreativeManagement,
+            [Description("{772bad3f-98c0-4d85-baa9-092ddb45ad04}")] Distributors_DispatchersAndProcessors,
+            [Description("{43502e4f-c529-4fb6-b1f2-d5e9e78dd0ef}")] Education,
+            [Description("{8dfadb2c-91ca-4b43-9bd8-b555c4a18bc9}")] Financial,
+            [Description("{81b62e79-8382-492c-a9f2-ff63cef6923c}")] Forestry_FishingAndHunting,
+            [Description("{8d75de5a-1444-4c69-8068-9d815b5401e3}")] Government,
+            [Description("{92f6ce30-159f-4133-88ec-7c1f65e4a03a}")] HealthCare,
+            [Description("{864eab88-2291-42bf-aa2c-7ada1195c485}")] Insurance,
+            [Description("{7655cf81-d341-45ef-a697-927fd0ee573c}")] LegalServices,
+            [Description("{533e45e4-bb86-46a8-8f20-20075e6d9d52}")] Manufacturing,
+            [Description("{0c010cef-b57d-4d00-9cdf-dbc9a7b279a2}")] Mining_Quarrying_OilAndGasExtraction,
+            [Description("{534d1f7c-4fbe-4a9c-826a-c83ba92a5053}")] RealEstate,
+            [Description("{a404a887-c98d-4abc-82d1-e04619102906}")] RentalAndLeasing,
+            [Description("{c4c15289-45d1-4e31-8a25-83edf53b2266}")] RestaurantAndFoodService,
+            [Description("{5b8817ad-0519-4cda-a4ca-0d0af0c13e6b}")] Retail,
+            [Description("{de70ee5d-0718-4d53-8b10-7c6d9be76529}")] Sciences,
+            [Description("{df1767d5-a320-41b1-9ab3-907fb9b2244b}")] Services,
+            [Description("{813feab6-7557-456a-a503-65d11d14facf}")] SocialServices,
+            [Description("{41a3058c-a839-4e96-85b1-64b7f597e888}")] Technology,
+            [Description("{30b30958-707e-42f0-a526-855459d43b43}")] TransportationAndWarehousing,
+            [Description("{ab337280-d783-4e60-8b15-0fef7fe9e7b1}")] Utilities,
+        }
+        public enum LoanType {
+            [Description("{19dba771-2e7b-4d3b-a0b9-3277e9fbad48}")] Mortgage,
+            [Description("{b2644953-5045-4be4-8d57-afa0389ef8da}")] MultipleComponent,
+            [Description("{dc504338-5022-447d-9767-46b35ca119a8}")] SecuredLoan,
+            [Description("{a67464a8-f765-4968-8a4e-29dc07685da7}")] SecuredLOC,
+        }
+        public enum RatioType
+        {
+            [Description("{8508ed02-20a3-4d81-bc76-cc007cb360c4}")] Actual_GDS,
+            [Description("{efd3c80b-ee94-467a-9490-7e0811c17db1}")] Actual_TDS,
+        }
         public enum Province { 
             [Description("Alberta")]Alberta, 
             [Description("BritishColumbia")]BritishColumbia, 
@@ -170,7 +214,9 @@ namespace PQ_API.Classes
             [Description("{88a98817-c0f0-4206-8290-167bb524aa65}")]Monthly, 
             [Description("{935dbb77-1602-4dbe-96aa-42f1a91e2abb}")]Weekly, 
             [Description("{a2c31b0a-c34a-4431-a991-e090f05c9318}")]BiWeekly, 
-            [Description("{fcb0709a-5916-45e4-91d5-76ff5f2f81a3}")]SemiMonthly 
+            [Description("{fcb0709a-5916-45e4-91d5-76ff5f2f81a3}")]SemiMonthly,
+            [Description("{6333b957-1109-4751-a933-d8c7a2879a27}")] AcceleratedBiWeekly,
+            [Description("{8064b42f-619a-4fdf-885c-ab63dfdeac2b}")] AcceleratedWeekly
         }
         public enum LoanPurposes { 
             [Description("{42657ef3-305c-4598-83b1-dd0f86bdd601}")]ETO, 
@@ -196,6 +242,10 @@ namespace PQ_API.Classes
             [Description("{c56b6919-ad07-49f0-813f-465789427e20}")]BiLevel,
             [Description("{dc703287-f0c8-4bba-9d0d-12cf1a59eab0}")]Other
         } 
+        public enum PaymentType {
+            [Description("{9a13ccc2-df13-46c0-99cf-ff165147792f}")] PrincipalAndInterest,
+            [Description("{ef343d71-fc34-4c2d-9c4a-4ef09862fbc8}")] InterestOnly
+        }
         public enum ValuationMethods {
             [Description("{2e0bc9fc-2ecf-4d9b-8065-36a1ea09c298}")]Appraised,
             [Description("{26037eb2-73be-4f5d-ba91-82d9b9a8e095}")]Estimated,
