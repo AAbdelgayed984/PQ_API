@@ -28,7 +28,20 @@ namespace PQ_API.Classes
                 _BasisOfEmployment = value;
             }
         }
-        public string IndustrySector {get; set;}
+        private Enums.IndustrySector _IndustrySector;
+        public Enums.IndustrySector IndustrySector 
+        {
+            get
+            {
+                return _IndustrySector;
+            }
+            set
+            {
+                if (!Enum.IsDefined(typeof(Enums.IndustrySector), value))
+                    throw new System.ArgumentException(string.Format("Invalid Enums.IndustrySector {0}.", value));
+                _IndustrySector = value;
+            }
+        }
         private Enums.IncomeFrequency _IncomeFrequency;
         public Enums.IncomeFrequency IncomeFrequency 
         {
