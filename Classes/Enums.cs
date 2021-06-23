@@ -68,6 +68,16 @@ namespace PQ_API.Classes
             [Description("{ece4b7e6-2ff8-4f40-927f-ae395c3fc20f}")]GNW_CG_Vacation_Property,
             [Description("{fc41020b-2e1f-4743-b380-172c834c053d}")]GNW_CG_Alt_A ,
         }
+        public enum MIIndicator {
+            [Description("{388f8388-7a91-4ab8-940c-4631bba16d6a}")] GNW_RequiredStdGuidelines,
+            [Description("{445246f9-a449-4958-b464-aaa1ac871ad4}")] GNW_NotRequired,
+            [Description("{a0d2b1e3-9468-4e7b-94e0-8d4109da3f84}")] GNW_UWRequired,
+            [Description("{c4194a4f-e86f-4787-aa1d-fcdf4cefbe8b}")] GNW_LoanAssessment,
+            [Description("{e9c86378-b41f-4b99-9ffb-ad12b92bca29}")] CMHC_NotRequired,
+            [Description("{6b406e32-63a3-463f-b222-ca39918a1f95}")] CMHC_RequiredStdGuidelines,
+            [Description("{fc53eb72-4e5a-4d53-a83e-c17bb77be172}")] CMHC_LoanAssessment,
+            [Description("{fad2565f-9bbb-43db-a4c9-b81185ea10f6}")] CMHC_UWRequired    
+        }
         public enum PropertyListingType {
             [Description("1")]MLSListing,
             [Description("2")]FISBO,

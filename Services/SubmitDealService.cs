@@ -75,9 +75,39 @@ namespace PQ_API.Services
             string MortgageInsurer_PremiumAmount_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.MortgageInsurancePremium),request.MortgageInsuranceDetails.PremiumAmount); 
             string MortgageInsurer_TaxAmount_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.MortgageInsuranceTax),request.MortgageInsuranceDetails.TaxAmount); 
             
+            string MIIndicator = String.Empty;
+            string MIPayor = String.Empty;
+
+            if (request.MortgageInsuranceDetails.BulkFlag == "0")
+            {
+                if (request.MortgageInsuranceDetails.MortgageInsurer == Enums.MortgageInsurers.CMHC)
+                {
+                    MIIndicator = Enums.GetEnumDescription(Enums.MIIndicator.CMHC_RequiredStdGuidelines);
+                    MIPayor = "Borrower";
+                }
+                else if ( request.MortgageInsuranceDetails.MortgageInsurer == Enums.MortgageInsurers.Genworth || request.MortgageInsuranceDetails.MortgageInsurer == Enums.MortgageInsurers.CanadaGauranty)
+                {
+                    MIIndicator = Enums.GetEnumDescription(Enums.MIIndicator.GNW_RequiredStdGuidelines);
+                    MIPayor = "Borrower";
+                }
+            }
+            else if (request.MortgageInsuranceDetails.BulkFlag == "1")
+            {
+                if (request.MortgageInsuranceDetails.MortgageInsurer == Enums.MortgageInsurers.CMHC)
+                {
+                    MIIndicator = Enums.GetEnumDescription(Enums.MIIndicator.CMHC_LoanAssessment);
+                    MIPayor = "Lender";
+                }
+                else if ( request.MortgageInsuranceDetails.MortgageInsurer == Enums.MortgageInsurers.Genworth || request.MortgageInsuranceDetails.MortgageInsurer == Enums.MortgageInsurers.CanadaGauranty)
+                {
+                    MIIndicator = Enums.GetEnumDescription(Enums.MIIndicator.GNW_LoanAssessment);
+                    MIPayor = "Lender";
+                }
+            }
+
             string CertificateNumber_RLMI_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanInsuranceFunc(
                 RMR_ID, 
-                request.MortgageInsuranceDetails.BulkFlag, 
+                MIIndicator, 
                 request.MortgageInsuranceDetails.CertificateNumber, 
                 0, 
                 0, 
@@ -86,7 +116,7 @@ namespace PQ_API.Services
                 Enums.GetEnumDescription(request.MortgageInsuranceDetails.MIType), 
                 false, 
                 false, 
-                null, 
+                MIPayor, 
                 Enums.GetEnumDescription(request.MortgageInsuranceDetails.MIStatus), 
                 false, 
                 false, 
