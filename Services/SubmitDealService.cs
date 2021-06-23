@@ -364,7 +364,7 @@ namespace PQ_API.Services
                     string Employment_CED_ID = _rubiDataConnect.PQ_ServicingAPI_Client_IndividualEmploymentFunc(
                         Borrower_CMR_ID,
                         Enums.GetEnumDescription(borrower.Income.BasisOfEmployment),
-                        null,
+                        Enums.GetEnumDescription(Enums.Country.Canada),
                         borrower.Income.EmploymentName,
                         borrower.Income.EmploymentAddress.UnitNumber,
                         borrower.Income.EmploymentAddress.StreetNumber,
