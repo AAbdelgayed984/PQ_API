@@ -150,11 +150,6 @@ namespace PQ_API.Services
                 string MortgageType_Second_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.ThirdMortgage));
             }
 
-            if (request.AccountDetails.Product == "{b24b8415-c1e9-47cc-9480-1763e583c82f}")
-            {
-                string LessFrills_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.Loan_LessFrills));
-            }
-
             // Dates
             string ClosingDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 1001, request.LoanDetails.ClosingDate);
             string ApplicationDate_RCD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlDateFunc(RMR_ID, 1, request.LoanDetails.ApplicationDate);
@@ -305,6 +300,7 @@ namespace PQ_API.Services
             );
 
             // Borrowers
+            string MainBankAccount_CBD_ID = String.Empty;
             foreach (Borrower borrower in request.Borrowers)
             {
                 // Borrower Master Details
@@ -397,11 +393,70 @@ namespace PQ_API.Services
                     // Income
                     string Income_CINc_ID = _rubiDataConnect.PQ_ServicingAPI_client_individualincomeFunc( Borrower_CMR_ID, borrower.Income.IncomeType, Enums.GetEnumDescription(borrower.Income.IncomeFrequency), borrower.Income.IncomeAmount, Employment_CED_ID );
                 }    
-                
-                //Client Bank detail
-                string BankDetail_CBD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_BankDetailFunc(Borrower_CMR_ID,  null, request.PreauthorizedPaymentAccount.CustomerAccountNumber.ToString(),null,null,false, request.PreauthorizedPaymentAccount.Transit.ToString(),request.PreauthorizedPaymentAccount.BankID.ToString());
 
+                if (borrower.ClientType == Enums.ClientType.PriBorrower)
+                {
+                    //Client Bank detail
+                    String BankDetail_CBD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_BankDetailFunc(Borrower_CMR_ID,  null, request.PreauthorizedPaymentAccount.CustomerAccountNumber.ToString(),null,null,false, request.PreauthorizedPaymentAccount.Transit.ToString(),request.PreauthorizedPaymentAccount.BankID.ToString());
+                    MainBankAccount_CBD_ID = BankDetail_CBD_ID;
+                }                    
             }
+
+            //Pending Payment Task
+            string XTKM_ID = string.Empty;
+            switch (request.LoanDetails.PaymentFrequency)
+            {
+                case Enums.PaymentFrequencies.BiWeekly:
+                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_BiWeekly);
+                    break;
+                case Enums.PaymentFrequencies.AcceleratedBiWeekly:
+                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_AcceleratedBiWeekly);
+                    break;
+                case Enums.PaymentFrequencies.AcceleratedWeekly:
+                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_AcceleratedWeekly);
+                    break;
+                case Enums.PaymentFrequencies.EndOfMonth:
+                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_EndofMonth);
+                    break;
+                case Enums.PaymentFrequencies.Monthly:
+                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_Monthly);
+                    break;
+                case Enums.PaymentFrequencies.SemiMonthly:
+                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_SemiMonthly);
+                    break;
+                case Enums.PaymentFrequencies.Weekly:
+                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_Weekly);
+                    break;
+                default:
+                    XTKM_ID = String.Empty;
+                    break;
+            }
+
+            DateTime DateEnd = new DateTime(2099, 1, 1, 0, 0, 0);
+            string ContractualPayment_KPD_ID = _rubiDataConnect.PQ_ServicingAPI_Task_PendingFunc (
+                RMR_ID,
+                XTKM_ID,
+                null,
+                800,
+                request.PrePaymentPrivileges.NextPaymentDate,
+                DateEnd,
+                request.PrePaymentPrivileges.NextPaymentDate,
+                request.PrePaymentPrivileges.NextPaymentDate,
+                (request.PrePaymentPrivileges.NextPaymentDate - System.DateTime.Now).Days,
+                null,
+                MainBankAccount_CBD_ID
+            );
+
+            string RDD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanTransferFunc(
+                MainBankAccount_CBD_ID,
+                ContractualPayment_KPD_ID,
+                4,
+                request.PrePaymentPrivileges.CurrentPaymentAmount,
+                0,
+                request.PrePaymentPrivileges.CurrentPaymentAmount,
+                request.PrePaymentPrivileges.CurrentPaymentAmount,
+                request.PrePaymentPrivileges.CurrentPaymentAmount
+            );
 
             string OriginalPaymentAmount_RLP_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanPaymentFunc(RMR_ID,7700,(float)request.PrePaymentPrivileges.OriginalPaymentAmount,0,0,0,0,null);
             string CurrentPaymentAmount_RLP_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanPaymentFunc(RMR_ID,1,(float)request.PrePaymentPrivileges.CurrentPaymentAmount,0,0,0,0,null);

@@ -54,6 +54,7 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_IsValid_CMR_ID = "EXEC dbo.PQ_ServicingAPI_IsValid_CMR_ID @CMR_ID";
         public const string PQ_ServicingAPI_Product_FundingTransations = "EXEC dbo.PQ_ServicingAPI_Product_FundingTransations @RTM_IDLink_RMR, @RTM_IDLink_Funder, @RTM_TransactionValue, @RTM_MIPremiumValue, @RTM_MITaxValue, @RTM_DisbursementDate";
         public const string PQ_ServicingAPI_Product_ControlRate = "EXEC dbo.PQ_ServicingAPI_Product_ControlRate @RCR_IDLink_RMR, @ProductID, @RateType, @Spread, @BaseRate, @QualifyingRate";
+        public const string PQ_ServicingAPI_Product_LoanTransfer = "EXEC dbo.PQ_ServicingAPI_Product_LoanTransfer @RDD_IDLink_CBD, @RDD_IDLink_KPD, @RDD_PaymentMethod, @RDD_CustomerNominatedAmt_Fixed, @RDD_AdditionalAmt, @RDD_Total_DD_Amount, @RDD_DD_Formula, @RDD_ProcessAmount";
         private SqlCommand _PQ_CutomerAPI_GetDealClientsList;
         private SqlCommand _PQ_CutomerAPI_GetMailAddress;
         private SqlCommand _PQ_CutomerAPI_GetContactInfo;
@@ -69,6 +70,7 @@ namespace PQ_API.DataConnect
         private SqlCommand _PQ_CutomerAPI_SetContactInfo;
         private SqlCommand _PQ_CutomerAPI_SetMailAddress;
 
+        private SqlCommand _PQ_ServicingAPI_Product_LoanTransfer;
         private SqlCommand _PQ_ServicingAPI_Product_MasterReference;
         private SqlCommand _PQ_ServicingAPI_Keys_MasterReference;
         private SqlCommand _PQ_ServicingAPI_Product_LoanAssetProperty;
@@ -166,6 +168,16 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_MasterReference = new SqlCommand(PQ_ServicingAPI_Product_MasterReference, _Connection);
             _PQ_ServicingAPI_Product_MasterReference.Parameters.Add("@RMR_IDLink_XRP", SqlDbType.VarChar);
             _PQ_ServicingAPI_Product_MasterReference.Parameters.Add("@RMR_IDLink_XSU", SqlDbType.VarChar);
+
+            _PQ_ServicingAPI_Product_LoanTransfer = new SqlCommand(PQ_ServicingAPI_Product_LoanTransfer, _Connection);
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters.Add("@RDD_IDLink_CBD", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters.Add("@RDD_IDLink_KPD", SqlDbType.VarChar);
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters.Add("@RDD_PaymentMethod", SqlDbType.Int);
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters.Add("@RDD_CustomerNominatedAmt_Fixed", SqlDbType.Decimal);
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters.Add("@RDD_AdditionalAmt", SqlDbType.Decimal);
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters.Add("@RDD_Total_DD_Amount", SqlDbType.Decimal);
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters.Add("@RDD_DD_Formula", SqlDbType.Decimal);
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters.Add("@RDD_ProcessAmount", SqlDbType.Decimal);
 
             _PQ_ServicingAPI_Keys_MasterReference = new SqlCommand(PQ_ServicingAPI_Keys_MasterReference, _Connection);
             _PQ_ServicingAPI_Keys_MasterReference.Parameters.Add("@YMR_IDLink_ARMNet", SqlDbType.VarChar);
@@ -1004,6 +1016,34 @@ namespace PQ_API.DataConnect
             return result;
         }
 
+        public string PQ_ServicingAPI_Product_LoanTransferFunc ( string RDD_IDLink_CBD, string RDD_IDLink_KPD, int RDD_PaymentMethod, decimal RDD_CustomerNominatedAmt_Fixed, decimal RDD_AdditionalAmt, decimal RDD_Total_DD_Amount, decimal RDD_DD_Formula, decimal RDD_ProcessAmount )
+        {
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters["@RDD_IDLink_CBD"].Value = (object)RDD_IDLink_CBD ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters["@RDD_IDLink_KPD"].Value = (object)RDD_IDLink_KPD ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters["@RDD_PaymentMethod"].Value = (object)RDD_PaymentMethod ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters["@RDD_CustomerNominatedAmt_Fixed"].Value = (object)RDD_CustomerNominatedAmt_Fixed ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters["@RDD_AdditionalAmt"].Value = (object)RDD_AdditionalAmt ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters["@RDD_Total_DD_Amount"].Value = (object)RDD_Total_DD_Amount ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters["@RDD_DD_Formula"].Value = (object)RDD_DD_Formula ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_LoanTransfer.Parameters["@RDD_ProcessAmount"].Value = (object)RDD_ProcessAmount ?? DBNull.Value;
+            
+            string result = null;
+
+            _rs = _PQ_ServicingAPI_Product_LoanTransfer.ExecuteReader();
+
+            if (_rs.HasRows)
+            {
+                while (_rs.Read())
+                {
+                    result = _rs["Result"].ToString();
+                }
+                _rs.Close();
+                return result;
+            }
+            _rs.Close();
+            return result;
+        }
+        
         public string PQ_ServicingAPI_Product_LoanAssetPropertyFunc ( 
             string RLAp_IDLink_RMR, 
             string RLAp_UnitNumber, 
@@ -1741,7 +1781,7 @@ namespace PQ_API.DataConnect
             return result;
         }
 
-        public string PQ_ServicingAPI_Task_PendingFunc ( string KPD_IDLink_Code, string KPD_IDLink_XTKM, int KPD_Type, int KPD_ProcessOrder, DateTime KPD_DateStart, DateTime KPD_DateEnd, DateTime KPD_DateNext, DateTime KPD_DatePrev, int KPD_DayStart, string KPD_IDLink_Key, string KPD_IDLink_CBD)
+        public string PQ_ServicingAPI_Task_PendingFunc ( string KPD_IDLink_Code, string KPD_IDLink_XTKM, int ? KPD_Type, int KPD_ProcessOrder, DateTime KPD_DateStart, DateTime KPD_DateEnd, DateTime KPD_DateNext, DateTime KPD_DatePrev, int KPD_DayStart, string KPD_IDLink_Key, string KPD_IDLink_CBD)
         {
             _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_IDLink_Code"].Value = (object)KPD_IDLink_Code ?? DBNull.Value;
             _PQ_ServicingAPI_Task_Pending.Parameters["@KPD_IDLink_XTKM"].Value = (object)KPD_IDLink_XTKM ?? DBNull.Value;
