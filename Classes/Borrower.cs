@@ -119,6 +119,8 @@ namespace PQ_API.Classes
             }
         }
 
+        public bool FirstHomeOwner { get; set; }
+        public bool NewToCanada { get; set; }
         public Income Income {get;set;}
     }
 }

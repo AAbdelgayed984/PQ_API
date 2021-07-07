@@ -273,7 +273,11 @@ namespace PQ_API.Services
                 Enums.GetEnumDescription(request.SecurityPropertyDetails.PropertyStyle),
                 RSP_FISBO,
                 RSP_MLSListing,
-                request.SecurityPropertyDetails.AgeOfStructure
+                request.SecurityPropertyDetails.AgeOfStructure,
+                request.SecurityPropertyDetails.FloorSize,
+                Enums.GetEnumDescription(request.SecurityPropertyDetails.FloorSizeMeasurement),
+                request.SecurityPropertyDetails.LandSize,
+                Enums.GetEnumDescription(request.SecurityPropertyDetails.LandSizeMeasurement)
             );
 
             if ( AppraisedValue > 0)
@@ -296,7 +300,8 @@ namespace PQ_API.Services
                 RMR_ID,
                 request.AccountDetails.Product,
                 request.LoanDetails.ProductType,
-                request.LoanDetails.InterestRate
+                request.LoanDetails.InterestRate,
+                request.LoanDetails.Spread
             );
 
             // Borrowers
@@ -347,6 +352,16 @@ namespace PQ_API.Services
                         break;
                     default:
                         break;
+                }
+
+                if (borrower.NewToCanada == true)
+                {
+                    string NewToCanada_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.NewToCanada));
+                }
+
+                if (borrower.FirstHomeOwner == true)
+                {
+                    string FirstHomeOwner_FeatureID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlFeatureFunc(RMR_ID, Enums.GetEnumDescription(Enums.LoanFeatures.FirstHomeOwner));
                 }
 
                 // Keys
