@@ -143,6 +143,15 @@ namespace PQ_API.Classes
             [Description("{2edda548-b312-43b0-abf0-0c0ac1632888}")] MeasuringUnit_Hectares,
             [Description("{dca3f39b-bf0b-419c-876a-0ff10c371dcf}")] MeasuringUnit_Acres            
         }
+        public enum ContractualPaymentTask {
+            [Description("{12b8909a-5401-422b-950a-8fa742d9893d}")] ContractualPayment_EndofMonth,
+            [Description("{6333b957-1109-4751-a933-d8c7a2879a27}")] ContractualPayment_AcceleratedBiWeekly,
+            [Description("{8064b42f-619a-4fdf-885c-ab63dfdeac2b}")] ContractualPayment_AcceleratedWeekly,
+            [Description("{88a98817-c0f0-4206-8290-167bb524aa65}")] ContractualPayment_Monthly,
+            [Description("{935dbb77-1602-4dbe-96aa-42f1a91e2abb}")] ContractualPayment_Weekly,
+            [Description("{a2c31b0a-c34a-4431-a991-e090f05c9318}")] ContractualPayment_BiWeekly,
+            [Description("{fcb0709a-5916-45e4-91d5-76ff5f2f81a3}")] ContractualPayment_SemiMonthly,
+        }
         public enum BasisOfEmployment { 
             [Description("{580BF359-6991-488e-9DBB-ED65CF92BF41}")]PartTime, 
             [Description("{32B24966-AF08-4d18-86D8-1BEC4D6C3FE2}")]FullTime,
