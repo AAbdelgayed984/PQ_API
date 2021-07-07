@@ -36,7 +36,7 @@ namespace PQ_API.Classes
         public int AmortizationContractual_Months {get;set;}
         public int AmortizationRemaining_Years {get;set;}
         public int AmortizationRemaining_Months {get;set;}
-        public int OriginalLTV {get;set;}
+        public Decimal OriginalLTV {get;set;}
         private Enums.LoanType _LoanType;
         public Enums.LoanType LoanType 
         {
@@ -70,9 +70,9 @@ namespace PQ_API.Classes
             }
         }
         public decimal InterestRate {get;set;}
-        public int Spread {get;set;}
-        public int CombinedGDS {get;set;}
-        public int CombinedTDS {get;set;}
+        public Decimal Spread {get;set;}
+        public Decimal CombinedGDS {get;set;}
+        public Decimal CombinedTDS {get;set;}
         public DateTime MaturityDate {get;set;}
         public Decimal PaymentAmount {get;set;}
         public string Feature {get;set;}

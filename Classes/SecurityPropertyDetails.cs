@@ -198,6 +198,41 @@ namespace PQ_API.Classes
             }
         }  
 
-        public Int32 AgeOfStructure {set; get;}   
+        public Int32 AgeOfStructure {set; get;}  
+        public int FloorSize { set; get; }
+
+
+        private Enums.UnitOfMeasure_StudioSize _FloorSizeMeasurement;
+        public Enums.UnitOfMeasure_StudioSize FloorSizeMeasurement 
+        {
+            get
+            {
+                return _FloorSizeMeasurement;
+            }
+            set
+            {
+                if (!Enum.IsDefined(typeof(Enums.UnitOfMeasure_StudioSize), value))
+                    throw new System.ArgumentException(string.Format("Invalid Enums.UnitOfMeasure_StudioSize {0}.", value));
+                _FloorSizeMeasurement = value;
+            }
+        }  
+
+        public int LandSize { get; set; }
+        private Enums.UnitOfMeasure_LandSize _LandSizeMeasurement;
+        public Enums.UnitOfMeasure_LandSize LandSizeMeasurement 
+        {
+            get
+            {
+                return _LandSizeMeasurement;
+            }
+            set
+            {
+                if (!Enum.IsDefined(typeof(Enums.UnitOfMeasure_LandSize), value))
+                    throw new System.ArgumentException(string.Format("Invalid Enums.UnitOfMeasure_LandSize {0}.", value));
+                _LandSizeMeasurement = value;
+            }
+        }  
+
+ 
     }
 }

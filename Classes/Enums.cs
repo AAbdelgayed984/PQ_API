@@ -22,8 +22,11 @@ namespace PQ_API.Classes
             [Description("{7d57b0b4-e802-4dbb-9030-e835d2dfbcd6}")]FirstMortgage,
             [Description("{6b91ca7a-583f-4efa-b2bb-f681ffb81f5b}")]SecondMortgage,
             [Description("{2234842e-3f58-46a2-869c-d7488d05b2eb}")]ThirdMortgage,
-            [Description("{98c22b71-18a4-40f7-bd92-117135bfa775}")]Loan_LessFrills
+            [Description("{98c22b71-18a4-40f7-bd92-117135bfa775}")]Loan_LessFrills,
+            [Description("{cbbaea2f-29b4-4470-bb4b-3b78acf9b75a}")]FirstHomeOwner,
+            [Description("{7b574384-f72d-4263-98f8-820ea9417cf1}")]NewToCanada        
         }
+
         public enum BalanceType {
             [Description("{cf421ec7-af23-474c-9f8f-46e6b899075f}")]Principal,
             [Description("{57af2f0d-9ec7-46c7-9468-cf633f9b4930}")]Approved,
@@ -129,6 +132,17 @@ namespace PQ_API.Classes
             [Description("{194c7aac-d71d-4b55-a656-54730963d070}")]Male, 
             [Description("{a94e0e95-e380-4548-b35e-6798ad35ac4f}")]Female
         }
+        public enum UnitOfMeasure_StudioSize {
+            [Description("{88e5429b-f99a-4bf2-a7b3-f2ca4dba99c7}")] MeasuringUnit_Sq_Ft,
+            [Description("{1ada9211-5c3f-40c1-b57c-6646c7342120}")] MeasuringUnit_Sq_M
+            
+        }
+        public enum UnitOfMeasure_LandSize {
+            [Description("{b5c8e141-7d45-4a11-9f2b-3e70b6dd4b34}")] MeasuringUnit_Sq_Ft,
+            [Description("{50d8955e-ba74-4a5f-b90c-9178e0451c53}")] MeasuringUnit_Sq_M,
+            [Description("{2edda548-b312-43b0-abf0-0c0ac1632888}")] MeasuringUnit_Hectares,
+            [Description("{dca3f39b-bf0b-419c-876a-0ff10c371dcf}")] MeasuringUnit_Acres            
+        }
         public enum BasisOfEmployment { 
             [Description("{580BF359-6991-488e-9DBB-ED65CF92BF41}")]PartTime, 
             [Description("{32B24966-AF08-4d18-86D8-1BEC4D6C3FE2}")]FullTime,
@@ -200,7 +214,7 @@ namespace PQ_API.Classes
             [Description("NovaScotia")]NovaScotia, 
             [Description("Nunavut")]Nunavut, 
             [Description("Ontario")]Ontario, 
-            [Description("PrinceWdwardIsland")]PrinceWdwardIsland, 
+            [Description("PrinceEdwardIsland")]PrinceEdwardIsland, 
             [Description("Quebec")]Quebec, 
             [Description("Saskatchewan")]Saskatchewan, 
             [Description("Yukon")]Yukon 

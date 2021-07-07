@@ -31,7 +31,7 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_Product_LoanMDT = "EXEC dbo.PQ_ServicingAPI_Product_LoanMDT @RLM_IDLink_RMR, @RLM_IDLink_XRPu, @RLM_IDLink_XRPy, @MortgageType, @RLM_IDLink_LoanType";
         public const string PQ_ServicingAPI_Product_ControlFeature = "EXEC dbo.PQ_ServicingAPI_Product_ControlFeature @RCFf_IDLink_RMR, @RCFf_IDLink_XRFf";
         public const string PQ_ServicingAPI_Product_ControlDate = "EXEC dbo.PQ_ServicingAPI_Product_ControlDate @RCD_IDLink_RMR, @RCD_Type, @RCD_CurrentStart";
-        public const string PQ_ServicingAPI_Product_SecurityPTY = "EXEC dbo.PQ_ServicingAPI_Product_SecurityPTY @RSP_IDLink_RMR, @RSP_IDLink_StreetType, @RSP_IDLink_Country, @RSP_IDLink_XRTy, @RSP_IDLink_XRTu, @RSP_IDLink_XRTt, @RSP_PurchasePrice, @RSP_EstimatedValue, @RSP_UnitNumber, @RSP_StreetNumber, @RSP_StreetName, @RSP_City, @RSP_State, @RSP_PostCode, @RSP_Direction, @RSP_IDLink_XRTc, @RSP_HeatingValue, @RSP_IDLink_XRTs, @RSP_IDLink_XRTw, @RSP_UnitCount, @RSP_IDLink_XRTz, @RSP_IDLink_XRTvi, @RSP_IDLink_XRTl, @RSP_FISBO, @RSP_MLSListing, @RSP_AgeOfStructure";        
+        public const string PQ_ServicingAPI_Product_SecurityPTY = "EXEC dbo.PQ_ServicingAPI_Product_SecurityPTY @RSP_IDLink_RMR, @RSP_IDLink_StreetType, @RSP_IDLink_Country, @RSP_IDLink_XRTy, @RSP_IDLink_XRTu, @RSP_IDLink_XRTt, @RSP_PurchasePrice, @RSP_EstimatedValue, @RSP_UnitNumber, @RSP_StreetNumber, @RSP_StreetName, @RSP_City, @RSP_State, @RSP_PostCode, @RSP_Direction, @RSP_IDLink_XRTc, @RSP_HeatingValue, @RSP_IDLink_XRTs, @RSP_IDLink_XRTw, @RSP_UnitCount, @RSP_IDLink_XRTz, @RSP_IDLink_XRTvi, @RSP_IDLink_XRTl, @RSP_FISBO, @RSP_MLSListing, @RSP_AgeOfStructure, @RSP_StudioSize, @RSP_IDLink_XRTus, @RSP_LandSize, @RSP_IDLink_XRTul";        
         public const string PQ_ServicingAPI_Product_SecurityPTYValuation = "EXEC dbo.PQ_ServicingAPI_Product_SecurityPTYValuation @RSPv_IDLink_RSP, @RSPv_CMV_MaxAmount";
         public const string PQ_ServicingAPI_Product_LoanLiabilityMaster = "EXEC dbo.PQ_ServicingAPI_Product_LoanLiabilityMaster @RLLm_IDLink_RMR, @RLLm_IDLink_XLBo, @RLLm_IDLink_XFR, @RLLm_Value, @RLLm_ValuePerYear, @RLLm_IDLink_RSP";
         public const string PQ_ServicingAPI_Link_MasterReference = "EXEC dbo.PQ_ServicingAPI_Link_MasterReference @LMR_IDLink_CMR, @LMR_IDLink_Code_ID,	@LMR_IDLink_Association";
@@ -53,7 +53,7 @@ namespace PQ_API.DataConnect
         public const string PQ_ServicingAPI_IsValid_RMR_ID = "EXEC dbo.PQ_ServicingAPI_IsValid_RMR_ID @RMR_ID";
         public const string PQ_ServicingAPI_IsValid_CMR_ID = "EXEC dbo.PQ_ServicingAPI_IsValid_CMR_ID @CMR_ID";
         public const string PQ_ServicingAPI_Product_FundingTransations = "EXEC dbo.PQ_ServicingAPI_Product_FundingTransations @RTM_IDLink_RMR, @RTM_IDLink_Funder, @RTM_TransactionValue, @RTM_MIPremiumValue, @RTM_MITaxValue, @RTM_DisbursementDate";
-        public const string PQ_ServicingAPI_Product_ControlRate = "EXEC dbo.PQ_ServicingAPI_Product_ControlRate @RCR_IDLink_RMR, @ProductID, @RateType, @PrimeRate, @BaseRate, @QualifyingRate";
+        public const string PQ_ServicingAPI_Product_ControlRate = "EXEC dbo.PQ_ServicingAPI_Product_ControlRate @RCR_IDLink_RMR, @ProductID, @RateType, @Spread, @BaseRate, @QualifyingRate";
         private SqlCommand _PQ_CutomerAPI_GetDealClientsList;
         private SqlCommand _PQ_CutomerAPI_GetMailAddress;
         private SqlCommand _PQ_CutomerAPI_GetContactInfo;
@@ -243,6 +243,10 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_FISBO", SqlDbType.Bit);
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_MLSListing", SqlDbType.Bit);
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_AgeOfStructure", SqlDbType.Int);
+            _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_StudioSize", SqlDbType.Decimal);
+	        _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_IDLink_XRTus", SqlDbType.VarChar);
+	        _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_LandSize", SqlDbType.Decimal);
+	        _PQ_ServicingAPI_Product_SecurityPTY.Parameters.Add("@RSP_IDLink_XRTul", SqlDbType.VarChar);
 
             _PQ_ServicingAPI_Product_SecurityPTYValuation = new SqlCommand(PQ_ServicingAPI_Product_SecurityPTYValuation, _Connection);
             _PQ_ServicingAPI_Product_SecurityPTYValuation.Parameters.Add("@RSPv_IDLink_RSP", SqlDbType.VarChar);
@@ -413,10 +417,9 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@RCR_IDLink_RMR", SqlDbType.VarChar); 
             _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@ProductID", SqlDbType.VarChar);
             _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@RateType", SqlDbType.VarChar);
-            _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@PrimeRate", SqlDbType.Decimal); 
+            _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@Spread", SqlDbType.Decimal); 
             _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@BaseRate", SqlDbType.Decimal);
-            _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@QualifyingRate", SqlDbType.Decimal);
-        
+            _PQ_ServicingAPI_Product_ControlRate.Parameters.Add("@QualifyingRate", SqlDbType.Decimal);        
         }
 
         public List<User> PQ_CutomerAPI_GetAPIUsersListFunc()
@@ -1460,7 +1463,11 @@ namespace PQ_API.DataConnect
             string RSP_IDLink_XRTl,
             bool RSP_FISBO,
             bool RSP_MLSListing,
-            Int32 RSP_AgeOfStructure
+            Int32 RSP_AgeOfStructure,
+            decimal RSP_StudioSize,
+            string RSP_IDLink_XRTus,
+            decimal RSP_LandSize,
+            string RSP_IDLink_XRTul
         )
         {
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_RMR"].Value = (object)RSP_IDLink_RMR ?? DBNull.Value;
@@ -1489,6 +1496,10 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_FISBO"].Value = (object)RSP_FISBO ?? DBNull.Value;
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_MLSListing"].Value = (object)RSP_MLSListing ?? DBNull.Value;
             _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_AgeOfStructure"].Value = (object)RSP_AgeOfStructure ?? DBNull.Value;
+            _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_StudioSize"].Value = (object)RSP_StudioSize ?? DBNull.Value;
+	        _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_XRTus"].Value = (object)RSP_IDLink_XRTus ?? DBNull.Value;
+	        _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_LandSize"].Value = (object)RSP_LandSize ?? DBNull.Value;
+	        _PQ_ServicingAPI_Product_SecurityPTY.Parameters["@RSP_IDLink_XRTul"].Value = (object)RSP_IDLink_XRTul ?? DBNull.Value;
 
             string result = null;
 
@@ -1789,12 +1800,12 @@ namespace PQ_API.DataConnect
             
         }
             
-        public string PQ_ServicingAPI_Product_ControlRateFunc ( string RCR_IDLink_RMR, string ProductID, string @RateType, decimal BaseRate )
+        public string PQ_ServicingAPI_Product_ControlRateFunc ( string RCR_IDLink_RMR, string ProductID, string RateType, decimal BaseRate, decimal Spread )
         {
             _PQ_ServicingAPI_Product_ControlRate.Parameters["@RCR_IDLink_RMR"].Value = (object)RCR_IDLink_RMR ?? DBNull.Value;
             _PQ_ServicingAPI_Product_ControlRate.Parameters["@ProductID"].Value = (object)ProductID ?? DBNull.Value;
             _PQ_ServicingAPI_Product_ControlRate.Parameters["@RateType"].Value = (object)RateType ?? DBNull.Value;
-            _PQ_ServicingAPI_Product_ControlRate.Parameters["@PrimeRate"].Value = DBNull.Value;
+            _PQ_ServicingAPI_Product_ControlRate.Parameters["@Spread"].Value = (object)Spread ?? DBNull.Value;
             _PQ_ServicingAPI_Product_ControlRate.Parameters["@BaseRate"].Value = (object)BaseRate ?? DBNull.Value;
             _PQ_ServicingAPI_Product_ControlRate.Parameters["@QualifyingRate"].Value = DBNull.Value;
 
