@@ -396,17 +396,17 @@ namespace PQ_API.DataConnect
             _PQ_ServicingAPI_Product_LoanPayment.Parameters.Add("@RLP_IDLink_Link", SqlDbType.VarChar);   
 
             _PQ_ServicingAPI_Task_Pending = new SqlCommand(PQ_ServicingAPI_Task_Pending,_Connection);
-            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_IDLink_Code",SqlDbType.VarChar); 
-            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_IDLink_XTKM",SqlDbType.VarChar);
-            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_Type",SqlDbType.Int);
-            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_ProcessOrder",SqlDbType.Int);
-            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_DateStart",SqlDbType.DateTime);
-            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_DateEnd",SqlDbType.DateTime);
-            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_DateNext",SqlDbType.DateTime);
-            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_DatePrev",SqlDbType.DateTime);
-            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_DayStart",SqlDbType.Int);
-            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_IDLink_Key",SqlDbType.VarChar);
-            _PQ_ServicingAPI_Task_Pending.Parameters.Add("KPD_IDLink_CBD",SqlDbType.VarChar);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("@KPD_IDLink_Code",SqlDbType.VarChar); 
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("@KPD_IDLink_XTKM",SqlDbType.VarChar);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("@KPD_Type",SqlDbType.Int);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("@KPD_ProcessOrder",SqlDbType.Int);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("@KPD_DateStart",SqlDbType.DateTime);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("@KPD_DateEnd",SqlDbType.DateTime);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("@KPD_DateNext",SqlDbType.DateTime);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("@KPD_DatePrev",SqlDbType.DateTime);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("@KPD_DayStart",SqlDbType.Int);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("@KPD_IDLink_Key",SqlDbType.VarChar);
+            _PQ_ServicingAPI_Task_Pending.Parameters.Add("@KPD_IDLink_CBD",SqlDbType.VarChar);
 
             _PQ_ServicingAPI_ProductsList = new SqlCommand(PQ_ServicingAPI_ProductsList, _Connection);
             _PQ_ServicingAPI_ProductsList.Parameters.Add("@Brand_CMR_ID", SqlDbType.VarChar);
@@ -1043,7 +1043,7 @@ namespace PQ_API.DataConnect
             _rs.Close();
             return result;
         }
-        
+
         public string PQ_ServicingAPI_Product_LoanAssetPropertyFunc ( 
             string RLAp_IDLink_RMR, 
             string RLAp_UnitNumber, 
