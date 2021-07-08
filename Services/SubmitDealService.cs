@@ -436,7 +436,7 @@ namespace PQ_API.Services
             string ContractualPayment_KPD_ID = _rubiDataConnect.PQ_ServicingAPI_Task_PendingFunc (
                 RMR_ID,
                 XTKM_ID,
-                null,
+                1,
                 800,
                 request.PrePaymentPrivileges.NextPaymentDate,
                 DateEnd,
