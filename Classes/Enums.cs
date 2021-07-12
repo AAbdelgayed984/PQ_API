@@ -152,6 +152,15 @@ namespace PQ_API.Classes
             [Description("{a2c31b0a-c34a-4431-a991-e090f05c9318}")] ContractualPayment_BiWeekly,
             [Description("{fcb0709a-5916-45e4-91d5-76ff5f2f81a3}")] ContractualPayment_SemiMonthly,
         }
+        public enum ActualPaymentTask {
+            [Description("{0af12292-fa2b-42de-9a82-5becc30cb242}")] ActualPayment_EndofMonth,
+            [Description("{8c427a27-35be-45c2-aed0-07ba64d687fa}")] ActualPayment_AcceleratedBiWeekly,
+            [Description("{bf50559c-f2b2-4c98-a83b-02df843f3801}")] ActualPayment_AcceleratedWeekly,
+            [Description("{9b8ab712-ebf1-4205-a886-5d8bbe5b10ab}")] ActualPayment_Monthly,
+            [Description("{06309665-f0d8-4277-97b9-2e43d6cc146a}")] ActualPayment_Weekly,
+            [Description("{d3098c32-ae09-4976-a402-041fc0c639c2}")] ActualPayment_BiWeekly,
+            [Description("{d2dd1a19-9411-4294-b844-a6fe06a53abe}")] ActualPayment_SemiMonthly,
+        }
         public enum BasisOfEmployment { 
             [Description("{580BF359-6991-488e-9DBB-ED65CF92BF41}")]PartTime, 
             [Description("{32B24966-AF08-4d18-86D8-1BEC4D6C3FE2}")]FullTime,

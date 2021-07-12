@@ -397,45 +397,53 @@ namespace PQ_API.Services
                 if (borrower.ClientType == Enums.ClientType.PriBorrower)
                 {
                     //Client Bank detail
-                    String BankDetail_CBD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_BankDetailFunc(Borrower_CMR_ID,  null, request.PreauthorizedPaymentAccount.CustomerAccountNumber.ToString(),null,null,false, request.PreauthorizedPaymentAccount.Transit.ToString(),request.PreauthorizedPaymentAccount.BankID.ToString());
+                    String BankDetail_CBD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_BankDetailFunc(Borrower_CMR_ID,  request.PreauthorizedPaymentAccount.NameOnAccount, request.PreauthorizedPaymentAccount.CustomerAccountNumber.ToString(),null,null,false, request.PreauthorizedPaymentAccount.Transit.ToString(),request.PreauthorizedPaymentAccount.BankID.ToString());
                     MainBankAccount_CBD_ID = BankDetail_CBD_ID;
                 }                    
             }
 
             //Pending Payment Task
-            string XTKM_ID = string.Empty;
+            string ContractualPayment_XTKM_ID = string.Empty;
+            string ActualPayment_XTKM_ID = string.Empty;
             switch (request.LoanDetails.PaymentFrequency)
             {
                 case Enums.PaymentFrequencies.BiWeekly:
-                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_BiWeekly);
+                    ContractualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_BiWeekly);
+                    ActualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ActualPaymentTask.ActualPayment_BiWeekly);
                     break;
                 case Enums.PaymentFrequencies.AcceleratedBiWeekly:
-                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_AcceleratedBiWeekly);
+                    ContractualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_AcceleratedBiWeekly);
+                    ActualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ActualPaymentTask.ActualPayment_AcceleratedBiWeekly);
                     break;
                 case Enums.PaymentFrequencies.AcceleratedWeekly:
-                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_AcceleratedWeekly);
+                    ContractualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_AcceleratedWeekly);
+                    ActualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ActualPaymentTask.ActualPayment_AcceleratedWeekly);
                     break;
                 case Enums.PaymentFrequencies.EndOfMonth:
-                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_EndofMonth);
+                    ContractualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_EndofMonth);
+                    ActualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ActualPaymentTask.ActualPayment_EndofMonth);
                     break;
                 case Enums.PaymentFrequencies.Monthly:
-                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_Monthly);
+                    ContractualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_Monthly);
+                    ActualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ActualPaymentTask.ActualPayment_Monthly);
                     break;
                 case Enums.PaymentFrequencies.SemiMonthly:
-                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_SemiMonthly);
+                    ContractualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_SemiMonthly);
+                    ActualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ActualPaymentTask.ActualPayment_SemiMonthly);
                     break;
                 case Enums.PaymentFrequencies.Weekly:
-                    XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_Weekly);
+                    ContractualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ContractualPaymentTask.ContractualPayment_Weekly);
+                    ActualPayment_XTKM_ID = Enums.GetEnumDescription(Enums.ActualPaymentTask.ActualPayment_Weekly);
                     break;
                 default:
-                    XTKM_ID = String.Empty;
+                    ContractualPayment_XTKM_ID = String.Empty;
                     break;
             }
 
             DateTime DateEnd = new DateTime(2099, 1, 1, 0, 0, 0);
             string ContractualPayment_KPD_ID = _rubiDataConnect.PQ_ServicingAPI_Task_PendingFunc (
                 RMR_ID,
-                XTKM_ID,
+                ContractualPayment_XTKM_ID,
                 1,
                 800,
                 request.PrePaymentPrivileges.NextPaymentDate,
@@ -445,6 +453,32 @@ namespace PQ_API.Services
                 (request.PrePaymentPrivileges.NextPaymentDate - System.DateTime.Now).Days,
                 null,
                 MainBankAccount_CBD_ID
+            );
+            string ActualPayment_KPD_ID = _rubiDataConnect.PQ_ServicingAPI_Task_PendingFunc (
+                RMR_ID,
+                ActualPayment_XTKM_ID,
+                1,
+                900,
+                request.PrePaymentPrivileges.NextPaymentDate,
+                DateEnd,
+                request.PrePaymentPrivileges.NextPaymentDate,
+                request.PrePaymentPrivileges.NextPaymentDate,
+                (request.PrePaymentPrivileges.NextPaymentDate - System.DateTime.Now).Days,
+                null,
+                MainBankAccount_CBD_ID
+            );
+            string InterestCalcualtedDaily_KPD_ID = _rubiDataConnect.PQ_ServicingAPI_Task_PendingFunc (
+                RMR_ID,
+                "{be37fe41-3c01-4e37-bf33-3abe9e186727}",
+                1,
+                999,
+                request.LoanDetails.DisbursementDate,
+                DateEnd,
+                request.LoanDetails.DisbursementDate,
+                request.LoanDetails.DisbursementDate,
+                (request.LoanDetails.DisbursementDate - System.DateTime.Now).Days,
+                null,
+                null
             );
 
             string RDD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanTransferFunc(
