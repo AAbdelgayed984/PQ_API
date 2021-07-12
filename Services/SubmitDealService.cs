@@ -67,7 +67,7 @@ namespace PQ_API.Services
 
             // Balances
             string PrincipalBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.Principal), request.LoanDetails.OriginalLoanAmount); 
-            string CurrentLoanAmountBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.LoanAmount), request.LoanDetails.OriginalLoanAmount); 
+            string CurrentLoanAmountBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.LoanAmount), request.LoanDetails.OriginalLoanAmount + request.MortgageInsuranceDetails.PremiumAmount); 
             string ApplicationAmountBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.Application), request.LoanDetails.OriginalLoanAmount);
             string ApprovedBalance_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID, Enums.GetEnumDescription(Enums.BalanceType.Approved), request.LoanDetails.ApprovedBalance);                       
             string LoanDetails_LoanApplicationLTV_RCB_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlBalanceFunc(RMR_ID,Enums.GetEnumDescription(Enums.BalanceType.LoanApplicationLTV),request.LoanDetails.OriginalLTV);
@@ -109,9 +109,9 @@ namespace PQ_API.Services
                 RMR_ID, 
                 MIIndicator, 
                 request.MortgageInsuranceDetails.CertificateNumber, 
-                0, 
-                0, 
-                0, 
+                request.MortgageInsuranceDetails.PremiumAmount, 
+                request.MortgageInsuranceDetails.TaxAmount, 
+                request.MortgageInsuranceDetails.PremiumAmount + request.MortgageInsuranceDetails.TaxAmount, 
                 null, 
                 Enums.GetEnumDescription(request.MortgageInsuranceDetails.MIType), 
                 false, 

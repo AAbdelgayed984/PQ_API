@@ -167,7 +167,7 @@ namespace PQ_API.Classes
                 _ConstructionType = value;
             }
         }
-        public int LoanToValue {get;set;}
+        public decimal LoanToValue {get;set;}
         private Enums.BorrowerFlag _BorrowerFlag;
         public Enums.BorrowerFlag BorrowerFlag 
         {

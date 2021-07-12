@@ -1713,7 +1713,7 @@ namespace PQ_API.DataConnect
             return result;
         }
 
-        public string PQ_ServicingAPI_Product_LoanInsuranceFunc ( string RLMi_IDLink_RMR, string RLMi_LMIProduct, string RLMi_PolicyID, float RLMi_PremiumAmount, float RLMi_PremiumTax, float RLMi_PremiumTotal, string RLMi_PolicyID_Existing, string RLMi_LMIType, bool RLMi_LMIFlag_Upfront, bool RLMi_LMIFlag_RUInterventation, string RLMi_LMIPayor, string RLMi_Status, bool RLMi_LMIPayorOverrideFlag, bool RLMi_IsManualOverride, string RLMi_PolicyID_Final)
+        public string PQ_ServicingAPI_Product_LoanInsuranceFunc ( string RLMi_IDLink_RMR, string RLMi_LMIProduct, string RLMi_PolicyID, decimal RLMi_PremiumAmount, decimal RLMi_PremiumTax, decimal RLMi_PremiumTotal, string RLMi_PolicyID_Existing, string RLMi_LMIType, bool RLMi_LMIFlag_Upfront, bool RLMi_LMIFlag_RUInterventation, string RLMi_LMIPayor, string RLMi_Status, bool RLMi_LMIPayorOverrideFlag, bool RLMi_IsManualOverride, string RLMi_PolicyID_Final)
         {
             _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_IDLink_RMR"].Value = (object)RLMi_IDLink_RMR ?? DBNull.Value;
             _PQ_ServicingAPI_Product_LoanInsurance.Parameters["@RLMi_LMIProduct"].Value = (object)RLMi_LMIProduct ?? DBNull.Value;
