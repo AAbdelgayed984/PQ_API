@@ -397,7 +397,16 @@ namespace PQ_API.Services
                 if (borrower.ClientType == Enums.ClientType.PriBorrower)
                 {
                     //Client Bank detail
-                    String BankDetail_CBD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_BankDetailFunc(Borrower_CMR_ID,  request.PreauthorizedPaymentAccount.NameOnAccount, request.PreauthorizedPaymentAccount.CustomerAccountNumber.ToString(),null,null,false, request.PreauthorizedPaymentAccount.Transit.ToString(),request.PreauthorizedPaymentAccount.BankID.ToString());
+                    String BankDetail_CBD_ID = _rubiDataConnect.PQ_ServicingAPI_Client_BankDetailFunc(
+                        Borrower_CMR_ID,  
+                        request.PreauthorizedPaymentAccount.NameOnAccount, 
+                        request.PreauthorizedPaymentAccount.CustomerAccountNumber.ToString(),
+                        null,
+                        null,
+                        true, 
+                        request.PreauthorizedPaymentAccount.Transit.ToString(),
+                        request.PreauthorizedPaymentAccount.BankID.ToString()
+                    );
                     MainBankAccount_CBD_ID = BankDetail_CBD_ID;
                 }                    
             }
