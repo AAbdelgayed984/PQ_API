@@ -126,6 +126,7 @@ namespace PQ_API.Services
             // Product Term and Amortization
             string ProductTerm_RCTe_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTermFunc(RMR_ID, request.LoanDetails.ProductTerm_Years, request.LoanDetails.ProductTerm_Months, ( request.LoanDetails.ProductTerm_Years * 12 ) + request.LoanDetails.ProductTerm_Months, 1);
             string AmortizationOriginal_RCTe_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTermFunc(RMR_ID, request.LoanDetails.AmortizationOriginal_Years, request.LoanDetails.AmortizationOriginal_Months, ( request.LoanDetails.ProductTerm_Years * 12 ) + request.LoanDetails.ProductTerm_Months, 2);
+            string AmortizationRemaining_RCTe_ID = _rubiDataConnect.PQ_ServicingAPI_Product_ControlTermFunc(RMR_ID, request.LoanDetails.AmortizationOriginal_Years, request.LoanDetails.AmortizationOriginal_Months, ( request.LoanDetails.ProductTerm_Years * 12 ) + request.LoanDetails.ProductTerm_Months, 43);
 
             // Features
             if (request.PrePaymentPrivileges.IndicatorForNearPrime == "No")
