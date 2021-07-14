@@ -450,7 +450,7 @@ namespace PQ_API.Services
                     break;
             }
 
-            DateTime DateEnd = new DateTime(2099, 1, 1, 0, 0, 0);
+            DateTime DateEnd = request.LoanDetails.MaturityDate;
             string ContractualPayment_KPD_ID = _rubiDataConnect.PQ_ServicingAPI_Task_PendingFunc (
                 RMR_ID,
                 ContractualPayment_XTKM_ID,
