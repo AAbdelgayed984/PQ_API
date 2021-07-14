@@ -493,7 +493,7 @@ namespace PQ_API.Services
 
             string RDD_ID = _rubiDataConnect.PQ_ServicingAPI_Product_LoanTransferFunc(
                 MainBankAccount_CBD_ID,
-                ContractualPayment_KPD_ID,
+                ActualPayment_KPD_ID,
                 4,
                 request.PrePaymentPrivileges.CurrentPaymentAmount,
                 0,
